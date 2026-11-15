@@ -1,0 +1,388 @@
+/* Luxury stay cards — gallery rail, gold stars, price emblem, services */
+
+.stay-card--luxury {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: clamp(14px, 1.4vw, 20px);
+  border: 1px solid rgb(166 124 82 / 0.16);
+  background: linear-gradient(168deg, #fffdf8, #faf6f0 55%, #f3ebe0);
+  box-shadow:
+    0 6px 16px rgb(74 47 34 / 0.05),
+    0 20px 44px rgb(74 47 34 / 0.07);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.55s var(--ease-cinematic),
+    box-shadow 0.55s var(--ease-out),
+    border-color 0.45s var(--ease-out);
+}
+
+.stay-card__surface {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  text-decoration: none;
+}
+
+.stay-card__surface:focus-visible {
+  outline: 2px solid var(--color-brand-amber);
+  outline-offset: 3px;
+}
+
+.stay-card__media,
+.stay-card__body > * {
+  position: relative;
+  z-index: 2;
+}
+
+.stay-card__rail,
+.stay-card__thumb {
+  z-index: 5;
+}
+
+@media (hover: hover) {
+  .stay-card--luxury:hover {
+    transform: translateY(-4px);
+    border-color: rgb(201 162 74 / 0.35);
+    box-shadow:
+      0 10px 22px rgb(74 47 34 / 0.07),
+      0 28px 52px rgb(74 47 34 / 0.11);
+  }
+
+  .stay-card--luxury:hover .stay-card__hero {
+    transform: scale(1.02);
+  }
+}
+
+.stay-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 5 / 4;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.stay-card__hero {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-cinematic), opacity 0.4s var(--ease-out);
+}
+
+.stay-card__rail {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.45rem 0.4rem 0.55rem 0.2rem;
+  background: linear-gradient(90deg, rgb(255 255 255 / 0), rgb(255 252 247 / 0.92));
+}
+
+.stay-card__thumb {
+  flex: 1 1 0;
+  min-height: 2.5rem;
+  padding: 0;
+  border: 2px solid rgb(255 255 255 / 0.9);
+  border-radius: 0.35rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--color-neutral-100);
+  transition:
+    border-color 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+}
+
+.stay-card__thumb[aria-selected='true'] {
+  border-color: var(--color-brand-amber);
+  box-shadow: 0 0 0 1px rgb(232 163 23 / 0.45);
+}
+
+.stay-card__thumb:focus-visible {
+  outline: 2px solid var(--color-brand-amber);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .stay-card__thumb:hover {
+    transform: translateX(-2px);
+  }
+}
+
+.stay-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.stay-card__price-badge {
+  position: absolute;
+  z-index: 4;
+  top: 0.65rem;
+  left: 0.65rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.35rem;
+  padding: 0.35rem 0.65rem 0.4rem;
+  border-radius: 0.55rem;
+  background: linear-gradient(135deg, rgb(42 32 24 / 0.82), rgb(92 66 45 / 0.78));
+  color: #fff8ee;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 22px rgb(40 32 24 / 0.22);
+}
+
+.stay-card__price-from {
+  opacity: 0.85;
+  font-size: 0.58rem;
+}
+
+.stay-card__price-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.05rem;
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+.stay-card__price-currency {
+  font-size: 0.9rem;
+  color: var(--color-brand-yellow-bright);
+}
+
+.stay-card__price-amount {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-brand-yellow);
+}
+
+.stay-card__price-unit {
+  flex: 1 1 100%;
+  font-size: 0.55rem;
+  font-weight: 500;
+  opacity: 0.88;
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+.stay-card__avail {
+  position: absolute;
+  z-index: 4;
+  right: 0.65rem;
+  top: 0.65rem;
+  max-width: 11rem;
+  padding: 0.32rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(120deg, rgb(154 73 31 / 0.92), rgb(201 100 58 / 0.9));
+  color: #fff8ee;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: right;
+  line-height: 1.25;
+  box-shadow: 0 6px 18px rgb(90 45 24 / 0.25);
+}
+
+.stay-card__body {
+  padding: clamp(1rem, 2.5vw, 1.35rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex: 1;
+}
+
+.stay-card__stars {
+  display: inline-flex;
+  gap: 0.15rem;
+  color: var(--color-brand-amber);
+  font-size: 0.72rem;
+  text-shadow: 0 1px 0 rgb(255 248 236 / 0.4);
+}
+
+.stay-card__stars .fa-star {
+  color: #e8a317;
+  filter: drop-shadow(0 1px 0 rgb(139 90 20 / 0.25));
+}
+
+.stay-card__kicker {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-taupe);
+}
+
+.stay-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  line-height: 1.15;
+}
+
+.stay-card__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+}
+
+.stay-card__services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stay-card__service {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgb(166 124 82 / 0.18);
+  background: rgb(255 252 247 / 0.9);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--color-brand-green-deep);
+}
+
+.stay-card__service i {
+  color: var(--color-brand-terracotta);
+  font-size: 0.72rem;
+}
+
+.stay-card__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.stay-card__price-sub {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-brand-taupe);
+}
+
+.stay-card__cta {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-brand-terracotta);
+}
+
+.card-grid--2 .stay-card--luxury,
+.card-grid--stay-catalog .stay-card--luxury {
+  min-height: 100%;
+}
+
+.card-grid--stay-catalog {
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .card-grid--stay-catalog {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card-grid--stay-catalog .stay-card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.home-rooms__grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  align-items: stretch;
+}
+
+/* Homepage stay carousel — 3 comfortable columns (2 on tablet, 1 on phone) */
+.home-top-carousel--stay {
+  padding-block: 0.35rem 0.85rem;
+}
+
+.home-top-carousel--stay .home-top-carousel__track {
+  gap: clamp(1.15rem, 2.8vw, 1.85rem);
+}
+
+.home-top-carousel--stay .home-top-carousel__slide {
+  flex: 0 0 min(92vw, 22.5rem);
+  max-width: none;
+}
+
+.home-top-carousel--stay .stay-card__media {
+  aspect-ratio: 5 / 4;
+}
+
+.home-top-carousel--stay .stay-card__title {
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+  line-height: 1.2;
+}
+
+.home-top-carousel--stay .stay-card__text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-top-carousel--stay .stay-card__avail {
+  max-width: 8.5rem;
+  font-size: 0.52rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 480px) {
+  .home-top-carousel--stay .home-top-carousel__slide {
+    flex: 0 0 calc((100% - clamp(1.15rem, 2.8vw, 1.85rem)) / 2);
+  }
+}
+
+@media (min-width: 900px) {
+  .home-top-carousel--stay .home-top-carousel__slide {
+    flex: 0 0 calc((100% - 2 * clamp(1.15rem, 2.8vw, 1.85rem)) / 3);
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-top-carousel--stay .home-top-carousel__slide {
+    flex: 0 0 calc((100% - 2 * 1.85rem) / 3);
+  }
+}
+
+.stay-card.is-visible .stay-card__media {
+  animation: stay-card-reveal 0.85s var(--ease-cinematic) both;
+}
+
+@keyframes stay-card-reveal {
+  from {
+    opacity: 0.92;
+    transform: translate3d(0, 6px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stay-card.is-visible .stay-card__media {
+    animation: none;
+  }
+
+  .stay-card--luxury:hover .stay-card__hero {
+    transform: none;
+  }
+}

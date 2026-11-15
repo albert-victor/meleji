@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 340" fill="none" aria-hidden="true">
+  <path
+    d="M210 28 C152 36 116 68 98 108 C78 154 88 206 118 244 C148 282 192 304 236 310 C276 316 316 302 342 274 C364 252 382 216 386 178 C388 154 382 130 368 108 C350 80 318 58 280 48 C258 42 234 40 210 44 Z"
+    stroke="#d4a24a"
+    stroke-width="2.25"
+    fill="rgb(212 162 74 / 0.1)"
+  />
+  <path
+    class="home-hero__flight-path"
+    d="M72 176 Q165 118 228 148 Q292 178 348 142"
+    stroke="#ffffff"
+    stroke-width="2"
+    stroke-dasharray="7 9"
+    stroke-linecap="round"
+    opacity="0.95"
+  />
+  <circle cx="236" cy="152" r="6.5" fill="#e8a317" stroke="#f7ecd2" stroke-width="2" />
+</svg>

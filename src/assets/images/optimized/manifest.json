@@ -1,0 +1,138 @@
+{
+  "hero": {
+    "original": "accommodation/c07ae422-42c9-423d-862a-3a74d3cc4446.jpg",
+    "variants": [
+      {
+        "file": "hero-800.webp",
+        "width": 800,
+        "height": 600,
+        "bytes": 161470
+      },
+      {
+        "file": "hero-1920.webp",
+        "width": 1920,
+        "height": 1440,
+        "bytes": 647850
+      }
+    ]
+  },
+  "intro": {
+    "original": "accommodation/941166c3-0345-4ecf-a199-7e5d2920d420.jpg",
+    "variants": [
+      {
+        "file": "intro-800.webp",
+        "width": 800,
+        "height": 600,
+        "bytes": 50220
+      },
+      {
+        "file": "intro-1600.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 85740
+      }
+    ]
+  },
+  "roomShared": {
+    "original": "accommodation/2b07c8ba-0916-4464-ba5c-7158c9761b0a.jpg",
+    "variants": [
+      {
+        "file": "roomShared-800.webp",
+        "width": 800,
+        "height": 535,
+        "bytes": 47370
+      },
+      {
+        "file": "roomShared-1600.webp",
+        "width": 1170,
+        "height": 783,
+        "bytes": 82202
+      }
+    ]
+  },
+  "roomDeluxe": {
+    "original": "accommodation/Deluxe_2.jpg",
+    "variants": [
+      {
+        "file": "roomDeluxe-800.webp",
+        "width": 800,
+        "height": 603,
+        "bytes": 62258
+      },
+      {
+        "file": "roomDeluxe-1600.webp",
+        "width": 1280,
+        "height": 964,
+        "bytes": 117450
+      }
+    ]
+  },
+  "landscape": {
+    "original": "moments/47954a28-774a-43cd-9511-3566c7e53f69.jpg",
+    "variants": [
+      {
+        "file": "landscape-800.webp",
+        "width": 800,
+        "height": 600,
+        "bytes": 38160
+      },
+      {
+        "file": "landscape-1600.webp",
+        "width": 1080,
+        "height": 810,
+        "bytes": 64878
+      }
+    ]
+  },
+  "waterfall": {
+    "original": "moments/692e940a-3c6a-4bf1-9727-b7d188c4a31a.jpg",
+    "variants": [
+      {
+        "file": "waterfall-800.webp",
+        "width": 800,
+        "height": 1067,
+        "bytes": 257702
+      },
+      {
+        "file": "waterfall-1600.webp",
+        "width": 810,
+        "height": 1080,
+        "bytes": 315408
+      }
+    ]
+  },
+  "expFood": {
+    "original": "accommodation/8c983124-6451-4c8d-a135-0ec6d446decd.jpg",
+    "variants": [
+      {
+        "file": "expFood-800.webp",
+        "width": 800,
+        "height": 600,
+        "bytes": 72422
+      },
+      {
+        "file": "expFood-1600.webp",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 166508
+      }
+    ]
+  },
+  "expCoffee": {
+    "original": "sticky-sections/7dc8d0da-873f-49fa-b5a8-2c1ed1851db7.jpg",
+    "variants": [
+      {
+        "file": "expCoffee-800.webp",
+        "width": 800,
+        "height": 640,
+        "bytes": 26110
+      },
+      {
+        "file": "expCoffee-1600.webp",
+        "width": 1080,
+        "height": 864,
+        "bytes": 38416
+      }
+    ]
+  }
+}

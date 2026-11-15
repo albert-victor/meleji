@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="none" aria-hidden="true">
+  <path
+    d="M120 200c40-50 120-70 200-50 50 12 90 60 140 55 70-8 130-55 210-40 45 8 80 35 80 35"
+    stroke="currentColor"
+    stroke-width="0.75"
+    opacity="0.35"
+  />
+  <circle cx="280" cy="165" r="3" fill="currentColor" opacity="0.4"/>
+  <circle cx="520" cy="150" r="3" fill="currentColor" opacity="0.4"/>
+  <path
+    d="M265 168 Q400 120 515 152"
+    stroke="currentColor"
+    stroke-width="1"
+    stroke-dasharray="4 6"
+    opacity="0.45"
+  />
+</svg>

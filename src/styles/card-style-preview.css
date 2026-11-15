@@ -1,0 +1,322 @@
+@import './main.css';
+
+.page--card-style-preview .page__main {
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+  background: #efe4d4;
+}
+
+.csp-page {
+  padding-bottom: 4rem;
+}
+
+.csp-intro {
+  max-width: 40rem;
+  margin-bottom: var(--space-10);
+}
+
+.csp-intro .csp-kicker {
+  font-family: var(--font-label);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5c6b48;
+  margin: 0 0 0.75rem;
+}
+
+.csp-intro h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 3.2vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: #4a2f22;
+  margin: 0 0 0.75rem;
+}
+
+.csp-intro p {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: #5c4638;
+  margin: 0;
+}
+
+.csp-block {
+  margin-bottom: var(--space-12);
+}
+
+.csp-block h2 {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: #4a2f22;
+  margin: 0 0 var(--space-5);
+}
+
+.csp-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  max-width: 72rem;
+}
+
+/* —— Premium card shell (preview) —— */
+:root {
+  --csp-surface: #faf6f0;
+  --csp-olive: #5c6b48;
+  --csp-olive-deep: #465238;
+  --csp-brown: #8b3a1e;
+  --csp-brown-deep: #6f2e16;
+  --csp-gold: #c9a24a;
+}
+
+.csp-card {
+  --csp-radius: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--csp-radius);
+  overflow: hidden;
+  background: var(--csp-surface);
+  box-shadow:
+    0 4px 6px rgb(74 47 34 / 0.05),
+    0 18px 36px rgb(74 47 34 / 0.1);
+  text-decoration: none;
+  color: inherit;
+  height: auto;
+}
+
+.csp-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.csp-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.csp-card__badge {
+  position: absolute;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-label);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.csp-card__badge--fav {
+  top: 0.65rem;
+  right: 0.65rem;
+  background: rgb(255 255 255 / 0.94);
+  color: #8b3a1e;
+  box-shadow: 0 2px 8px rgb(60 42 33 / 0.12);
+}
+
+.csp-card__badge--fav i {
+  font-size: 0.55rem;
+  color: #c54e22;
+}
+
+.csp-card__badge--duration {
+  left: 0.65rem;
+  bottom: 1.35rem;
+  background: var(--csp-olive);
+  color: #fff;
+}
+
+.csp-card__badge--signature {
+  top: 0.65rem;
+  right: 0.65rem;
+  background: var(--csp-olive-deep);
+  color: #fff8ee;
+  border: 1px solid rgb(201 162 74 / 0.45);
+  font-family: var(--font-signature);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.csp-card__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1.75rem;
+  pointer-events: none;
+}
+
+.csp-card__wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.csp-card__wave--dest {
+  height: 2rem;
+}
+
+.csp-card__gem {
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  width: 8px;
+  height: 8px;
+  background: var(--csp-gold);
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 0 0 0 2px var(--csp-surface);
+}
+
+.csp-card__body {
+  padding: 1.15rem 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1;
+}
+
+.csp-card__body--dest {
+  padding-top: 0.95rem;
+  gap: 0.5rem;
+}
+
+.csp-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--csp-brown);
+  margin: 0;
+}
+
+.csp-card__subtitle {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgb(139 58 30 / 0.82);
+  margin: 0;
+}
+
+.csp-card__rule {
+  display: flex;
+  justify-content: center;
+  margin: 0.15rem 0 0.25rem;
+}
+
+.csp-card__rule span {
+  display: block;
+  width: min(100%, 12rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--csp-gold), transparent);
+}
+
+.csp-card__bullets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #5c4638;
+  line-height: 1.45;
+}
+
+.csp-card__bullets li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.12rem 0;
+}
+
+.csp-card__bullets li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--csp-brown);
+}
+
+.csp-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.csp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.65rem;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition:
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+
+.csp-btn--primary {
+  flex: 1 1 8rem;
+  color: #fff;
+  background: linear-gradient(135deg, #9a4320 0%, var(--csp-brown-deep) 100%);
+  border: 1px solid transparent;
+}
+
+.csp-btn--primary:hover {
+  filter: brightness(1.05);
+}
+
+.csp-btn--ghost {
+  flex: 1 1 8rem;
+  color: var(--csp-olive);
+  background: transparent;
+  border: 1px solid var(--csp-olive);
+}
+
+.csp-btn--ghost:hover {
+  background: rgb(92 107 72 / 0.08);
+}
+
+.csp-btn--dest {
+  width: 100%;
+  margin-top: 0.65rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--csp-olive) 0%, var(--csp-olive-deep) 100%);
+  border: 1px solid rgb(201 162 74 / 0.35);
+  box-shadow: 0 8px 20px rgb(70 82 56 / 0.22);
+  cursor: pointer;
+}
+
+.csp-card--destination:hover .csp-btn--dest {
+  filter: brightness(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csp-btn {
+    transition: none;
+  }
+}

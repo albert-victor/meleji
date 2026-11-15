@@ -1,0 +1,46 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" preserveAspectRatio="none" fill="none">
+  <!-- Soft cream fill: asymmetric brush dip, lower on the left, rising right -->
+  <path
+    d="M0 78
+       C95 42 170 118 280 96
+       C390 74 470 28 590 62
+       C710 96 820 148 960 118
+       C1080 92 1185 38 1285 58
+       C1355 72 1405 52 1440 44
+       V180 H0 Z"
+    fill="#fdf9f3"
+  />
+  <!-- Layered gold brush contour lines -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path
+      d="M0 72 C98 36 168 112 282 90 C392 68 468 24 592 58 C712 92 818 142 958 112 C1082 86 1188 34 1288 54 C1358 68 1406 48 1440 40"
+      stroke="#b98543"
+      stroke-width="2.2"
+      opacity="0.85"
+    />
+    <path
+      d="M0 66 C110 28 190 98 300 82 C430 60 520 18 640 48 C780 86 900 136 1040 108 C1160 84 1260 40 1360 50 C1400 54 1425 46 1440 36"
+      stroke="#c9a05a"
+      stroke-width="1.15"
+      opacity="0.7"
+    />
+    <path
+      d="M40 88 C120 58 200 108 310 78 C400 54 480 70 560 52"
+      stroke="#a67438"
+      stroke-width="3.2"
+      opacity="0.55"
+    />
+    <path
+      d="M980 128 C1080 98 1180 56 1280 68 C1340 76 1390 58 1440 48"
+      stroke="#a67438"
+      stroke-width="2.6"
+      opacity="0.5"
+    />
+    <!-- Short brush ticks / paint accents -->
+    <path d="M70 54 118 38" stroke="#b98543" stroke-width="2.8" opacity="0.65"/>
+    <path d="M130 34 178 22" stroke="#d4b06a" stroke-width="1.6" opacity="0.55"/>
+    <path d="M520 34 568 48" stroke="#b98543" stroke-width="2.4" opacity="0.5"/>
+    <path d="M1220 48 1275 36" stroke="#d4b06a" stroke-width="2" opacity="0.6"/>
+    <path d="M1310 42 1375 28" stroke="#b98543" stroke-width="2.5" opacity="0.55"/>
+  </g>
+</svg>

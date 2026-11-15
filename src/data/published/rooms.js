@@ -1,0 +1,76 @@
+import { DELUXE_ROOM_GALLERY, SHARED_ROOM_GALLERY } from '../room-images.js';
+import { STAY_PRICING } from '../pricing.js';
+
+/** Approved accommodation records for production pages. */
+export const publishedRooms = [
+  {
+    id: 'shared',
+    status: 'published',
+    title: 'Shared rooms',
+    slug: 'shared-rooms',
+    description: 'Bunk-style shared accommodation for solo guests and pairs.',
+    longDescription:
+      'Shared rooms suit travellers who want an affordable base at the homestay. Choose a single bed (USD 15 per night) or a double/couple setup (USD 30 per night). Layout and facilities are confirmed when you enquire.',
+    imageSrc: SHARED_ROOM_GALLERY[0].src,
+    imageAlt: SHARED_ROOM_GALLERY[0].alt,
+    gallery: SHARED_ROOM_GALLERY,
+    occupancy: '1 guest (single) or 2 guests (couple / double)',
+    priceNote: `From USD ${STAY_PRICING.shared.single} / ${STAY_PRICING.shared.double} per night`,
+    priceFrom: STAY_PRICING.shared.single,
+    priceUnit: 'per night · single',
+    priceSubline: `Double / couple from $${STAY_PRICING.shared.double} per night`,
+    pricing: STAY_PRICING.shared,
+    ratingStars: 4,
+    roomKicker: 'Shared stay',
+    services: [
+      { icon: 'fa-bed', label: 'Bunk beds' },
+      { icon: 'fa-shower', label: 'Shared bathroom' },
+      { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
+      { icon: 'fa-mug-hot', label: 'Meals on request' },
+      { icon: 'fa-users', label: 'Solo or pairs' },
+    ],
+    amenities: [
+      'USD 15 per night — single bed',
+      'USD 30 per night — double / couple',
+      'Shared bathroom arrangement — details on enquiry',
+      'Meals and experiences booked separately',
+    ],
+    href: '/pages/accommodation/shared-rooms/',
+    bookingHref: '/pages/booking/?room=shared-rooms',
+  },
+  {
+    id: 'deluxe',
+    status: 'published',
+    title: 'Deluxe rooms',
+    slug: 'deluxe-rooms',
+    description: 'Private rooms with more space for couples and longer stays.',
+    longDescription:
+      'Deluxe rooms offer more privacy and space. The guide rate is USD 40 per night for solo guests or couples. Specific in-room features are shared before you confirm a reservation.',
+    imageSrc: DELUXE_ROOM_GALLERY[0].src,
+    imageAlt: DELUXE_ROOM_GALLERY[0].alt,
+    gallery: DELUXE_ROOM_GALLERY,
+    occupancy: '1–2 guests (private room)',
+    priceNote: `USD ${STAY_PRICING.deluxe.night} per night`,
+    priceFrom: STAY_PRICING.deluxe.night,
+    priceUnit: 'per night · private',
+    pricing: STAY_PRICING.deluxe,
+    ratingStars: 5,
+    roomKicker: 'Private stay',
+    availabilityBadge: 'Limited availability — book early',
+    services: [
+      { icon: 'fa-bed', label: 'Private room' },
+      { icon: 'fa-door-closed', label: 'More privacy' },
+      { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
+      { icon: 'fa-mug-hot', label: 'Meals on request' },
+      { icon: 'fa-heart', label: 'Couples welcome' },
+    ],
+    amenities: [
+      `USD ${STAY_PRICING.deluxe.night} per night — private room`,
+      'Suitable for couples and longer stays',
+      'Meal plans and experiences added on enquiry',
+      'Pay and confirm with the team — not online checkout',
+    ],
+    href: '/pages/accommodation/deluxe-rooms/',
+    bookingHref: '/pages/booking/?room=deluxe-rooms',
+  },
+];

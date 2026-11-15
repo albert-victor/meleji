@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Meleji Homestays design system reference (temporary)." />
+    <title>Design System | Meleji Homestays</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="page" data-footer="full">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <main id="main-content" class="page__main">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol class="breadcrumb__list">
+            <li><a href="/">Home</a></li>
+            <li aria-current="page">Design system</li>
+          </ol>
+        </nav>
+
+        <div class="section-head section-head--center" style="margin-bottom: var(--space-10)">
+          <p class="section-head__eyebrow">Phase 02</p>
+          <h1 class="section-head__title">Global design system</h1>
+          <p class="section-head__desc">
+            Reference for shared components. Provisional color tokens until official brand approval.
+          </p>
+        </div>
+
+        <section class="ds-section" id="typography" aria-labelledby="typography-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Foundations</p>
+            <h2 class="section-head__title" id="typography-title">Typography</h2>
+            <p class="section-head__desc">Cormorant Garamond for editorial headings; Manrope for body text, labels and buttons.</p>
+          </div>
+          <div class="ds-panel" style="margin-top: var(--space-6)">
+            <p style="font-size: var(--text-display-sm); font-family: var(--font-heading)">Heading scale</p>
+            <p style="font-size: var(--text-section); font-family: var(--font-heading)">Section title</p>
+            <p>Body text at base size with comfortable line height for long reading.</p>
+          </div>
+        </section>
+
+        <section class="ds-section" id="color" aria-labelledby="color-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Foundations</p>
+            <h2 class="section-head__title" id="color-title">Color &amp; gradients</h2>
+            <p class="section-head__desc">Brand tokens are provisional.</p>
+          </div>
+          <div class="ds-stack" style="margin-top: var(--space-6)">
+            <div class="ds-swatch">
+              <span class="ds-swatch__chip" style="background: var(--color-brand-navy-deep)"></span>
+              Charcoal
+            </div>
+            <div class="ds-swatch">
+              <span class="ds-swatch__chip" style="background: var(--gradient-cta)"></span>
+              CTA gradient
+            </div>
+            <div class="ds-swatch">
+              <span class="ds-swatch__chip" style="background: var(--gradient-brand-hero)"></span>
+              Brand hero
+            </div>
+            <div class="ds-swatch">
+              <span class="ds-swatch__chip" style="background: var(--color-brand-green)"></span>
+              Green
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="buttons" aria-labelledby="buttons-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Components</p>
+            <h2 class="section-head__title" id="buttons-title">Buttons</h2>
+            <p class="section-head__desc">Gradient fill and sliding label on primary actions.</p>
+          </div>
+          <div class="ds-stack" style="margin-top: var(--space-6)">
+            <a class="btn btn--primary btn--slide" href="/pages/booking/" aria-label="Book Your Stay">
+              <span class="btn__clip" aria-hidden="true">
+                <span class="btn__stack">
+                  <span class="btn__label">Book Your Stay</span>
+                  <span class="btn__label">Book Your Stay</span>
+                </span>
+              </span>
+            </a>
+            <a class="btn btn--secondary" href="/pages/safaris/" aria-label="Explore Meleji">
+              <span class="btn__clip" aria-hidden="true">
+                <span class="btn__stack">
+                  <span class="btn__label">Explore Meleji</span>
+                  <span class="btn__label">Explore Meleji</span>
+                </span>
+              </span>
+            </a>
+            <button type="button" class="btn btn--primary btn--slide btn--sm" aria-label="Compact primary">
+              <span class="btn__clip" aria-hidden="true">
+                <span class="btn__stack">
+                  <span class="btn__label">Compact</span>
+                  <span class="btn__label">Compact</span>
+                </span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <section class="ds-section" id="patterns" aria-labelledby="patterns-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Surface</p>
+            <h2 class="section-head__title" id="patterns-title">Cultural patterns</h2>
+            <p class="section-head__desc">Low-intensity overlays (roughly 3–5% opacity).</p>
+          </div>
+          <div class="ds-stack" style="margin-top: var(--space-6); align-items: stretch">
+            <div class="pattern-panel pattern-panel--mesh" style="flex: 1">
+              <div class="pattern-panel__inner">
+                <p class="text-muted">Mesh pattern sample</p>
+              </div>
+            </div>
+            <div class="pattern-panel pattern-panel--diamond" style="flex: 1">
+              <div class="pattern-panel__inner">
+                <p class="text-muted">Diamond pattern sample</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ds-section" id="headings" aria-labelledby="headings-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Components</p>
+            <h2 class="section-head__title" id="headings-title">Section headings</h2>
+          </div>
+          <div class="section-head" style="margin-top: var(--space-6)">
+            <p class="section-head__eyebrow">Stay</p>
+            <h2 class="section-head__title">Comfortable rooms</h2>
+            <p class="section-head__desc">Short supporting line for a content section.</p>
+          </div>
+        </section>
+
+        <section class="ds-section" id="footers" aria-labelledby="footers-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Components</p>
+            <h2 class="section-head__title" id="footers-title">Footer variants</h2>
+            <p class="section-head__desc">
+              Full footer is mounted on this page. Compact footer preview below.
+            </p>
+          </div>
+          <div class="ds-footer-preview" data-footer-compact-preview style="margin-top: var(--space-6)"></div>
+        </section>
+
+        <section class="ds-section" id="navigation" aria-labelledby="nav-title">
+          <div class="section-head">
+            <p class="section-head__eyebrow">Components</p>
+            <h2 class="section-head__title" id="nav-title">Navigation</h2>
+            <p class="section-head__desc">
+              Logo and booking CTA sit in the header. Stay, Explore, and Our Story open inside the menu panel. Press
+              <kbd>Tab</kbd> and <kbd>Escape</kbd> to test navigation.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
+</html>

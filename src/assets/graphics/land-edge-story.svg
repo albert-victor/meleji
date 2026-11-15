@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 96" preserveAspectRatio="none" fill="none">
+  <path
+    d="M0 52
+       C120 28 220 72 360 58
+       C500 44 620 24 780 46
+       C940 68 1080 82 1240 64
+       C1340 52 1390 40 1440 36
+       V96 H0 Z"
+    fill="#fdf9f3"
+  />
+  <path
+    d="M0 48 C130 26 240 68 380 54 C540 38 660 20 800 42 C980 66 1120 76 1280 58 C1360 48 1405 38 1440 32"
+    stroke="#c9a05a"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    opacity="0.45"
+  />
+</svg>

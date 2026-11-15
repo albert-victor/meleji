@@ -1,0 +1,31 @@
+.pattern-panel {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.pattern-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--pattern-opacity-strong);
+}
+
+.pattern-panel--mesh::after {
+  background-image: url('../../assets/patterns/african-mesh.svg');
+  background-size: 100px 100px;
+}
+
+.pattern-panel--diamond::after {
+  background-image: url('../../assets/patterns/african-diamond.svg');
+  background-size: 160px 80px;
+}
+
+.pattern-panel__inner {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-8);
+}

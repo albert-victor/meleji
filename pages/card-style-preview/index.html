@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Premium card style preview | Meleji</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Lexend:wght@300;400;500;600;700&family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/card-style-preview.css" />
+  <script type="module" src="/src/scripts/main.js"></script>
+</head>
+<body class="page page--card-style-preview" data-chrome="on" data-footer="compact">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" class="page__main" tabindex="-1">
+    <div class="container csp-page">
+      <header class="csp-intro">
+        <p class="csp-kicker">Preview only — bado haijawekwa kwenye kurasa halisi</p>
+        <h1>Premium card style</h1>
+        <p>
+          <strong>Packages</strong> — kama reference yako (wave, badges, bullets, View journey + Reserve).
+          <strong>Destinations</strong> — style ile ile lakini <em>hakuna</em> maelezo, feature tags, wala mistari ya ziada:
+          jina + region tu, kisha View destination.
+        </p>
+      </header>
+
+      <section class="csp-block" aria-labelledby="csp-pkg-h">
+        <h2 id="csp-pkg-h">Safari packages (reference style)</h2>
+        <div class="csp-grid" data-csp-packages></div>
+      </section>
+
+      <section class="csp-block" aria-labelledby="csp-dest-h">
+        <h2 id="csp-dest-h">Destinations (clean)</h2>
+        <div class="csp-grid" data-csp-destinations></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

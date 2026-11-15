@@ -1,0 +1,44 @@
+/**
+ * Warm room-card polish only — safari, destination, gallery and amenity photos stay natural.
+ */
+
+.stay-card__media.m-card__media--room-photo {
+  position: relative;
+}
+
+.stay-card__media.m-card__media--room-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--meleji-photo-wash);
+  opacity: var(--meleji-photo-wash-opacity);
+  mix-blend-mode: soft-light;
+}
+
+.stay-card__media.m-card__media--room-photo .stay-card__hero {
+  filter: var(--meleji-photo-filter);
+}
+
+/* Page-end CTA — dark scrim only (no global cream wash on the photo) */
+.visit-cta {
+  position: relative;
+}
+
+.visit-cta > img {
+  filter: brightness(0.88) contrast(1.04) saturate(0.95);
+}
+
+:where(
+  .site-header img,
+  .site-menu img,
+  .footer-ecosystem__mark img,
+  .foundation-logo img,
+  .community-collage__logo,
+  .experience-piece__badge,
+  .btn--story-foundation__mark,
+  [data-photo-wash='off']
+) {
+  filter: none;
+}

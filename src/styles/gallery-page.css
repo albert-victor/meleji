@@ -1,0 +1,169 @@
+/* Gallery — animated mosaic collages */
+
+.inner-page--gallery {
+  --gallery-tile-radius: clamp(10px, 1.2vw, 16px);
+}
+
+.gallery-mosaic-section__head {
+  max-width: 42ch;
+  margin-bottom: var(--space-8);
+}
+
+.gallery-mosaic-section__lead {
+  margin-top: var(--space-2);
+  font-size: var(--text-base);
+}
+
+.gallery-mosaic {
+  position: relative;
+  display: grid;
+  gap: clamp(0.45rem, 1.1vw, 0.85rem);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(68px, auto));
+  min-height: min(72vw, 520px);
+}
+
+@media (min-width: 768px) {
+  .gallery-mosaic {
+    min-height: clamp(380px, 42vw, 520px);
+  }
+}
+
+.gallery-mosaic__tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--gallery-tile-radius);
+  box-shadow: 0 10px 28px rgb(42 32 24 / 0.08);
+  opacity: 0;
+  transform: translate3d(0, 14px, 0) scale(0.97);
+  transition:
+    opacity 0.65s var(--ease-out),
+    transform 0.75s var(--ease-out);
+  transition-delay: calc(var(--tile-i, 0) * 70ms);
+}
+
+.gallery-mosaic.is-visible .gallery-mosaic__tile,
+.gallery-mosaic.is-alive .gallery-mosaic__tile {
+  opacity: 1;
+  transform: none;
+}
+
+.gallery-mosaic__tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    155deg,
+    rgb(154 73 31 / 0.14),
+    rgb(122 154 72 / 0.1) 48%,
+    rgb(49 62 46 / 0.12)
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+}
+
+.gallery-mosaic__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .gallery-mosaic__tile:hover img {
+    transform: scale(1.035);
+  }
+
+  .gallery-mosaic-section--urban .gallery-mosaic__tile:hover img {
+    transform: scale(1.012);
+  }
+}
+
+.gallery-mosaic-section--urban .gallery-mosaic__tile::before {
+  background: var(--meleji-urban-cinematic-wash, linear-gradient(
+    148deg,
+    rgb(154 73 31 / 0.22),
+    rgb(122 154 72 / 0.16) 42%,
+    rgb(212 162 74 / 0.14) 100%
+  ));
+  mix-blend-mode: multiply;
+  opacity: 0.78;
+}
+
+.gallery-mosaic-section--urban .gallery-mosaic__tile img {
+  filter: var(--meleji-urban-photo-filter, saturate(0.96) contrast(0.99) brightness(1.02));
+}
+
+/* Tile slots — asymmetric collage */
+.gallery-mosaic__tile--a {
+  grid-column: 1 / span 4;
+  grid-row: 1 / span 3;
+  border-bottom-right-radius: 42% 18%;
+}
+
+.gallery-mosaic__tile--b {
+  grid-column: 5 / span 2;
+  grid-row: 1 / span 2;
+}
+
+.gallery-mosaic__tile--c {
+  grid-column: 5 / span 2;
+  grid-row: 3 / span 2;
+  border-top-left-radius: 28% 22%;
+}
+
+.gallery-mosaic__tile--d {
+  grid-column: 1 / span 2;
+  grid-row: 4 / span 1;
+}
+
+.gallery-mosaic__tile--e {
+  grid-column: 3 / span 2;
+  grid-row: 4 / span 1;
+}
+
+.gallery-mosaic__tile--f {
+  grid-column: 5 / span 2;
+  grid-row: 4 / span 1;
+}
+
+@media (max-width: 599px) {
+  .gallery-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    min-height: 0;
+  }
+
+  .gallery-mosaic__tile--a,
+  .gallery-mosaic__tile--b,
+  .gallery-mosaic__tile--c,
+  .gallery-mosaic__tile--d,
+  .gallery-mosaic__tile--e,
+  .gallery-mosaic__tile--f {
+    grid-column: auto;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--gallery-tile-radius);
+  }
+
+  .gallery-mosaic__tile--a {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.gallery-mosaic-section + .gallery-mosaic-section {
+  padding-top: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-mosaic__tile {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

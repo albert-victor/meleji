@@ -1,0 +1,571 @@
+---
+description: Permanent design, engineering, content and QA rules for Meleji Homestays.
+alwaysApply: true
+---
+
+# MELEJI HOMESTAYS – PERMANENT PROJECT RULES
+
+These rules apply to all implementation, content, refactoring and maintenance tasks.
+
+Read the existing code and project documentation before making changes.
+
+Never compromise responsiveness, readability, accessibility or performance to achieve visual effects.
+
+## 1. BRAND AND DESIGN CONSISTENCY
+
+- Meleji Homestays must remain the dominant brand.
+- Maintain the approved premium, authentic, warm and modern design direction.
+- Use the centralized design tokens.
+- Do not invent alternative palettes on individual pages.
+- Do not introduce random font families.
+- Use consistent button heights, border radii, spacing and typography.
+- Preserve visual hierarchy.
+- Avoid unnecessary decorative elements.
+- Use gradients deliberately and consistently.
+- Avoid flat, overly saturated section backgrounds where subtle brand gradients are more appropriate.
+- Preserve neutral space around important content.
+- Maintain both desktop and mobile design quality.
+
+## 2. COPYWRITING RULES
+
+Never use generic AI marketing clichés.
+
+PROHIBITED PHRASES:
+- "It's not just ... it's ..."
+- "More than just ..."
+- "Whether you're ... or ..."
+- "Embark on a journey ..."
+- "Discover the magic ..."
+- "Unlock unforgettable ..."
+- "Nestled in the heart of ..."
+- "Where luxury meets ..."
+- "Where comfort meets ..."
+- "A hidden gem ..."
+- "Your gateway to ..."
+- "Experience like never before ..."
+- "Something for everyone ..."
+- "Unforgettable memories await ..."
+- "Seamless experience ..."
+- "Breathtaking adventure awaits ..."
+
+Avoid repetitive marketing adjectives.
+
+Do not repeat the same message in hero sections, cards, supporting text and footers.
+
+Prefer specific, natural and credible hospitality copy.
+
+Write for human travelers, not search-engine stuffing.
+
+Do not use excessive em dashes.
+
+Prefer commas, periods, colons or en dashes where grammatically appropriate.
+
+Never replace every punctuation mark with an en dash.
+
+Avoid repeated exclamation marks.
+
+Avoid excessive title-case capitalization.
+
+Do not fabricate:
+- Testimonials.
+- Ratings.
+- Review counts.
+- Awards.
+- Certifications.
+- Partner relationships.
+- Accommodation amenities.
+- Service guarantees.
+- Safari availability.
+- Exact travel durations.
+- Confirmed business prices.
+- Foundation registrations.
+- Children's personal stories.
+
+If information is unknown, record it in docs/content-status.md.
+
+Avoid publishing visible text such as:
+- Lorem ipsum.
+- Coming soon.
+- Sample content.
+- Amazing experience.
+- Your text here.
+- Dummy description.
+
+For unfinished sections, use a clean content state or keep them unpublished until real information is ready.
+
+## 3. BUTTON RULES
+
+All main CTA buttons must share the same design system.
+
+Use the existing button component.
+
+Avoid one-off button CSS.
+
+BUTTON STATES:
+- Default.
+- Hover.
+- Focus-visible.
+- Active.
+- Disabled.
+- Loading, only if required.
+
+Maintain WCAG AA text contrast where applicable.
+
+Target at least 4.5:1 contrast for ordinary text.
+
+Before and after gradient fill transitions, text must remain readable.
+
+No transparent text on a similarly colored background.
+
+No low-contrast gold on cream or pale text on light gradients.
+
+For sliding-label animations:
+- Duplicate text only as a visual animation layer.
+- Expose one accessible button label.
+- Prevent clipping of important text.
+- Keep both animated labels readable.
+- Use stable dimensions.
+- Do not create layout shifts.
+- Do not let pseudo-elements cover text unexpectedly.
+- Preserve visible keyboard focus.
+
+Do not apply desktop hover effects as the only feedback on touchscreens.
+
+Main booking CTA must remain visible in the mobile header.
+
+## 4. IMAGE QUALITY RULES
+
+Never use CSS scaling to compensate for an undersized source image.
+
+Never enlarge low-resolution images excessively.
+
+Use images appropriate to their rendered size and expected device pixel ratio.
+
+Use aspect-ratio and object-fit carefully.
+
+Avoid distorted faces, buildings, wildlife and landscape photography.
+
+CARD HOVER:
+Preferred scale: 1.025–1.04.
+Default: 1.035.
+Do not exceed 1.05 without explicit approval.
+
+Do not apply scale transforms to the entire card if only the image should zoom.
+
+Use overflow-hidden media containers.
+
+Avoid image blur filters during transitions.
+
+Avoid strong brightness, saturation and contrast manipulation.
+
+Use meaningful image crops.
+
+Implement responsive source handling where available.
+
+Use width and height or aspect ratio to reserve image space.
+
+Prioritize hero imagery.
+
+Lazy-load noncritical images.
+
+Do not repeatedly reuse a single unrelated stock image across different destinations.
+
+Do not assume an external image URL will remain available.
+
+Preserve original high-quality assets.
+
+Never invent proof that a photograph represents an actual Meleji property or service.
+
+## 5. MOBILE-FIRST RESPONSIVENESS
+
+Start with narrow layouts and progressively enhance.
+
+Check these widths:
+320, 360, 375, 390, 430, 768, 1024, 1280 and 1440px.
+
+Avoid fixed widths that break on small screens.
+
+Use clamp(), min(), max(), CSS Grid and Flexbox where suitable.
+
+No unintended horizontal scrolling.
+
+No overlapping navigation controls.
+
+No clipped headings.
+
+No CTA text overflow.
+
+No oversized empty spaces.
+
+No tiny links or unusable form controls.
+
+Keep interactive targets comfortably touch-friendly, preferably at least 44 x 44 CSS pixels.
+
+Account for fixed or sticky header height.
+
+Do not let anchored section headings hide under the header.
+
+Use appropriate scroll-margin-top.
+
+Avoid desktop-only interaction assumptions.
+
+Mobile interactions must be deliberate, not simply smaller desktop components.
+
+## 6. NAVIGATION RULES
+
+Exactly three primary desktop navbar links:
+Stay, Explore, Our Story.
+
+Main CTA:
+Book Your Stay.
+
+Hamburger must remain present on all viewport sizes.
+
+The hamburger contains the full site navigation.
+
+On narrow screens, hide the three main links before they collide with the logo or CTA.
+
+Preserve:
+- Accessible menu button.
+- aria-expanded.
+- aria-controls.
+- Escape-key support.
+- Focus management.
+- Scroll locking.
+- Working navigation links.
+- Smooth open/close behavior.
+
+Close the menu after selecting a route.
+
+No menu content hidden behind fixed elements.
+
+No accidental stacking-context conflicts.
+
+No animation that prevents users from navigating.
+
+## 7. ICON SYSTEM
+
+Prefer Font Awesome Free icons for standard interface symbols.
+
+Use the official Font Awesome package or consistent verified assets.
+
+Do not mix incompatible icon versions.
+
+Do not use placeholder Unicode symbols as permanent interface icons.
+
+Use icons semantically.
+
+Examples:
+- Flight: fa-plane
+- Safari: fa-binoculars
+- Location: fa-location-dot
+- Accommodation: fa-bed
+- Coffee: fa-mug-hot
+- Food: fa-utensils
+- Walking: fa-person-walking
+- Hiking: fa-person-hiking
+- Community: fa-hand-holding-heart
+
+Verify icon availability in the installed Font Awesome version.
+
+Do not treat all requested icons as available in the free package without verification.
+
+Icon animation must be subtle.
+
+Avoid excessive rotations and bouncing.
+
+Keep line weight and icon sizing visually consistent.
+
+## 8. ANIMATION RULES
+
+Use CSS transitions for straightforward interaction.
+
+Use IntersectionObserver only where scroll reveals require it.
+
+Do not install a heavy animation framework without a documented reason.
+
+Do not animate layout-affecting properties unnecessarily.
+
+Prefer opacity and transform.
+
+Avoid excessive will-change usage.
+
+Avoid continuous background animations.
+
+Respect prefers-reduced-motion.
+
+No scroll hijacking.
+
+No artificial delayed page loading.
+
+No forced preloader.
+
+No arbitrary setTimeout delays for visual effect.
+
+No pinned sections that trap scrolling or break touch navigation.
+
+Avoid excessive z-index values.
+
+## 9. PERFORMANCE RULES
+
+Use Vite's optimized production build.
+
+Do not introduce React or other frameworks without approval.
+
+Keep dependencies minimal.
+
+Avoid importing entire icon libraries unnecessarily.
+
+Avoid large videos as default backgrounds.
+
+Avoid enormous image files.
+
+Use appropriate modern image compression.
+
+Minimize layout shift.
+
+Avoid excessive DOM nesting.
+
+Do not duplicate event listeners.
+
+Remove unused CSS and JavaScript.
+
+Do not use JavaScript for effects CSS can handle.
+
+Maintain responsive page rendering under ordinary mobile network conditions.
+
+Do not confuse a loading animation with actual performance optimization.
+
+## 10. SHARED COMPONENT RULES
+
+Never duplicate navbar markup independently on every page.
+
+Never duplicate large footer sections independently.
+
+Maintain two footer variants:
+- Full Footer.
+- Compact Footer.
+
+Use reusable components for:
+- Buttons.
+- Room cards.
+- Safari cards.
+- Destination cards.
+- Experience cards.
+- Forms.
+- Breadcrumbs.
+- CTA sections.
+
+Use centralized variables and component modifiers.
+
+Avoid creating a new card type when an existing type can be safely extended.
+
+Do not make unrelated components depend on fragile CSS selectors.
+
+Avoid overly broad selectors that accidentally affect other pages.
+
+Do not write page-specific styles that unexpectedly override global components.
+
+## 11. ROUTING AND FILE STRUCTURE
+
+Use organized directories.
+
+Do not scatter every HTML page in the project root.
+
+Avoid broken relative links.
+
+Avoid case-sensitive path mistakes.
+
+Do not use absolute local filesystem paths.
+
+Do not hardcode development-server URLs.
+
+Ensure direct navigation to each public page works in production.
+
+Maintain a consistent route strategy.
+
+Do not silently replace real routes with # links.
+
+Avoid broken image paths on nested routes.
+
+Keep production compatibility with static cPanel hosting.
+
+## 12. CONTENT AND DATA MODELING
+
+Keep destination data separate from safari package data.
+
+Do not hardcode multiple safari packages inside one large HTML block.
+
+Prepare reusable data models.
+
+Every destination can have:
+- Name.
+- Slug.
+- Region.
+- Description.
+- Hero image.
+- Gallery.
+- Activities.
+- Related packages.
+
+Every safari package can have:
+- Name.
+- Slug.
+- Destination references.
+- Duration.
+- Itinerary.
+- Inclusions.
+- Exclusions.
+- Price or enquiry status.
+- Gallery.
+
+Real package content will be supplied later.
+
+Do not invent official itineraries.
+
+Do not display unfinished cards as real products.
+
+Allow future content imports without rewriting the entire UI.
+
+## 13. FORMS AND BOOKING
+
+Use accessible labels.
+
+Validate required fields.
+
+Use appropriate input types.
+
+Show clear validation errors.
+
+Never claim successful delivery when no backend is connected.
+
+Do not collect card details without an appropriate secure payment provider.
+
+Do not expose secrets in frontend code.
+
+Provide clear user feedback.
+
+Keep the booking experience simple on mobile.
+
+Never use dead-end buttons.
+
+If an interaction cannot yet be completed, report that limitation instead of inventing functionality.
+
+## 14. SECURITY AND PRIVACY
+
+Never place API secrets in public frontend files.
+
+Avoid unsafe HTML insertion.
+
+Sanitize or safely render user-generated content.
+
+Use appropriate form protections when backend services are introduced.
+
+Do not expose personal data or children's information unnecessarily.
+
+Use privacy-conscious analytics if introduced later.
+
+Do not use photos of vulnerable children without appropriate permission.
+
+## 15. ACCESSIBILITY AND SEO
+
+Use semantic landmarks.
+
+Maintain logical heading structure.
+
+Provide accessible image alternatives.
+
+Decorative images should have empty alt attributes.
+
+Use meaningful link labels.
+
+Support keyboard interaction.
+
+Use visible focus states.
+
+Respect reduced-motion settings.
+
+Use unique page titles and meta descriptions.
+
+Avoid duplicate meta content.
+
+Use canonical URLs when configured.
+
+Use structured data only when supported by verified business facts.
+
+## 16. PREVENT COMMON AI AGENT ERRORS
+
+Before changing code:
+- Read the relevant existing files.
+- Identify the current component conventions.
+- Check for existing reusable solutions.
+- Understand the dependencies affected.
+
+Avoid:
+- Rewriting unrelated working code.
+- Creating duplicate CSS rules.
+- Creating conflicting media queries.
+- Importing missing packages.
+- Referencing nonexistent assets.
+- Creating fake links.
+- Introducing unrequested page redesigns.
+- Adding unnecessary new dependencies.
+- Creating desktop layouts that fail on mobile.
+- Leaving temporary debugging code in production.
+- Silently ignoring warnings and errors.
+- Describing untested interactions as fully tested.
+
+Do not replace a good solution simply to make the code look different.
+
+Fix root causes instead of layering additional CSS overrides.
+
+## 17. VERIFICATION AFTER EVERY PHASE
+
+Inspect package.json scripts.
+
+Use npm run dev for local preview.
+
+Run npm run build.
+
+Run npm run preview where appropriate.
+
+Inspect console and terminal errors.
+
+Check missing assets.
+
+Check navigation behavior.
+
+Check mobile overflow.
+
+Check button contrast.
+
+Check image quality.
+
+Check accessibility basics.
+
+Check animations under reduced-motion settings.
+
+Check that changes have not broken existing pages.
+
+If browser inspection is not available, clearly say so.
+
+Never claim a test passed unless it was actually executed.
+
+## 18. CHANGE DISCIPLINE
+
+Work on the requested phase only.
+
+Preserve approved designs.
+
+Explain significant architecture changes.
+
+Do not silently modify the brand identity.
+
+Do not change official text, pricing or company claims without instruction.
+
+Update documentation when architecture or design standards change.
+
+Complete and validate one phase before starting another.
+
+Always prioritize:
+Clarity → Functionality → Responsiveness → Accessibility → Performance → Visual refinement.

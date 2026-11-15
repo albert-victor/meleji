@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Cards & activity flow demo | Meleji Homestays</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Lexend:wght@300;400;500;600;700&family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/cards-journey-demo.css" />
+  <script type="module" src="/src/scripts/main.js"></script>
+</head>
+<body class="page page--cards-journey-demo" data-chrome="on" data-footer="compact">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" class="page__main" tabindex="-1">
+  <span data-dev-notice class="visually-hidden">Demo only</span>
+    <div class="container cjd-wrap">
+      <header class="section-head cjd-hero">
+        <p class="section-head__eyebrow">Internal demo</p>
+        <h1 class="section-head__title">Libre Bodoni + cards</h1>
+        <p class="section-head__desc">
+          Fonts zimeshiki kwenye tovuti. Bofya <strong>activity</strong> — packages zinazohusiana zinaonekana hapa chini.
+          Destination = jina + subtitle tu.
+        </p>
+      </header>
+
+      <section class="cjd-block" aria-labelledby="cjd-dest">
+        <div class="cjd-block__head">
+          <p class="cjd-block__label">Destinations</p>
+          <h2 id="cjd-dest">Where you go</h2>
+        </div>
+        <div class="card-grid card-grid--3" data-cjd-destinations></div>
+      </section>
+
+      <section class="cjd-block" aria-labelledby="cjd-act">
+        <div class="cjd-block__head">
+          <p class="cjd-block__label">Activities</p>
+          <h2 id="cjd-act">Choose a focus</h2>
+          <p class="cjd-block__hint">Click a card to see matching safari packages.</p>
+        </div>
+        <div class="card-grid card-grid--3" data-cjd-activities></div>
+      </section>
+
+      <section class="cjd-block cjd-packages-panel" id="packages-for-selection" aria-labelledby="cjd-pkg" hidden>
+        <div class="cjd-block__head">
+          <p class="cjd-block__label">Safari packages</p>
+          <h2 id="cjd-pkg">Packages for <span data-cjd-pkg-focus>this activity</span></h2>
+          <p class="cjd-block__hint" data-cjd-pkg-count></p>
+        </div>
+        <div class="card-grid card-grid--2" data-cjd-packages></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,15 @@
+---
+description: Meleji Homestays — build phases, stack, and Vite multi-page
+alwaysApply: true
+---
+
+# Meleji Homestays — build order
+
+- **Stack**: Vite, vanilla HTML/CSS/JS (ES modules). No React/Vue unless explicitly approved.
+- **Phases**: Do not skip ahead — foundation (Phase 01) → shared components → homepage sections → inner pages → content import.
+- **Brand tokens**: Provisional palette until confirmed — `src/styles/tokens.css`.
+- **Content gaps**: `docs/content-status.md`.
+- **Multi-page**: Add each HTML page to `vite.config.js` `rollupOptions.input` for static hosting.
+- **Navigation panel**: Side panel, not dropdown (see permanent rules for full nav spec).
+
+Design, copy, components, QA, and agent discipline: `.cursor/rules/meleji-permanent-rules.mdc`.

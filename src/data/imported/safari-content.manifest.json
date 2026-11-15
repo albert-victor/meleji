@@ -1,0 +1,221 @@
+{
+  "importedAt": "2026-11-08T15:10:15.832Z",
+  "packages": [
+    {
+      "slug": "3-days-to-ngorongoro-crater-tarangire-lake-manyara-national-parks",
+      "name": "3 Days to Ngorongoro Crater, Tarangire & Lake Manyara National Parks",
+      "imageCount": 3,
+      "itineraryDays": 3,
+      "activityCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "2-days-to-lake-manyara-national-park-ngorongoro-crater",
+      "name": "2 Days to Lake Manyara National Park & Ngorongoro Crater",
+      "imageCount": 3,
+      "itineraryDays": 2,
+      "activityCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "4-days-to-serengeti-national-park-and-ngorongoro-crater",
+      "name": "4 Days to Serengeti National Park and Ngorongoro Crater",
+      "imageCount": 3,
+      "itineraryDays": 4,
+      "activityCount": 4,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "5-days-serengeti-and-ngorongoro-crater-safari",
+      "name": "5 Days Serengeti and Ngorongoro Crater Safari",
+      "imageCount": 3,
+      "itineraryDays": 5,
+      "activityCount": 4,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "5-days-tarangire-serengeti-ngorongoro-lake-manyara-safari",
+      "name": "5 Days Tarangire, Serengeti, Ngorongoro, Lake Manyara Safari",
+      "imageCount": 3,
+      "itineraryDays": 5,
+      "activityCount": 5,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "6-days-ngorongoro-crater-serengeti-and-lake-manyara-safari",
+      "name": "6 Days Ngorongoro Crater, Serengeti and Lake Manyara Safari",
+      "imageCount": 3,
+      "itineraryDays": 6,
+      "activityCount": 5,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "6-days-tarangire-serengeti-and-ngorongoro-crater-safari",
+      "name": "6 Days Tarangire, Serengeti and Ngorongoro Crater Safari",
+      "imageCount": 3,
+      "itineraryDays": 6,
+      "activityCount": 4,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "7-days-manyara-serengeti-ngorongoro-crater-and-tarangire-safari",
+      "name": "7 Days, Manyara, Serengeti, Ngorongoro Crater and Tarangire Safari",
+      "imageCount": 3,
+      "itineraryDays": 7,
+      "activityCount": 6,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "day-trip-to-arusha-national-park",
+      "name": "Day Trip to Arusha National Park",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 4,
+      "paragraphCount": 3
+    },
+    {
+      "slug": "day-trip-to-lake-manyara-national-park",
+      "name": "Day Trip to Lake Manyara National Park",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "day-trip-to-materuni-waterfalls-and-coffee-tour",
+      "name": "Day Trip to Materuni Waterfalls and Coffee Tour",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 4,
+      "paragraphCount": 5
+    },
+    {
+      "slug": "day-trip-to-lake-chala",
+      "name": "Day Trip to Lake Chala",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 4,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "day-trip-to-chemka-hot-springs",
+      "name": "Day Trip to Chemka Hot Springs",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 1,
+      "paragraphCount": 3
+    },
+    {
+      "slug": "day-trip-to-lake-duluti",
+      "name": "Day Trip to Lake Duluti",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 4,
+      "paragraphCount": 4
+    },
+    {
+      "slug": "day-trip-to-lake-natron",
+      "name": "Day Trip to Lake Natron",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 3,
+      "paragraphCount": 3
+    },
+    {
+      "slug": "3-days-safari-to-serengeti-and-ngorongoro-crater",
+      "name": "Day Trip to Chemka Hot Springs",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 1,
+      "paragraphCount": 3
+    },
+    {
+      "slug": "4-days-kilimanjaro-trek-via-machame-route",
+      "name": "4 Days Kilimanjaro Trek via Machame Route",
+      "imageCount": 3,
+      "itineraryDays": 6,
+      "activityCount": 1,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "day-hike-mount-kilimanjaro-via-marangu-route",
+      "name": "Day Hike Mount Kilimanjaro via Marangu Route",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 1,
+      "paragraphCount": 2
+    },
+    {
+      "slug": "day-trip-to-mount-meru-waterfalls-hike",
+      "name": "Day Trip to Mount Meru Waterfalls Hike",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 2,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "day-trip-to-tarangire-national-park",
+      "name": "Day Trip to Tarangire National Park",
+      "imageCount": 3,
+      "itineraryDays": 1,
+      "activityCount": 3,
+      "paragraphCount": 1
+    }
+  ],
+  "activities": [
+    {
+      "slug": "coffee",
+      "title": "Coffee experiences",
+      "imageCount": 3,
+      "paragraphCount": 5
+    },
+    {
+      "slug": "waterfalls",
+      "title": "Waterfalls & forest walks",
+      "imageCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "swahili-food",
+      "title": "Swahili food & village meals",
+      "imageCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "social-impact",
+      "title": "Social impact & cultural tourism",
+      "imageCount": 3,
+      "paragraphCount": 4
+    },
+    {
+      "slug": "hadzabe-tours",
+      "title": "Hadzabe cultural tours",
+      "imageCount": 3,
+      "paragraphCount": 7
+    },
+    {
+      "slug": "great-migration",
+      "title": "Great Migration safaris",
+      "imageCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "game-drives",
+      "title": "Game drives & wildlife",
+      "imageCount": 3,
+      "paragraphCount": 1
+    },
+    {
+      "slug": "walking-safaris",
+      "title": "Walking & hiking safaris",
+      "imageCount": 3,
+      "paragraphCount": 3
+    },
+    {
+      "slug": "balloon-safari",
+      "title": "Balloon & aerial safaris",
+      "imageCount": 3,
+      "paragraphCount": 1
+    }
+  ]
+}

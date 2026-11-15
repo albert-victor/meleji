@@ -1,0 +1,179 @@
+/**
+ * Original logo accents retained. Editorial surface and CTA colors are provisional.
+ */
+:root {
+  --color-brand-charcoal: #1a1a1a;
+  --color-brand-charcoal-soft: #2d2d2d;
+  --color-brand-yellow: #f5d66b;
+  --color-brand-yellow-bright: #f8e08a;
+  --color-brand-amber: #e8a317;
+  --color-brand-orange: #e07020;
+  --color-brand-terracotta: #d9581f;
+  --color-brand-terracotta-deep: #c54e22;
+  --color-brand-taupe: #a67c52;
+  --color-brand-lime: #9cb648;
+  --color-brand-lime-deep: #7a9a32;
+
+  --color-brand-navy: var(--color-brand-charcoal-soft);
+  --color-brand-navy-deep: var(--color-brand-charcoal);
+  --color-brand-navy-muted: #3d3d3d;
+  --color-brand-gold: var(--color-brand-amber);
+  --color-brand-gold-soft: var(--color-brand-yellow);
+  --color-brand-gold-deep: var(--color-brand-terracotta-deep);
+  --color-brand-green: var(--color-brand-lime-deep);
+  --color-brand-green-soft: var(--color-brand-lime);
+  --color-brand-green-deep: #5f7d28;
+
+  --color-neutral-0: #ffffff;
+  --color-cream: #fdf9f3;
+  --color-ivory: #f7f4ef;
+  --color-brand-brown: #3c2a21;
+  --color-brand-brown-muted: #5c4638;
+  --color-brand-copper: #c54e22;
+  --color-brand-gold-highlight: #d4a24a;
+
+  --color-neutral-50: #f7f4ef;
+  --color-neutral-100: #efe9e0;
+  --color-neutral-200: #ddd4c8;
+  --color-neutral-300: #c4b8a8;
+  --color-neutral-400: #9a8f82;
+  --color-neutral-600: #5c564e;
+  --color-neutral-800: #2e2c28;
+  --color-neutral-900: var(--color-brand-charcoal);
+
+  --color-text: var(--color-brand-brown);
+  --color-text-muted: var(--color-neutral-600);
+  --color-text-inverse: var(--color-neutral-0);
+  --color-surface: var(--color-cream);
+  --color-surface-alt: var(--color-neutral-50);
+  --color-border: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+  --color-focus-ring: #9a431f;
+
+  --gradient-surface-soft: linear-gradient(
+    165deg,
+    var(--color-neutral-50) 0%,
+    var(--color-neutral-0) 50%,
+    var(--color-neutral-100) 100%
+  );
+  --gradient-brand-hero: linear-gradient(
+    128deg,
+    var(--color-brand-charcoal) 0%,
+    var(--color-brand-charcoal-soft) 45%,
+    var(--color-brand-terracotta-deep) 100%
+  );
+  /* Logo mosaic: bright yellow → amber → orange → terracotta */
+  --gradient-cta: linear-gradient(
+    118deg,
+    #b95118 0%,
+    #a5451d 48%,
+    #873b22 100%
+  );
+  --gradient-cta-hover: linear-gradient(
+    118deg,
+    #a5451d 0%,
+    #873b22 48%,
+    #71301d 100%
+  );
+  --gradient-footer: linear-gradient(
+    180deg,
+    var(--color-brand-charcoal) 0%,
+    #121212 100%
+  );
+
+  /* Libre Bodoni = display headings; Lexend = UI/body; Italiana = signature accents */
+  --font-heading: 'Libre Bodoni', Didot, 'Bodoni MT', Georgia, serif;
+  --font-body: 'Lexend', system-ui, sans-serif;
+  --font-label: 'Lexend', system-ui, sans-serif;
+  --font-signature: Italiana, Georgia, serif;
+  --font-weight-body: 400;
+  --font-weight-ui: 600;
+  --font-weight-strong: 700;
+
+  --text-xs: clamp(0.78rem, 0.72rem + 0.25vw, 0.84rem);
+  --text-sm: clamp(0.9rem, 0.85rem + 0.25vw, 0.95rem);
+  --text-base: clamp(1.02rem, 0.96rem + 0.3vw, 1.125rem);
+  --text-lg: clamp(1.05rem, 1rem + 0.35vw, 1.125rem);
+  --text-xl: clamp(1.15rem, 1.05rem + 0.5vw, 1.25rem);
+  --text-2xl: clamp(1.35rem, 1.2rem + 0.75vw, 1.5rem);
+  --text-3xl: clamp(1.5rem, 1.3rem + 0.9vw, 1.85rem);
+  --text-4xl: clamp(1.75rem, 1.45rem + 1.2vw, 2.35rem);
+  --text-5xl: clamp(2rem, 1.6rem + 1.6vw, 2.85rem);
+  --text-display: clamp(2.25rem, 1.45rem + 3.5vw, 4.85rem);
+  --text-display-sm: clamp(2rem, 1.35rem + 2.8vw, 3.25rem);
+  --text-section: clamp(2rem, 1.4rem + 2.4vw, 3.625rem);
+  --text-card: clamp(1.5rem, 1.25rem + 1vw, 2.125rem);
+  --section-space: clamp(3rem, 7vw, 6rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.4;
+  --leading-normal: 1.65;
+
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.12em;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-14: 3.5rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  --container-max: 90rem;
+  --container-narrow: 40rem;
+  --container-padding: clamp(1.25rem, 5vw, 5rem);
+  --header-height: clamp(4.55rem, 4.35rem + 0.55vw, 5.1rem);
+  --header-height-home-compact: clamp(4.15rem, 4rem + 0.4vw, 4.55rem);
+  --header-surface-fade: 520ms;
+  --scroll-margin-header: calc(var(--header-height) + var(--space-4));
+
+  --border-width: 1px;
+  --border-width-thick: 2px;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(26 26 26 / 0.06);
+  --shadow-md: 0 12px 32px rgb(26 26 26 / 0.12);
+  --shadow-header: 0 1px 0 rgb(221 212 200 / 0.95);
+  --shadow-card: 0 4px 6px rgb(26 26 26 / 0.04), 0 14px 28px rgb(26 26 26 / 0.08);
+  --shadow-card-hover: 0 8px 16px rgb(26 26 26 / 0.06), 0 20px 40px rgb(26 26 26 / 0.1);
+
+  --z-header: 100;
+  --z-overlay: 150;
+  --z-menu: 200;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 320ms;
+  --duration-button: 620ms;
+  --duration-cinematic: 880ms;
+  --duration-ghost-fill: 1.35s;
+  --ease-cinematic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-ghost-fill: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-slow: 720ms;
+
+  --pattern-opacity: 0.08;
+  --pattern-opacity-strong: 0.14;
+
+  /* Subtle warm wash on photography — tames harsh/saturation without hurting contrast */
+  --meleji-photo-wash-opacity: 0.1;
+  --meleji-photo-wash: linear-gradient(
+    122deg,
+    rgb(212 162 74 / 0.18) 0%,
+    rgb(166 124 82 / 0.14) 38%,
+    rgb(253 249 243 / 0.12) 72%,
+    rgb(60 42 33 / 0.08) 100%
+  );
+  --meleji-photo-filter: saturate(0.97) contrast(1) brightness(1.01);
+}

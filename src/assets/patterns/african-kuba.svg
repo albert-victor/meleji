@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <!-- Kuba-inspired interlocking diamonds + chevrons (filled cultural geometry) -->
+  <defs>
+    <pattern id="kuba" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="none"/>
+      <path d="M40 4 L76 40 L40 76 L4 40 Z" fill="none" stroke="#3c2a21" stroke-width="3.5"/>
+      <path d="M40 18 L62 40 L40 62 L18 40 Z" fill="#3c2a21" opacity="0.35"/>
+      <path d="M40 28 L52 40 L40 52 L28 40 Z" fill="#3c2a21" opacity="0.55"/>
+      <path d="M8 8 L20 8 L14 18 Z" fill="#3c2a21" opacity="0.4"/>
+      <path d="M60 8 L72 8 L66 18 Z" fill="#3c2a21" opacity="0.4"/>
+      <path d="M8 62 L20 62 L14 72 Z" fill="#3c2a21" opacity="0.4"/>
+      <path d="M60 62 L72 62 L66 72 Z" fill="#3c2a21" opacity="0.4"/>
+      <rect x="36" y="2" width="8" height="8" fill="#3c2a21" opacity="0.45" transform="rotate(45 40 6)"/>
+      <rect x="36" y="70" width="8" height="8" fill="#3c2a21" opacity="0.45" transform="rotate(45 40 74)"/>
+    </pattern>
+  </defs>
+  <rect width="160" height="160" fill="url(#kuba)"/>
+</svg>

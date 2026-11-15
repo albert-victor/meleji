@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="Internal card component QA — not public content." />
+    <title>Card components (dev) | Meleji Homestays</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="page page--dev-cards" data-footer="compact" data-chrome="on">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <main id="main-content" class="page__main">
+      <div class="container">
+        <div class="dev-fixture-banner" role="status">
+          <strong>Development only.</strong>
+          <span data-dev-notice>Loading fixture notice…</span>
+        </div>
+
+        <div class="section-head section-head--center" style="margin-bottom: var(--space-8)">
+          <p class="section-head__eyebrow">Phase 04</p>
+          <h1 class="section-head__title">Reusable cards</h1>
+          <p class="section-head__desc">
+            Fixture rows use [DEV] labels. Published preview uses approved <code>src/data/published/</code> records only.
+          </p>
+        </div>
+
+        <section class="dev-cards-section" aria-labelledby="published-title">
+          <div class="section-head">
+            <h2 class="section-head__title" id="published-title">Published preview</h2>
+            <p class="section-head__desc">Safe for production reference.</p>
+          </div>
+          <div data-card-mount="published"></div>
+        </section>
+
+        <section class="dev-cards-section" aria-labelledby="fixtures-title">
+          <div class="section-head">
+            <h2 class="section-head__title" id="fixtures-title">Development fixtures</h2>
+            <p class="section-head__desc">Isolated data from <code>src/data/fixtures/</code>.</p>
+          </div>
+          <div data-card-mount="fixtures"></div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="/src/scripts/dev-cards.js"></script>
+  </body>
+</html>

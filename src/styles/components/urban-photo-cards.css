@@ -1,0 +1,92 @@
+/* City tours & local markets — brand cinematic wash, gentle motion (low-res sources) */
+
+:root {
+  --meleji-urban-cinematic-wash: linear-gradient(
+    148deg,
+    rgb(154 73 31 / 0.22) 0%,
+    rgb(122 154 72 / 0.16) 42%,
+    rgb(212 162 74 / 0.14) 78%,
+    rgb(166 124 82 / 0.1) 100%
+  );
+  --meleji-urban-photo-filter: saturate(0.96) contrast(0.99) brightness(1.02);
+}
+
+.m-card--photo-soft .m-card__media::after,
+.csp-card--photo-soft .csp-card__media::after,
+.csp-card--photo-soft .csp-card__main-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--meleji-urban-cinematic-wash);
+  mix-blend-mode: multiply;
+  opacity: 0.78;
+}
+
+.m-card--photo-soft .m-card__media img,
+.csp-card--photo-soft .csp-card__hero,
+.csp-card--photo-soft .csp-card__main {
+  filter: var(--meleji-urban-photo-filter);
+}
+
+@media (hover: hover) {
+  a.m-card--photo-soft:hover .m-card__media img,
+  .csp-card--photo-soft:hover .csp-card__hero,
+  .csp-card--photo-soft:hover .csp-card__main {
+    transform: scale(1.012);
+  }
+}
+
+.csp-card--photo-soft:hover .csp-card__hero {
+  transform: scale(1.012);
+}
+
+/* Homepage explore tiles — city & markets */
+.experience-piece--urban-photo .experience-piece__photos {
+  position: relative;
+}
+
+.experience-piece--urban-photo .experience-piece__photos::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--meleji-urban-cinematic-wash);
+  mix-blend-mode: multiply;
+  opacity: 0.72;
+}
+
+.experience-piece--urban-photo .experience-piece__photos > img,
+.experience-piece--urban-photo .experience-piece__inset {
+  filter: var(--meleji-urban-photo-filter);
+}
+
+.collage-live.is-alive .experience-piece--urban-photo .experience-piece__photos > img:first-child {
+  animation: urban-collage-drift 16s ease-in-out infinite alternate;
+}
+
+@media (hover: hover) {
+  .collage-live:hover .experience-piece--urban-photo .experience-piece__photos > img:first-child,
+  .collage-live:hover .experience-piece--urban-photo .experience-piece__inset {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes urban-collage-drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: scale(1.012) translate3d(-0.4%, 0.35%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collage-live.is-alive .experience-piece--urban-photo .experience-piece__photos > img:first-child {
+    animation: none;
+  }
+}

@@ -1,0 +1,103 @@
+.enquiry-form {
+  padding: clamp(1rem, 4vw, 2.5rem);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: none;
+}
+
+.enquiry-form__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.enquiry-form__intro {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+  max-width: 60ch;
+}
+
+.enquiry-form__grid {
+  margin-bottom: 1.5rem;
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .enquiry-form__grid {
+  margin-bottom: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-ui);
+}
+
+.form-required {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  min-width: 0;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  font: inherit;
+  color: inherit;
+}
+
+.form-field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-field input:focus-visible,
+.form-field textarea:focus-visible,
+.form-field select:focus-visible {
+  outline: 2px solid var(--color-brand-amber);
+  outline-offset: 2px;
+}
+
+.enquiry-form__status {
+  min-height: 1.5rem;
+  margin-block: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-brand-terracotta);
+}
+
+.enquiry-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.enquiry-form__followup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.form-field__hint {
+  margin: 0;
+}

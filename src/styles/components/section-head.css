@@ -1,0 +1,37 @@
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 42rem;
+}
+
+.section-head--center {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head__eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-family: var(--font-label);
+  font-weight: 600;
+  color: var(--color-brand-terracotta-deep);
+}
+
+.section-head__title {
+  font-size: var(--text-section);
+  color: var(--color-brand-brown);
+}
+
+.section-head__desc {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-muted);
+  max-width: 52ch;
+}
+
+.section-head--center .section-head__desc {
+  text-align: center;
+}

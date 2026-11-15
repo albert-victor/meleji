@@ -1,0 +1,12 @@
+@import './tokens.css';
+@import './reset.css';
+@import './typography.css';
+@import './global.css';
+@import './layout.css';
+@import './components.css';
+@import './animations.css';
+@import './inner-pages.css';
+@import './foundation-page.css';
+@import './gallery-page.css';
+@import './detail-editorial.css';
+@import './responsive.css';
