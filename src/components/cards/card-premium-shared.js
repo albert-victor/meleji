@@ -57,7 +57,7 @@ const DESTINATION_CHIP_ICONS = {
 };
 
 /**
- * Editorial one-liner (reference-style kicker) — not a factual claim beyond region/park type.
+ * Editorial one-liner (reference-style kicker) – not a factual claim beyond region/park type.
  * @param {import('../../data/types.js').DestinationItem} item
  */
 export function destinationEditorialKicker(item) {
@@ -265,7 +265,7 @@ export function packagePrimaryActivityLine(item) {
 }
 
 /**
- * Price row for cards — request pricing unless a verified amount is already published.
+ * Price row for cards – request pricing unless a verified amount is already published.
  * @param {import('../../data/types.js').SafariPackageItem} item
  */
 const PACKAGE_PROMO_SLUGS = new Set([
@@ -281,7 +281,7 @@ export function packageShowsEnquiryPromo(item) {
 }
 
 /**
- * Price row for cards — request pricing unless a verified amount is already published.
+ * Price row for cards – request pricing unless a verified amount is already published.
  * @param {import('../../data/types.js').SafariPackageItem} item
  */
 export function renderPackagePriceBlock(item) {

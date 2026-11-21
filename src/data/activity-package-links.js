@@ -1,6 +1,6 @@
 /**
  * Match safari packages to activity cards for browse / demo flows.
- * Package `activities` values are free-text labels from import — matching is heuristic.
+ * Package `activities` values are free-text labels from import – matching is heuristic.
  */
 
 /** @type {Record<string, (pkg: import('./types.js').SafariPackageItem) => boolean>} */

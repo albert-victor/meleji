@@ -15,7 +15,9 @@ import {
   renderFoundationVolunteer,
   renderFoundationImpact,
 } from './foundation.js';
-import { renderAbout, renderContact, renderBooking, renderGalleryPage } from './general.js';
+import { renderBooking, renderGalleryPage } from './general.js';
+import { renderAbout } from './about.js';
+import { renderContact } from './contact.js';
 import { renderNotFound } from './not-found.js';
 
 const handlers = {
@@ -47,5 +49,17 @@ export function mountInnerPage() {
   if (!page || !handlers[page]) return;
 
   const slug = document.body.dataset.slug;
-  handlers[page]({ slug });
+  try {
+    handlers[page]({ slug });
+  } catch (err) {
+    console.error(`[mountInnerPage] Failed to render page "${page}"`, err);
+    const root = document.querySelector('[data-inner-mount]');
+    if (root && !root.innerHTML.trim()) {
+      root.innerHTML = `
+        <p class="inner-section container text-muted" role="status">
+          This page could not load. Please refresh or return to the
+          <a href="/">home page</a>. If the problem continues, contact the team.
+        </p>`;
+    }
+  }
 }

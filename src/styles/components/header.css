@@ -111,7 +111,7 @@
   font-size: 0.72rem;
 }
 
-/* Home: fixed cream bar — always readable over hero */
+/* Home: fixed cream bar – always readable over hero */
 .page--home .site-header,
 .page--home .site-header.is-hero-bar {
   position: fixed;
@@ -154,6 +154,76 @@
 }
 
 .page--home:has(.site-header) .page__main {
+  padding-top: 0;
+}
+
+/* Inner cinematic heroes: header over full-viewport image until scroll */
+.page--cinematic-hero .site-header.is-cinematic-dock {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__name,
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__descriptor,
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__nav a {
+  color: #fff9f0;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__nav a:hover,
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__nav a[aria-current] {
+  color: var(--color-brand-yellow-bright);
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__lockup {
+  border-left-color: rgb(255 248 238 / 0.35);
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .nav-toggle__bar {
+  background: #fff9f0;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-over-hero .site-header__cta {
+  --btn-fg: #3c2a21;
+  background: rgb(255 248 238 / 0.94);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgb(26 20 16 / 0.22);
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled {
+  background: #fdf9f3;
+  border-bottom-color: #e8ddcd;
+  box-shadow: 0 8px 24px rgb(60 42 33 / 0.08);
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .site-header__name,
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .site-header__descriptor,
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .site-header__nav a {
+  color: #3c2a21;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .site-header__descriptor {
+  color: #756048;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .site-header__lockup {
+  border-left-color: #cdb79c;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .nav-toggle__bar {
+  background: #3c2a21;
+}
+
+.page--cinematic-hero .site-header.is-cinematic-dock.is-scrolled .site-header__cta {
+  --btn-fg: #ffffff;
+  background: linear-gradient(118deg, #b95118 0%, #a5451d 48%, #873b22 100%);
+  box-shadow: none;
+}
+
+.page--cinematic-hero:has(.site-header.is-cinematic-dock) .page__main {
   padding-top: 0;
 }
 

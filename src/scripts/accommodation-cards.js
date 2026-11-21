@@ -1,4 +1,4 @@
-/** Stay cards — thumbnail rail swaps hero image without navigating. */
+/** Stay cards – thumbnail rail swaps hero image without navigating. */
 export function initAccommodationCards(root = document) {
   root.querySelectorAll('[data-stay-gallery]').forEach((gallery) => {
     const hero = gallery.querySelector('[data-stay-hero]');

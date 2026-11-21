@@ -40,7 +40,7 @@ function showPackagesForActivity(activity) {
   count.textContent =
     matches.length > 0
       ? `${matches.length} package${matches.length === 1 ? '' : 's'} linked to this activity (heuristic match).`
-      : 'No imported package matched — try another activity or enquire for a custom route.';
+      : 'No imported package matched – try another activity or enquire for a custom route.';
 
   pkgRoot.innerHTML =
     matches.length > 0

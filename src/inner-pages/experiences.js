@@ -19,7 +19,7 @@ export function renderExperiencesOverview() {
       ${renderDetailEditorialHero({
         eyebrow: 'Around the homestay',
         title: 'Local experiences',
-        lead: 'Food, coffee with Mgei, culture, and outdoor time — booked with the hosts and confirmed on WhatsApp.',
+        lead: 'Food, coffee, culture, and outdoor time – booked with the hosts and confirmed on WhatsApp.',
         images: collageImagesFromEntity({
           gallery: publishedExperiences.slice(0, 3).map((exp) => ({ src: exp.imageSrc, alt: exp.imageAlt })),
           imageSrc: expHero,

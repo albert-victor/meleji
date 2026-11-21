@@ -1,5 +1,6 @@
 import { renderDetailEditorialHero, collageImagesFromEntity } from '../components/detail-hero.js';
-import { renderEnquiryForm } from '../components/enquiry-form.js';
+import { renderEnquiryRedirectPanel } from '../components/enquiry-redirect.js';
+import { buildContactHref } from '../utils/contact-routes.js';
 import { renderEditorialSplit } from '../components/editorial-split.js';
 import { renderExperienceCard, renderCardGrid } from '../components/cards/index.js';
 import { publishedExperiences } from '../data/published/experiences.js';
@@ -14,7 +15,7 @@ import {
 import expCoffee from '../assets/images/optimized/expCoffee-1600.webp';
 import intro from '../assets/images/optimized/intro-1600.webp';
 import fieldImg from '../assets/images/accommodation/I_the_field.jpg';
-import { COFFEE_HOMESTAY } from '../data/pricing.js';
+import { renderExperiencePricingList } from '../components/experience-pricing.js';
 import { escapeHtml } from '../utils/html.js';
 import { renderAmenityList } from './shared.js';
 
@@ -74,16 +75,36 @@ function renderDishGrid() {
     </div>`;
 }
 
-function renderExperienceForm(experience, bookingMode) {
-  return renderEnquiryForm({
-    id: `experience-${experience.slug}`,
-    topic: 'booking',
+function renderExperienceForm(experience) {
+  return renderEnquiryRedirectPanel({
     heading: `Enquire – ${experience.title}`,
-    intro: 'This prepares an email or WhatsApp message. The team confirms menus, timing, and final totals.',
-    bookingMode,
-    experienceSlug: experience.slug,
-    hiddenFields: { experience: experience.slug },
+    intro: 'This prepares an email or WhatsApp message on the contact page. The team confirms menus, timing, and final totals.',
+    intent: 'stay',
+    context: { experience: experience.slug },
+    buttonLabel: 'Send enquiry',
   });
+}
+
+/**
+ * Shared split: details + USD guide pricing + enquiry.
+ * @param {import('../data/types.js').ExperienceItem & { pricingTiers?: import('../components/experience-pricing.js').ExperiencePriceTier[] }} experience
+ * @param {{ detailsTitle?: string }} [options]
+ */
+function renderExperienceDetailsSplit(experience, options = {}) {
+  const title = options.detailsTitle ?? 'What is included';
+  const tiers = experience.pricingTiers ?? [];
+  return `
+    <section class="inner-section container page-split" id="experience-booking">
+      <div>
+        <h2>${escapeHtml(title)}</h2>
+        ${renderAmenityList(experience.inclusions ?? [])}
+      </div>
+      <aside class="info-panel page-split__aside">
+        <p class="info-panel__label">Guide prices</p>
+        ${renderExperiencePricingList(tiers)}
+        ${renderExperienceForm(experience)}
+      </aside>
+    </section>`;
 }
 
 function renderRelatedExperiences(slug) {
@@ -114,23 +135,14 @@ export function renderCoffeeExperiencePage(experience) {
         imageAlt: experience.imageAlt,
       }),
       actions: [
-        { label: 'Book coffee experience', href: '#experience-booking' },
+        { label: 'Book coffee experience', href: buildContactHref({ intent: 'stay', experience: experience.slug }) },
         { label: 'Book your stay', href: '/pages/booking/', variant: 'secondary', slide: false },
       ],
     })}
     ${renderCoffeeJourney()}
-    <section class="inner-section container page-split" id="experience-booking">
-      <div>
-        <h2>What is included</h2>
-        ${renderAmenityList(experience.inclusions)}
-        <p class="text-muted text-small">Materuni and other day-trip coffee tours are listed separately under safaris.</p>
-      </div>
-      <aside class="info-panel page-split__aside">
-        <p class="info-panel__label">Guide price</p>
-        <p class="info-panel__price">USD ${COFFEE_HOMESTAY.perPerson}</p>
-        <p class="text-muted text-small">Per person at the homestay – multiply by participants in the form.</p>
-        ${renderExperienceForm(experience, 'coffee')}
-      </aside>
+    ${renderExperienceDetailsSplit(experience)}
+    <section class="inner-section container">
+      <p class="text-muted text-small">Materuni and other day-trip coffee tours are listed separately under safaris.</p>
     </section>
     ${renderRelatedExperiences(experience.slug)}`;
 }
@@ -147,7 +159,7 @@ export function renderFoodExperiencePage(experience) {
         imageAlt: experience.imageAlt,
       }),
       actions: [
-        { label: 'Book a meal', href: '#experience-booking' },
+        { label: 'Book a meal', href: buildContactHref({ intent: 'stay', experience: experience.slug }) },
         { label: 'All experiences', href: '/pages/experiences/', variant: 'secondary', slide: false },
       ],
     })}
@@ -161,9 +173,7 @@ export function renderFoodExperiencePage(experience) {
         ${renderAmenityList(FOOD_PRICING_NOTES)}
       </div>
     </section>
-    <section class="inner-section container" id="experience-booking">
-      ${renderExperienceForm(experience, 'food')}
-    </section>
+    ${renderExperienceDetailsSplit(experience, { detailsTitle: 'Booking notes' })}
     ${renderRelatedExperiences(experience.slug)}`;
 }
 
@@ -178,7 +188,7 @@ function renderPanelExperiencePage(experience, detail) {
         imageSrc: experience.landscapeSrc ?? experience.imageSrc,
         imageAlt: experience.imageAlt,
       }),
-      actions: [{ label: 'Send an enquiry', href: '#experience-booking' }],
+      actions: [{ label: 'Send an enquiry', href: buildContactHref({ intent: 'stay', experience: experience.slug }) }],
     })}
     <section class="inner-section container detail-highlight-grid">
       ${detail.panels
@@ -195,21 +205,13 @@ function renderPanelExperiencePage(experience, detail) {
       detail.images.length
         ? `<section class="inner-section container">${renderEditorialSplit({
             title: 'Host-led time',
-            body: experience.summary,
+            body: experience.longDescription,
             image: detail.images[0],
             reverse: true,
           })}</section>`
         : ''
     }
-    <section class="inner-section container container--narrow" id="experience-booking">
-      ${renderEnquiryForm({
-        id: `experience-${experience.slug}`,
-        topic: 'booking',
-        heading: 'Experience enquiry',
-        intro: 'Include stay dates if you already have accommodation in mind.',
-        hiddenFields: { experience: experience.slug },
-      })}
-    </section>
+    ${renderExperienceDetailsSplit({ ...experience, pricingTiers: detail.pricingTiers, inclusions: detail.details ?? experience.inclusions })}
     ${renderRelatedExperiences(experience.slug)}`;
 }
 

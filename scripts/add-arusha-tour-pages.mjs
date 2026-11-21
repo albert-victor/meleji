@@ -10,7 +10,7 @@ const entries = [
   {
     path: 'pages/safaris/activities/city-tours/index.html',
     title: 'Arusha city tours | Meleji Homestays',
-    description: 'Guided Arusha city tour — Clock Tower, streets, and local coffee stops. Price on request.',
+    description: 'Guided Arusha city tour – Clock Tower, streets, and local coffee stops. Price on request.',
     page: 'safari-activity-detail',
     slug: 'city-tours',
     footer: 'compact',
@@ -26,7 +26,7 @@ const entries = [
   {
     path: 'pages/safaris/packages/arusha-city-tour/index.html',
     title: 'Arusha city tour | Meleji Homestays',
-    description: 'Half-day Arusha city package — landmarks and cafés with Meleji. Price on request.',
+    description: 'Half-day Arusha city package – landmarks and cafés with Meleji. Price on request.',
     page: 'package-detail',
     slug: 'arusha-city-tour',
     footer: 'compact',
@@ -34,7 +34,7 @@ const entries = [
   {
     path: 'pages/safaris/packages/arusha-local-markets-tour/index.html',
     title: 'Arusha local markets tour | Meleji Homestays',
-    description: 'Half-day Arusha markets package — spices and produce with a guide. Price on request.',
+    description: 'Half-day Arusha markets package – spices and produce with a guide. Price on request.',
     page: 'package-detail',
     slug: 'arusha-local-markets-tour',
     footer: 'compact',

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <!-- Bogolan / mudcloth inspired dashes, ladders, and seed dots -->
+  <defs>
+    <pattern id="mudcloth" width="90" height="90" patternUnits="userSpaceOnUse">
+      <rect width="90" height="90" fill="none"/>
+      <path d="M10 18h28M10 26h20M10 34h28" stroke="#3c2a21" stroke-width="3.2" stroke-linecap="round" opacity="0.5"/>
+      <path d="M52 18h28M60 26h20M52 34h28" stroke="#3c2a21" stroke-width="3.2" stroke-linecap="round" opacity="0.5"/>
+      <circle cx="22" cy="52" r="4" fill="#3c2a21" opacity="0.45"/>
+      <circle cx="38" cy="52" r="4" fill="#3c2a21" opacity="0.45"/>
+      <circle cx="54" cy="52" r="4" fill="#3c2a21" opacity="0.45"/>
+      <circle cx="70" cy="52" r="4" fill="#3c2a21" opacity="0.45"/>
+      <path d="M14 68 V82 M26 68 V82 M38 68 V82" stroke="#3c2a21" stroke-width="3" stroke-linecap="round" opacity="0.42"/>
+      <path d="M52 68h28M52 75h28M52 82h28" stroke="#3c2a21" stroke-width="2.8" stroke-linecap="round" opacity="0.4"/>
+      <path d="M72 8 L82 18 L72 28 L62 18 Z" fill="#3c2a21" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="180" height="180" fill="url(#mudcloth)"/>
+</svg>

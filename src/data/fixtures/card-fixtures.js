@@ -1,5 +1,5 @@
 /**
- * DEV ONLY — used on /pages/dev/cards/ for component QA.
+ * DEV ONLY – used on /pages/dev/cards/ for component QA.
  * Must never be imported by production pages (/, inner routes).
  */
 import deluxeImg from '../../assets/images/accommodation/Deluxe_1.jpg';
@@ -50,7 +50,7 @@ export const fixturePackages = [
     imageSrc: fieldImg,
     imageAlt: 'Fixture field scene',
     enquiryHref: '/pages/booking/',
-    availabilityNote: 'Enquiry only — fixture',
+    availabilityNote: 'Enquiry only – fixture',
   },
 ];
 

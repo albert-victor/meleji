@@ -104,7 +104,7 @@ const PAGE_BODY = (dataPage, slug, title, footer = 'compact') => `<!doctype html
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="${title.replace(/"/g, '&quot;')} — Northern Tanzania." />
+    <meta name="description" content="${title.replace(/"/g, '&quot;')} – Northern Tanzania." />
     <title>${title.replace(/</g, '')} | Meleji Homestays</title>
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -205,7 +205,7 @@ async function importPackages(manifest) {
           .join('\n')}\n    ],`
       : `itinerary: [{ day: 1, title: ${jsString('Overview')}, body: ${jsString(longDescription)} }],`;
 
-    const galleryJs = imgImports.map((img) => `      { src: ${img.v}, alt: ${jsString(`${parsed.title} — ${img.alt}`)} },`).join('\n');
+    const galleryJs = imgImports.map((img) => `      { src: ${img.v}, alt: ${jsString(`${parsed.title} – ${img.alt}`)} },`).join('\n');
 
     records.push({
       imports: rowImports,
@@ -227,13 +227,11 @@ async function importPackages(manifest) {
     ${itineraryJs}
     imageSrc: ${imgImports[0].v},
     landscapeSrc: ${imgImports[Math.min(1, imgImports.length - 1)].v},
-    imageAlt: ${jsString(`${parsed.title} — ${imgImports[0].alt}`)},
+    imageAlt: ${jsString(`${parsed.title} – ${imgImports[0].alt}`)},
     gallery: [\n${galleryJs}\n    ],
     href: ${jsString(`/pages/safaris/packages/${slug}/`)},
     enquiryHref: ${jsString(`/pages/safaris/custom/?package=${slug}`)},
-    availabilityNote: 'Itinerary reference — confirm dates and routing with Meleji on enquiry.',
-    sourceUrl: ${jsString(pick.url)},
-    sourceNote: 'Itinerary and overview adapted from Tanzania Tourism (tanzaniatourism.com). Not a fixed Meleji price or booking.',
+    availabilityNote: 'Itinerary reference – confirm dates and routing with Meleji on enquiry.',
   },`,
     });
 
@@ -252,7 +250,7 @@ async function importPackages(manifest) {
 
   const uniqueImports = [...new Set(records.flatMap((r) => r.imports))].join('\n');
   const body = `/**
- * Safari packages — imported from Tanzania Tourism.
+ * Safari packages – imported from Tanzania Tourism.
  * Regenerate: node scripts/import-safari-content.mjs
  */
 ${uniqueImports}
@@ -289,7 +287,7 @@ async function importActivities(manifest) {
       pick.slug === 'swahili-food'
         ? [
             'Village and market visits where local cooks prepare seasonal dishes.',
-            'Meals may be arranged with hosts when you book your stay at Meleji — confirm dietary needs on enquiry.',
+            'Meals may be arranged with hosts when you book your stay at Meleji – confirm dietary needs on enquiry.',
           ]
         : pick.slug === 'social-impact'
           ? [
@@ -329,12 +327,10 @@ async function importActivities(manifest) {
       .join('\n')}\n    ],
     imageSrc: ${imgImports[0].v},
     landscapeSrc: ${imgImports[Math.min(1, imgImports.length - 1)].v},
-    imageAlt: ${jsString(`${parsed.title} — ${imgImports[0].alt}`)},
-    gallery: [\n${imgImports.map((img) => `      { src: ${img.v}, alt: ${jsString(`${parsed.title} — ${img.alt}`)} },`).join('\n')}\n    ],
+    imageAlt: ${jsString(`${parsed.title} – ${imgImports[0].alt}`)},
+    gallery: [\n${imgImports.map((img) => `      { src: ${img.v}, alt: ${jsString(`${parsed.title} – ${img.alt}`)} },`).join('\n')}\n    ],
     href: ${jsString(`/pages/safaris/activities/${pick.slug}/`)},
     enquiryHref: ${jsString(`/pages/safaris/custom/?activity=${pick.slug}`)},
-    sourceUrl: ${jsString(pick.url)},
-    sourceNote: 'Activity description adapted from Tanzania Tourism (tanzaniatourism.com). Combine with your stay through Meleji on enquiry.',
   },`,
     });
 
@@ -351,7 +347,7 @@ async function importActivities(manifest) {
 
   const uniqueImports = [...new Set(records.flatMap((r) => r.imports))].join('\n');
   const body = `/**
- * Safari activities — imported from Tanzania Tourism.
+ * Safari activities – imported from Tanzania Tourism.
  * Regenerate: node scripts/import-safari-content.mjs
  */
 ${uniqueImports}

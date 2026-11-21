@@ -1,4 +1,4 @@
-/* Luxury stay cards — gallery rail, gold stars, price emblem, services */
+/* Luxury stay cards – gallery rail, gold stars, price emblem, services */
 
 .stay-card--luxury {
   position: relative;
@@ -54,14 +54,15 @@
   }
 
   .stay-card--luxury:hover .stay-card__hero {
-    transform: scale(1.02);
+    transform: scale(var(--meleji-card-photo-zoom, 1.035));
   }
 }
 
 .stay-card__media {
   position: relative;
   display: block;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 16 / 10;
+  max-height: clamp(11rem, 30vw, 13rem);
   min-height: 0;
   overflow: hidden;
 }
@@ -307,9 +308,19 @@
   align-items: stretch;
 }
 
-/* Homepage stay carousel — 3 comfortable columns (2 on tablet, 1 on phone) */
+/* Homepage stay carousel – 3 comfortable columns (2 on tablet, 1 on phone) */
 .home-top-carousel--stay {
   padding-block: 0.35rem 0.85rem;
+  opacity: 1;
+  transform: none;
+}
+
+/* Carousels mount after load – never inherit hidden [data-reveal] state on the host */
+.home-top-carousel[data-reveal]:not(.is-visible) {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  animation: none;
 }
 
 .home-top-carousel--stay .home-top-carousel__track {
@@ -317,8 +328,14 @@
 }
 
 .home-top-carousel--stay .home-top-carousel__slide {
-  flex: 0 0 min(92vw, 22.5rem);
+  flex: 0 0 100%;
+  min-width: 0;
   max-width: none;
+}
+
+.home-top-carousel--stay .home-top-carousel__slide > .stay-card {
+  width: 100%;
+  max-width: 100%;
 }
 
 .home-top-carousel--stay .stay-card__media {
@@ -355,13 +372,7 @@
   }
 }
 
-@media (min-width: 1200px) {
-  .home-top-carousel--stay .home-top-carousel__slide {
-    flex: 0 0 calc((100% - 2 * 1.85rem) / 3);
-  }
-}
-
-.stay-card.is-visible .stay-card__media {
+.stay-card:not([data-reveal]).is-visible .stay-card__media {
   animation: stay-card-reveal 0.85s var(--ease-cinematic) both;
 }
 
@@ -378,7 +389,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stay-card.is-visible .stay-card__media {
+  .stay-card:not([data-reveal]).is-visible .stay-card__media {
     animation: none;
   }
 

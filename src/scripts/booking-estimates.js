@@ -1,4 +1,5 @@
-import { COFFEE_HOMESTAY, FOOD_PRICING, STAY_PRICING } from '../data/pricing.js';
+import { getStayNightlyQuote, stayPrefillFromSearchParams } from '../data/booking-room-options.js';
+import { COFFEE_HOMESTAY, FOOD_PRICING } from '../data/pricing.js';
 
 function parseDate(value) {
   if (!value) return null;
@@ -36,23 +37,12 @@ function bindStayEstimate(form) {
       return;
     }
 
-    let nightly = 0;
-    let label = '';
-    if (room.value === 'deluxe-rooms') {
-      nightly = STAY_PRICING.deluxe.night;
-      label = `Deluxe room – USD ${nightly} per night (room rate, not per guest).`;
-    } else if (room.value === 'shared-rooms') {
-      if (occupancy?.value === 'double') {
-        nightly = STAY_PRICING.shared.double;
-        label = `Shared double – USD ${nightly} per night (one room/couple).`;
-      } else if (occupancy?.value === 'single') {
-        nightly = STAY_PRICING.shared.single;
-        label = `Shared single – USD ${nightly} per night (one bed).`;
-      } else {
-        updateEstimate(form, '', '');
-        return;
-      }
+    const quote = getStayNightlyQuote(room.value, occupancy?.value);
+    if (!quote) {
+      updateEstimate(form, '', '');
+      return;
     }
+    const { nightly, label } = quote;
 
     const total = nightly * nightCount;
     updateEstimate(
@@ -118,11 +108,43 @@ export function renderPriceEstimateBlock() {
     </div>`;
 }
 
+function applyStayPrefillFromUrl(form) {
+  if (form.dataset.bookingMode !== 'stay') return;
+  const prefill = stayPrefillFromSearchParams(new URLSearchParams(window.location.search));
+  const room = form.elements.namedItem('room');
+  const occ = form.elements.namedItem('occupancy');
+  if (room instanceof HTMLInputElement && prefill.room && !room.value) {
+    room.value = prefill.room;
+  }
+  if (occ instanceof HTMLInputElement && prefill.occupancy && !occ.value) {
+    occ.value = prefill.occupancy;
+  }
+}
+
+function syncCustomSelectFromHidden(form, name) {
+  const hidden = form.elements.namedItem(name);
+  if (!(hidden instanceof HTMLInputElement) || !hidden.value) return;
+  const selectRoot = hidden.closest('[data-custom-select]');
+  const option = selectRoot?.querySelector(`[data-value="${CSS.escape(hidden.value)}"]`);
+  if (!selectRoot || !option) return;
+  selectRoot.querySelectorAll('.custom-select__option').forEach((el) => {
+    el.classList.toggle('is-selected', el === option);
+  });
+  const display = selectRoot.querySelector('.custom-select__display');
+  if (display) display.textContent = option.textContent?.trim() ?? '';
+}
+
 /** @param {ParentNode} [root] */
 export function initBookingEstimates(root = document) {
   root.querySelectorAll('[data-enquiry-form]').forEach((form) => {
     const mode = form.dataset.bookingMode;
-    if (mode === 'stay') bindStayEstimate(form);
+    if (mode === 'stay') {
+      applyStayPrefillFromUrl(form);
+      syncCustomSelectFromHidden(form, 'room');
+      syncCustomSelectFromHidden(form, 'occupancy');
+      bindStayEstimate(form);
+      form.dispatchEvent(new Event('change', { bubbles: true }));
+    }
     if (mode === 'coffee') bindCoffeeEstimate(form);
     if (mode === 'food') bindFoodEstimate(form);
   });

@@ -6,13 +6,14 @@ import hero from '../assets/images/optimized/hero-1920.webp';
 import expCoffee from '../assets/images/optimized/expCoffee-1600.webp';
 import expFood from '../assets/images/optimized/expFood-1600.webp';
 import foundationMain from '../assets/images/Meleji-Foundation/main_1.jpg';
+import { FOUNDATION_HREFS } from './contact.js';
 import {
   getDestinationBySlug,
   getPackageBySlug,
   getSafariActivityBySlug,
 } from './published/lookup.js';
 
-/** Landing page only — injected via footer variant `home`. */
+/** Landing page only – injected via footer variant `home`. */
 export const HOME_VISIT_CTA = {
   eyebrow: 'Plan your visit',
   title: 'Ready to hold your dates?',
@@ -97,7 +98,7 @@ export function resolvePageVisitCta(page, slug = '') {
     destinations: {
       eyebrow: 'Where to go',
       title: 'Pick a destination',
-      body: 'From Arusha National Park to the Serengeti — start with a place, then shape the days around your stay.',
+      body: 'From Arusha National Park to the Serengeti – start with a place, then shape the days around your stay.',
       image: landscape,
       imageAlt: 'Tanzania landscape',
       primary: { label: 'Browse destinations', href: '/pages/safaris/destinations/' },
@@ -113,7 +114,7 @@ export function resolvePageVisitCta(page, slug = '') {
     'safari-activities': {
       eyebrow: 'Activities',
       title: 'Add experiences to your stay',
-      body: 'Coffee tours, game drives, culture visits, and forest walks — layered onto accommodation or safari days.',
+      body: 'Coffee tours, game drives, culture visits, and forest walks – layered onto accommodation or safari days.',
       image: expCoffee,
       imageAlt: 'Coffee experience in Tanzania',
       primary: { label: 'Explore activities', href: '/pages/safaris/activities/' },
@@ -153,10 +154,10 @@ export function resolvePageVisitCta(page, slug = '') {
     'foundation-volunteer': {
       eyebrow: 'Volunteer',
       title: 'Discuss skills and time',
-      body: 'Educational volunteering is coordinated with foundation staff — not drop-in visits.',
+      body: 'Educational volunteering is coordinated with foundation staff – not drop-in visits.',
       image: foundationMain,
       imageAlt: 'Foundation community programmes',
-      primary: { label: 'Volunteer enquiry', href: '#foundation-form' },
+      primary: { label: 'Volunteer enquiry', href: FOUNDATION_HREFS.form },
     },
     'foundation-impact': {
       eyebrow: 'Community impact',
@@ -177,7 +178,7 @@ export function resolvePageVisitCta(page, slug = '') {
     contact: {
       eyebrow: 'Get in touch',
       title: 'Start with a conversation',
-      body: 'Email, phone, or WhatsApp — we reply with next steps for stays, safaris, or foundation visits.',
+      body: 'Email, phone, or WhatsApp – we reply with next steps for stays, safaris, or foundation visits.',
       image: intro,
       imageAlt: 'Welcome at Meleji',
       primary: { label: 'Send a message', href: '#contact-form' },

@@ -1,7 +1,8 @@
 import { renderBreadcrumb } from '../components/breadcrumb.js';
 import { renderPageHero } from '../components/page-hero.js';
 import { renderCtaBand } from '../components/cta-band.js';
-import { renderEnquiryForm } from '../components/enquiry-form.js';
+import { renderEnquiryRedirectPanel } from '../components/enquiry-redirect.js';
+import { buildContactHref } from '../utils/contact-routes.js';
 import {
   renderDetailSection,
   renderEditorialRouteFit,
@@ -16,12 +17,13 @@ import {
 } from '../components/cards/index.js';
 import { activitySlugFromLabel } from '../data/destination-relations.js';
 import {
-  getAlsoLikeDestinations,
+  getRelatedDestinations,
   getDestinationsForPackage,
   getEditorialRouteFit,
   getLinkedSafariActivities,
   getNearbyDestinations,
   getPackagesForDestination,
+  getSuggestedPackagesForDestination,
   getPackageRouteFit,
   getSimilarPackages,
 } from '../data/safari-detail-helpers.js';
@@ -31,7 +33,7 @@ import { liveSafariActivities } from '../data/published/safari-activities.js';
 import { getDestinationBySlug, getPackageBySlug, getPackageTemplate } from '../data/published/lookup.js';
 import { publishedDestinations } from '../data/published/destinations.js';
 import { escapeHtml } from '../utils/html.js';
-import safariHero from '../assets/images/optimized/landscape-1600.webp';
+import { CINEMATIC_HERO_IMAGES } from '../data/cinematic-hero-images.js';
 import { renderDetailEditorialHero, collageImagesFromEntity } from '../components/detail-hero.js';
 import { renderDestinationEditorialSections, renderPackageInfoPanels } from '../components/detail-planning.js';
 import { renderEditorialSplit } from '../components/editorial-split.js';
@@ -68,11 +70,11 @@ export function renderSafarisOverview() {
       ])}
       ${renderPageHero({
         variant: 'landscape',
-        imageSrc: safariHero,
-        imageAlt: 'Mountain and lake scenery in Tanzania',
+        imageSrc: CINEMATIC_HERO_IMAGES.safaris.src,
+        imageAlt: CINEMATIC_HERO_IMAGES.safaris.alt,
         eyebrow: 'Explore',
         title: 'Safaris & tours',
-        lead: 'Wildlife, landscapes and a route shaped around you. Talk with the Meleji team about where you would like to go.',
+        lead: 'Wildlife, landscapes, and a route shaped around your dates – planned with the Meleji team in Arusha.',
         actions: [
           { label: 'Tailor-made enquiry', href: '/pages/safaris/custom/' },
           { label: 'Contact', href: '/pages/contact/', variant: 'secondary' },
@@ -86,7 +88,7 @@ export function renderSafarisOverview() {
           </a>
           <a class="link-tile" href="/pages/safaris/packages/">
             <h2 class="link-tile__title">Safari packages</h2>
-            <p class="link-tile__text">City, market, and wildlife itineraries — pricing on request.</p>
+            <p class="link-tile__text">City, market, and wildlife itineraries – pricing on request.</p>
           </a>
           <a class="link-tile" href="/pages/safaris/activities/">
             <h2 class="link-tile__title">Safari activities</h2>
@@ -101,7 +103,7 @@ export function renderSafarisOverview() {
       <section class="inner-section inner-section--band">
         <div class="container landscape-stack">
           <figure class="landscape-stack__figure">
-            <img src="${safariHero}" alt="Mountain and lake scenery in Tanzania" width="1600" height="686" loading="lazy" decoding="async" />
+            <img src="${CINEMATIC_HERO_IMAGES.safaris.src}" alt="${escapeHtml(CINEMATIC_HERO_IMAGES.safaris.alt)}" width="1600" height="686" loading="lazy" decoding="async" />
           </figure>
           <div>
             <h2>How planning works</h2>
@@ -112,7 +114,7 @@ export function renderSafarisOverview() {
       </section>
       ${renderCtaBand({
         title: 'Start a safari conversation',
-        text: 'No obligation — outline your trip and the team will respond with options.',
+        text: 'No obligation – outline your trip and the team will respond with options.',
         primary: { label: 'Safari enquiry', href: '/pages/safaris/custom/' },
         secondary: { label: 'Book stay + safari', href: '/pages/booking/' },
       })}
@@ -136,9 +138,9 @@ export function renderDestinationsIndex() {
         variant: 'landscape',
         eyebrow: 'Geography',
         title: 'Destinations',
-        lead: 'Northern parks, craters, lakes and day trips from Arusha — with room to build a route around your dates.',
-        imageSrc: safariHero,
-        imageAlt: 'Wide landscape view',
+        lead: 'Northern parks, craters, lakes and day trips from Arusha – with room to build a route around your dates.',
+        imageSrc: CINEMATIC_HERO_IMAGES.safaris.src,
+        imageAlt: CINEMATIC_HERO_IMAGES.safaris.alt,
         actions: [{ label: 'Plan a route', href: '/pages/safaris/custom/' }],
       })}
       <section class="inner-section container">${grid}</section>
@@ -167,108 +169,112 @@ export function renderDestinationDetail(slug) {
   ].filter(Boolean);
 
   const routeFit = getEditorialRouteFit(dest.slug);
-  const packages = getPackagesForDestination(dest.slug);
-  const nearby = getNearbyDestinations(dest.slug, 4);
-  const alsoLike = getAlsoLikeDestinations(dest.slug, dest.region, 3);
+  const directPackages = getPackagesForDestination(dest.slug);
+  const packages = directPackages.length > 0 ? directPackages : getSuggestedPackagesForDestination(dest.slug);
+  const relatedDestinations = getRelatedDestinations(dest.slug, dest.region, 3);
   const linkedActivities = getLinkedSafariActivities(dest);
   const thingsChips = renderThingsToDoChips(dest.activities ?? [], activityLabelHrefs(dest.activities));
 
-  const packageSection =
-    packages.length > 0
-      ? renderDetailSection({
-          title: 'Tours & packages',
-          body: 'Sample routes that include this destination. The team confirms pricing, lodges, and timing on enquiry.',
-          band: true,
-          children: renderCardGrid(packages, renderSafariPackageCard, {
-            columns: 3,
-            ariaLabel: `Safari packages for ${dest.name}`,
-          }),
-        })
-      : renderDetailSection({
-          title: 'Tours & packages',
-          body: 'No fixed package is listed for this place yet. Share your dates and the team will outline a day or multi-day route from Arusha.',
-          band: true,
-          children: renderCardGrid([{ id: 'pending' }], () => renderSafariPackagesPendingCard(), {
-            columns: 1,
-            ariaLabel: 'Safari planning',
-          }),
-        });
+  const packagesSectionBody = directPackages.length
+    ? 'Sample routes that include this destination. The team confirms pricing, lodges, and timing on enquiry.'
+    : packages.length
+      ? `Routes that pair well with this stop on the northern circuit. The team can add ${dest.name} when you send dates and group size.`
+      : 'Share your dates and the team will outline a day or multi-day route from Arusha.';
 
-  const activitySection =
-    linkedActivities.length > 0
-      ? renderDetailSection({
-          title: 'Things to do',
-          body: 'Activity themes for this area. Combine with your stay at Meleji or a longer northern circuit.',
-          children: `
-            ${thingsChips}
-            <div class="detail-section__grid detail-section__grid--offset">
-              ${renderCardGrid(linkedActivities, renderSafariActivityCard, {
-                columns: 3,
-                ariaLabel: `Activities near ${dest.name}`,
-              })}
-            </div>`,
-        })
-      : renderDetailSection({
-          title: 'Things to do',
-          body: dest.activities?.length
-            ? 'Common ways visitors explore this destination with a local guide.'
-            : 'Ask the team what fits your dates and comfort level.',
-          children: thingsChips || `<p class="text-muted">Mention this destination when you send a safari enquiry.</p>`,
-        });
+  const packagesSectionChildren = packages.length
+    ? renderCardGrid(packages, renderSafariPackageCard, {
+        columns: 3,
+        ariaLabel: `Safari packages for ${dest.name}`,
+      })
+    : `<div class="detail-packages-cta">
+        <p class="text-muted">Mention ${escapeHtml(dest.name)} on your enquiry and we will suggest pacing and lodges.</p>
+        <div class="detail-packages-cta__actions">
+          <a class="csp-btn csp-btn--primary" href="/pages/safaris/custom/">Tailor-made safari</a>
+          <a class="csp-btn csp-btn--outline" href="/pages/safaris/packages/">All packages</a>
+        </div>
+      </div>`;
 
-  const nearbySection =
-    nearby.length > 0
-      ? renderDetailSection({
-          title: 'Nearby destinations from Arusha',
-          body: 'Often combined on the same trip when road time and park fees make sense.',
-          band: true,
-          children: renderCardGrid(nearby, renderDestinationCard, {
+  const packageSection = renderDetailSection({
+    title: 'Tours & packages',
+    body: packagesSectionBody,
+    band: true,
+    children: packagesSectionChildren,
+  });
+
+  const activitySection = renderDetailSection({
+    title: 'Activities at this destination',
+    body: linkedActivities.length
+      ? 'Ways to explore with a local guide. Combine with your stay at Meleji or a longer northern circuit.'
+      : dest.activities?.length
+        ? 'Common themes for this area. The team confirms what fits your dates.'
+        : 'Ask the team what fits your dates and comfort level.',
+    children:
+      linkedActivities.length > 0
+        ? renderCardGrid(linkedActivities, renderSafariActivityCard, {
             columns: 3,
-            ariaLabel: 'Nearby destinations',
+            ariaLabel: `Activities at ${dest.name}`,
+          })
+        : thingsChips || `<p class="text-muted">Mention this destination when you send a safari enquiry.</p>`,
+  });
+
+  const relatedSection =
+    relatedDestinations.length > 0
+      ? renderDetailSection({
+          title: 'Related destinations',
+          body: 'Places often paired with this stop on the same trip from Arusha.',
+          band: true,
+          children: renderCardGrid(relatedDestinations, renderDestinationCard, {
+            columns: 3,
+            ariaLabel: 'Related destinations',
           }),
         })
       : '';
 
-  const alsoLikeSection =
-    alsoLike.length > 0
-      ? renderDetailSection({
-          title: 'You may also like',
-          body: 'Other northern Tanzania places guests often add to the same conversation.',
-          children: renderCardGrid(alsoLike, renderDestinationCard, {
-            columns: 3,
-            ariaLabel: 'Suggested destinations',
-          }),
-        })
-      : '';
+  const galleryItems =
+    dest.gallery?.length > 0
+      ? dest.gallery
+      : dest.imageSrc
+        ? [{ src: dest.imageSrc, alt: dest.imageAlt ?? dest.name }]
+        : [];
 
   const galleryBlock =
-    dest.gallery?.length > 0
-      ? `<section class="inner-section container">
-          <h2>Photos</h2>
-          ${renderGallery(dest.gallery)}
+    galleryItems.length > 0
+      ? `<section class="inner-section container destination-gallery" aria-labelledby="destination-gallery-title">
+          <h2 class="detail-section__title" id="destination-gallery-title">Gallery</h2>
+          ${renderGallery(galleryItems)}
         </section>`
       : '';
-
-  const sourceBlock = dest.sourceNote
-    ? `<p class="text-muted text-small" style="margin-top: var(--space-8)">${escapeHtml(dest.sourceNote)}${
-        dest.sourceUrl
-          ? ` <a href="${escapeHtml(dest.sourceUrl)}" rel="noopener noreferrer" target="_blank">View source</a>`
-          : ''
-      }</p>`
-    : '';
 
   const factsPanel = `
     <aside class="info-panel page-split__aside">
       ${renderEditorialRouteFit(routeFit)}
       ${metaLines.length ? `<h3>At a glance</h3>${renderAmenityList(metaLines)}` : ''}
-      ${renderEnquiryForm({
-        id: `destination-${dest.slug}`,
-        topic: 'safari',
+      ${renderEnquiryRedirectPanel({
         heading: 'Destination enquiry',
         intro: 'Include travel dates and whether you already have a room at Meleji.',
-        hiddenFields: { destination: dest.slug },
+        intent: 'safari',
+        context: { destination: dest.slug },
+        buttonLabel: 'Enquire about this region',
       })}
     </aside>`;
+
+  const aboutBlock =
+    bodyParagraphs.length > 0
+      ? `<div data-reveal class="destination-about"><h2 class="detail-section__title">About ${escapeHtml(dest.name)}</h2>${context}</div>`
+      : `<div data-reveal class="destination-about"><h2 class="detail-section__title">About ${escapeHtml(dest.name)}</h2><p class="text-muted">${escapeHtml(dest.summary)}</p></div>`;
+
+  const detailsBlock = `
+      ${galleryBlock}
+      <section class="inner-section container destination-details" aria-labelledby="destination-details-title">
+        <span class="visually-hidden" id="destination-details-title">${escapeHtml(dest.name)} details</span>
+        ${aboutBlock}
+        ${renderDestinationEditorialSections(dest, activityLabelHrefs(dest.activities), {
+          skipSummaryRepeat: bodyParagraphs.length > 0,
+        })}
+      </section>
+      <section class="inner-section container page-split" id="destination-enquiry">
+        ${factsPanel}
+      </section>`;
 
   mountInner(`
     <div class="inner-page">
@@ -289,28 +295,10 @@ export function renderDestinationDetail(slug) {
           { label: 'Book your stay', href: '/pages/booking/', variant: 'secondary', slide: false },
         ],
       })}
-      <section class="inner-section container">
-        ${renderEditorialSplit({
-          eyebrow: 'Overview',
-          title: `Discover ${dest.name}`,
-          body: bodyParagraphs.length ? bodyParagraphs : [dest.summary],
-          image: {
-            src: dest.imageSrc,
-            alt: dest.imageAlt,
-          },
-          reverse: true,
-        })}
-        ${sourceBlock}
-      </section>
-      ${renderDestinationEditorialSections(dest, activityLabelHrefs(dest.activities))}
-      ${galleryBlock}
-      <section class="inner-section container page-split" id="destination-enquiry">
-        ${factsPanel}
-      </section>
+      ${detailsBlock}
       ${activitySection}
       ${packageSection}
-      ${nearbySection}
-      ${alsoLikeSection}
+      ${relatedSection}
       ${renderCtaBand({
         title: 'Plan this destination with Meleji',
         text: 'Stay at the homestay, then build safari days around your budget and pace.',
@@ -339,9 +327,9 @@ export function renderPackagesIndex() {
       ${renderPageHero({
         variant: 'landscape',
         title: 'Safari packages',
-        lead: 'Reference itineraries for northern Tanzania — share your dates and the team will adapt routing, lodges, and pace with you.',
-        imageSrc: safariHero,
-        imageAlt: 'Northern Tanzania landscape',
+        lead: 'Reference itineraries for northern Tanzania – share your dates and the team will adapt routing, lodges, and pace with you.',
+        imageSrc: CINEMATIC_HERO_IMAGES.safaris.src,
+        imageAlt: CINEMATIC_HERO_IMAGES.safaris.alt,
         actions: [{ label: 'Tailor-made enquiry', href: '/pages/safaris/custom/' }],
       })}
       <section class="inner-section container">${grid}</section>
@@ -377,14 +365,6 @@ export function renderPackageDetail(slug) {
         `<li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><a href="${escapeHtml(d.href)}">${escapeHtml(d.name)}</a></li>`,
     )
     .join('');
-
-  const sourceBlock = pkg.sourceNote
-    ? `<p class="text-muted text-small" style="margin-top: var(--space-6)">${escapeHtml(pkg.sourceNote)}${
-        pkg.sourceUrl
-          ? ` <a href="${escapeHtml(pkg.sourceUrl)}" rel="noopener noreferrer" target="_blank">View source</a>`
-          : ''
-      }</p>`
-    : '';
 
   const routeFit = getPackageRouteFit(pkg);
   const packageDestinations = getDestinationsForPackage(pkg);
@@ -462,12 +442,11 @@ export function renderPackageDetail(slug) {
           <h2>Overview</h2>
           ${context}
           <p class="text-muted"><strong>${escapeHtml(pkg.availabilityNote ?? 'Rates and availability are confirmed on enquiry with the Meleji team.')}</strong></p>
-          ${sourceBlock}
         </div>
         <aside class="info-panel page-split__aside">
           ${renderEditorialRouteFit(routeFit, 'Itinerary fit')}
           <p class="info-panel__label">Pricing</p>
-          <p class="text-muted text-small">Request a custom quote — safari totals depend on season, group size, and lodge level.</p>
+          <p class="text-muted text-small">Request a custom quote – safari totals depend on season, group size, and lodge level.</p>
           <h3>Tour snapshot</h3>
           ${renderAmenityList(metaLines)}
           ${
@@ -479,7 +458,7 @@ export function renderPackageDetail(slug) {
       </section>
       <section class="inner-section container inner-section--band" aria-labelledby="package-itinerary">
         <h2 class="detail-section__title" id="package-itinerary">Day-by-day itinerary</h2>
-        <p class="text-muted">Reference route from Tanzania Tourism import — Meleji adapts pacing, lodges, and pick-up points with you.</p>
+        <p class="text-muted">Sample day-by-day outline – Meleji adapts pacing, lodges, and pick-up points with you.</p>
         ${renderItineraryTimeline(pkg.itinerary ?? [], pkg.gallery ?? [])}
       </section>
       <section class="inner-section container">
@@ -495,19 +474,18 @@ export function renderPackageDetail(slug) {
       ${nearbySection}
       ${similarSection}
       <section class="inner-section container container--narrow" id="package-enquiry">
-        ${renderEnquiryForm({
-          id: `package-${pkg.slug}`,
-          topic: 'safari',
+        ${renderEnquiryRedirectPanel({
           heading: 'Safari inquiry',
-          intro: 'Share departure date, travellers, and accommodation preference. This is an inquiry — not a confirmed booking.',
-          bookingMode: 'safari-package',
-          hiddenFields: { package: pkg.slug },
+          intro: 'Share departure date, travellers, and accommodation preference on the contact page. This is an inquiry – not a confirmed booking.',
+          intent: 'safari',
+          context: { package: pkg.slug },
+          buttonLabel: 'Send package enquiry',
         })}
       </section>
       ${renderCtaBand({
         title: 'Reserve this route',
         text: 'Pair your safari with a room at Meleji. The team coordinates drivers and timing with your stay.',
-        primary: { label: 'Package enquiry', href: '#package-enquiry' },
+        primary: { label: 'Package enquiry', href: buildContactHref({ intent: 'safari', package: pkg.slug }) },
         secondary: { label: 'Book your stay', href: '/pages/booking/' },
       })}
     </div>`);
@@ -550,16 +528,16 @@ export function renderSafariCustom() {
       ${renderPageHero({
         variant: 'landscape',
         title: 'Tailor-made safari',
-        lead: 'Share dates, group size, comfort level, and parks you hope to see. The team drafts a route for discussion — not an instant quote online.',
-        imageSrc: safariHero,
-        imageAlt: 'Safari landscape',
+        lead: 'Share dates, group size, comfort level, and parks you hope to see. The team drafts a route for discussion – not an instant quote online.',
+        imageSrc: CINEMATIC_HERO_IMAGES.safaris.src,
+        imageAlt: CINEMATIC_HERO_IMAGES.safaris.alt,
       })}
       <section class="inner-section container container--narrow">
-        ${renderEnquiryForm({
-          id: 'safari-custom-form',
-          topic: 'safari',
+        ${renderEnquiryRedirectPanel({
           heading: 'Safari outline',
-          intro: 'Tell us where you would like to go and how you like to travel.',
+          intro: 'Tell us where you would like to go and how you like to travel – the contact page collects dates, parks, and group size.',
+          intent: 'safari',
+          buttonLabel: 'Start safari enquiry',
         })}
       </section>
     </div>`);

@@ -57,7 +57,7 @@ import { ARUSHA_CITY_MARKET_HOME } from './arusha-city-market-images.js';
 /** Story carousel scene keys (Stay → Explore → Experience → Give Back). */
 export const STORY_SCENE_IMAGES = [
   { key: 'storyStayScene', alt: 'Outdoor area and seating at Meleji Homestays' },
-  { key: 'storyKilimanjaro', alt: 'Mount Kilimanjaro National Park — Mount Kilimanjaro Tanzania' },
+  { key: 'storyKilimanjaro', alt: 'Mount Kilimanjaro National Park – Mount Kilimanjaro Tanzania' },
   { key: 'expFood', alt: 'Guests sharing a meal at Meleji' },
   { key: 'foundationMain', alt: 'Meleji Children Foundation community programmes' },
 ];
@@ -122,7 +122,7 @@ export const HOME_IMAGE_SETS = {
   expCoffee: `${expCoffeeSmall} 800w, ${expCoffee} 1080w`,
 };
 
-/** Homepage hero carousel — main slide + floating inset keys per slide. */
+/** Homepage hero carousel – main slide + floating inset keys per slide. */
 export const HERO_SLIDES = [
   {
     key: 'heroSection1',
@@ -150,7 +150,7 @@ export const HERO_SLIDES = [
   },
 ];
 
-/** Follow Your Curiosity — package activities with matching photography. */
+/** Follow Your Curiosity – package activities with matching photography. */
 export const OUTDOORS_ACTIVITY_SLIDES = [
   {
     href: '/pages/safaris/activities/coffee/',

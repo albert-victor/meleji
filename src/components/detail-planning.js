@@ -2,10 +2,12 @@ import { escapeHtml } from '../utils/html.js';
 import { renderThingsToDoChips } from './detail-section.js';
 
 /**
- * @param {{ region?: string, activities?: string[] }} dest
+ * @param {{ region?: string, activities?: string[], summary?: string }} dest
  * @param {Record<string, string>} activityHrefs
+ * @param {{ skipSummaryRepeat?: boolean }} [options]
  */
-export function renderDestinationEditorialSections(dest, activityHrefs = {}) {
+export function renderDestinationEditorialSections(dest, activityHrefs = {}, options = {}) {
+  const skipSummaryRepeat = options.skipSummaryRepeat === true;
   const regionNote = dest.region
     ? `${dest.region} – distances and park fees vary. The Meleji team outlines realistic day plans from Arusha or Moshi.`
     : 'Northern Tanzania routes depend on season, road time, and park rules. Ask the team what fits your dates.';
@@ -20,7 +22,11 @@ export function renderDestinationEditorialSections(dest, activityHrefs = {}) {
       <div data-reveal>
         <p class="editorial-split__eyebrow">Why visit</p>
         <h2 class="detail-section__title" id="dest-why">What draws travellers here</h2>
-        <p class="text-muted">${escapeHtml(dest.summary)}</p>
+        ${
+          skipSummaryRepeat
+            ? ''
+            : `<p class="text-muted">${escapeHtml(dest.summary ?? '')}</p>`
+        }
       </div>
       <div class="detail-highlight-grid">
         <article class="detail-highlight">

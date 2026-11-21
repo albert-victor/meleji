@@ -1,13 +1,15 @@
+import { CONTACT, FOUNDATION_HREFS } from './contact.js';
+
 /**
  * Full site map for the hamburger panel. Routes are registered in vite as pages are added.
  */
 export const primaryNav = [
-  { label: 'Stay', href: '/pages/accommodation/' },
-  { label: 'Explore', href: '/pages/safaris/' },
+  { label: 'Explore', href: '/pages/accommodation/' },
   { label: 'Our Story', href: '/pages/about/' },
+  { label: 'Contact Us', href: '/pages/contact/' },
 ];
 
-/** Italic links in the full-screen menu — specific Meleji ecosystem labels. */
+/** Italic links in the full-screen menu – specific Meleji ecosystem labels. */
 export const menuPrimary = [
   { label: 'Home', href: '/' },
   { label: 'Accommodation', href: '/pages/accommodation/' },
@@ -17,15 +19,15 @@ export const menuPrimary = [
   { label: 'Book Your Stay', href: '/pages/booking/' },
 ];
 
-/** Side column — quieter routes with hospitality-led labels. */
+/** Side column – quieter routes with hospitality-led labels. */
 export const menuMinor = [
   { label: 'Shared rooms', href: '/pages/accommodation/shared-rooms/' },
   { label: 'Deluxe rooms', href: '/pages/accommodation/deluxe-rooms/' },
   { label: 'Safari packages', href: '/pages/safaris/packages/' },
   { label: 'Destinations', href: '/pages/safaris/destinations/' },
   { label: 'Gallery', href: '/pages/gallery/' },
-  { label: 'Volunteer with us', href: '/pages/foundation/volunteer/' },
-  { label: 'Partner with us', href: '/pages/contact/' },
+  { label: 'Volunteer with us', href: FOUNDATION_HREFS.form },
+  { label: 'Partner with us', href: FOUNDATION_HREFS.form },
   { label: 'About Meleji', href: '/pages/about/' },
   { label: 'Contact the house', href: '/pages/contact/' },
 ];
@@ -73,7 +75,7 @@ export const menuSocial = [
   },
   {
     label: 'Email',
-    href: 'mailto:melejihouse@gmail.com',
+    href: `mailto:${CONTACT.email}`,
     icon: 'fa-solid fa-envelope',
     brand: 'email',
   },
@@ -85,12 +87,12 @@ export const menuSocial = [
   },
 ];
 
-/** Footer icon row — social brands only (contact stays in the Get in touch column). */
+/** Footer icon row – social brands only (contact stays in the Get in touch column). */
 export const footerSocial = menuSocial.filter((item) =>
   ['whatsapp', 'instagram', 'facebook', 'youtube'].includes(item.brand),
 );
 
-/** Compact hamburger rails — kept for any legacy references. */
+/** Compact hamburger rails – kept for any legacy references. */
 export const menuRails = [
   { label: 'Home', href: '/', type: 'link' },
   {
@@ -121,7 +123,7 @@ export const menuRails = [
     children: [
       { label: 'About Meleji', href: '/pages/about/' },
       { label: 'Meleji Children Foundation', href: '/pages/foundation/' },
-      { label: 'Volunteer with us', href: '/pages/foundation/volunteer/' },
+      { label: 'Volunteer with us', href: FOUNDATION_HREFS.form },
       { label: 'Contact', href: '/pages/contact/' },
     ],
   },
@@ -166,7 +168,7 @@ export const menuSections = [
     type: 'group',
     children: [
       { label: 'Our Mission', href: '/pages/foundation/' },
-      { label: 'Volunteer With Us', href: '/pages/foundation/volunteer/' },
+      { label: 'Volunteer With Us', href: FOUNDATION_HREFS.form },
       { label: 'Community Impact', href: '/pages/foundation/impact/' },
     ],
   },

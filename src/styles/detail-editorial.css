@@ -1,5 +1,27 @@
 /* Shared editorial detail patterns (destinations, packages, experiences, rooms) */
 
+.inner-page > .page-hero--cinematic + .destination-gallery {
+  padding-top: clamp(var(--space-8), 5vw, var(--space-10));
+}
+
+.destination-about {
+  margin-bottom: var(--space-8);
+}
+
+.destination-about p {
+  max-width: 65ch;
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+}
+
+.destination-about p + p {
+  margin-top: var(--space-4);
+}
+
+.destination-details .detail-section-stack {
+  padding-block: 0;
+}
+
 .detail-editorial-hero .foundation-hero__title {
   max-width: 16ch;
 }

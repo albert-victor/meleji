@@ -59,7 +59,7 @@ p {
   font-family: var(--font-body);
 }
 
-/* Rare decorative accents only — not for body or UI */
+/* Rare decorative accents only – not for body or UI */
 .font-signature,
 .text-signature {
   font-family: var(--font-signature);

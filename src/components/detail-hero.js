@@ -1,6 +1,4 @@
-import { escapeHtml } from '../utils/html.js';
-import { renderButton } from './button.js';
-import { renderFoundationHeroCollage } from './editorial-split.js';
+import { renderPageHero } from './page-hero.js';
 
 /**
  * @param {{ gallery?: { src: string, alt: string }[], imageSrc: string, landscapeSrc?: string, imageAlt?: string }} entity
@@ -19,6 +17,7 @@ export function collageImagesFromEntity(entity) {
 }
 
 /**
+ * Cinematic inner-page hero – full-bleed image with brand overlay (replaces editorial collage header).
  * @param {{
  *   eyebrow?: string,
  *   title: string,
@@ -29,35 +28,16 @@ export function collageImagesFromEntity(entity) {
  * }} props
  */
 export function renderDetailEditorialHero(props) {
-  const eyebrow = props.eyebrow
-    ? `<p class="foundation-hero__eyebrow">${escapeHtml(props.eyebrow)}</p>`
-    : '';
-  const lead = props.lead ? `<p class="foundation-hero__lead">${escapeHtml(props.lead)}</p>` : '';
-  const extra = props.className ? ` ${props.className}` : '';
+  const primary = props.images?.[0];
 
-  const actions = props.actions?.length
-    ? `<div class="foundation-hero__actions">${props.actions
-        .map((action) =>
-          renderButton({
-            label: action.label,
-            href: action.href,
-            variant: action.variant ?? 'primary',
-            slide: action.slide ?? action.variant !== 'secondary',
-          }),
-        )
-        .join('')}</div>`
-    : '';
-
-  return `
-    <header class="foundation-hero detail-editorial-hero${extra}">
-      <div class="container foundation-hero__grid">
-        <div class="foundation-hero__copy" data-reveal>
-          ${eyebrow}
-          <h1 class="foundation-hero__title">${escapeHtml(props.title)}</h1>
-          ${lead}
-          ${actions}
-        </div>
-        ${renderFoundationHeroCollage(props.images)}
-      </div>
-    </header>`;
+  return renderPageHero({
+    variant: 'landscape',
+    eyebrow: props.eyebrow,
+    title: props.title,
+    lead: props.lead,
+    imageSrc: primary?.src,
+    imageAlt: primary?.alt ?? '',
+    actions: props.actions,
+    className: ['detail-page-hero', props.className].filter(Boolean).join(' '),
+  });
 }

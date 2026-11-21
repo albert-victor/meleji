@@ -1,5 +1,6 @@
 import { ARUSHA_URBAN_PHOTO_SLUGS } from '../../data/arusha-city-market-images.js';
 import { escapeHtml } from '../../utils/html.js';
+import { scrollRevealAttrs } from '../../utils/reveal-attrs.js';
 import { renderCardMedia } from './shared.js';
 
 /**
@@ -15,7 +16,7 @@ export function renderSafariActivityCard(item, options = {}) {
   const softPhoto = item.slug && ARUSHA_URBAN_PHOTO_SLUGS.has(item.slug) ? ' m-card--photo-soft' : '';
 
   return `
-    <a class="m-card m-card--activity m-card--activity-compact${softPhoto}${extra}" href="${href}"${
+    <a class="m-card m-card--activity m-card--activity-compact${softPhoto}${extra}" ${scrollRevealAttrs(options)} href="${href}"${
       options.linkToPackages && item.slug ? ` data-activity-filter="${escapeHtml(item.slug)}"` : ''
     }>
       ${renderCardMedia({ imageSrc: item.imageSrc, imageAlt: item.imageAlt, aspect: 'wide' })}

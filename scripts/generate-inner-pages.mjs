@@ -47,7 +47,7 @@ const pages = [
   {
     path: 'pages/safaris/destinations/ruaha/index.html',
     title: 'Ruaha (draft) | Meleji Homestays',
-    description: 'Draft destination page — not in navigation.',
+    description: 'Draft destination page – not in navigation.',
     page: 'destination-detail',
     slug: 'ruaha',
     footer: 'compact',
@@ -56,7 +56,7 @@ const pages = [
   {
     path: 'pages/safaris/destinations/moshi/index.html',
     title: 'Moshi & foothills (draft) | Meleji Homestays',
-    description: 'Draft destination page — not in navigation.',
+    description: 'Draft destination page – not in navigation.',
     page: 'destination-detail',
     slug: 'moshi',
     footer: 'compact',

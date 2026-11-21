@@ -23,6 +23,36 @@
 .section-head--center { max-width: 56rem; }
 .home-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
 .home-actions .btn, .story-scene .btn { gap: .75rem; padding: .8rem 1.2rem; }
+
+/* Story landing panels – ghost CTAs stay white on photo and on brand fill */
+.story-scene .btn--ghost {
+  --btn-fg: #ffffff;
+  --btn-border: rgb(255 255 255 / 0.72);
+  color: #ffffff;
+}
+
+.story-scene .btn--ghost .btn__clip,
+.story-scene .btn--ghost .btn__label,
+.story-scene .btn--ghost > span {
+  color: #ffffff;
+}
+
+@media (hover: hover) {
+  .story-scene .btn.btn--ghost:hover,
+  .story-scene .btn.btn--ghost:focus-visible {
+    --btn-fg: #ffffff;
+    color: #ffffff;
+  }
+
+  .story-scene .btn.btn--ghost:hover .btn__clip,
+  .story-scene .btn.btn--ghost:hover .btn__label,
+  .story-scene .btn.btn--ghost:hover > span,
+  .story-scene .btn.btn--ghost:focus-visible .btn__clip,
+  .story-scene .btn.btn--ghost:focus-visible .btn__label,
+  .story-scene .btn.btn--ghost:focus-visible > span {
+    color: #ffffff;
+  }
+}
 .text-link { display: inline-flex; align-items: center; gap: 1rem; color: #92421f; font-size: .78rem; font-weight: 600; text-decoration: none; padding-block: .65rem; border-bottom: 1px solid #bc8f68; width: fit-content; }
 .text-link span { transition: transform .25s; }
 .text-link:hover span { transform: translateX(4px); }
@@ -72,7 +102,7 @@
 
 .home-hero__shade {
   object-fit: unset;
-  /* Brand brown / copper / cream wash — not flat black */
+  /* Brand brown / copper / cream wash – not flat black */
   background:
     linear-gradient(
       105deg,
@@ -392,8 +422,9 @@
 @media (hover: hover) {
   .home-hero--split .home-hero__actions .btn--primary:hover,
   .home-hero--split .home-hero__actions .btn--primary:focus-visible {
-    background: linear-gradient(118deg, #c45a24 0%, #9a4618 52%, #7a3314 100%);
-    border-color: #b04e1c;
+    background: var(--gradient-cta-hover);
+    border-color: #71301d;
+    color: #ffffff;
   }
 }
 
@@ -935,7 +966,7 @@
   position: absolute;
   left: clamp(1rem, 5.5vw, 3.75rem);
   right: auto;
-  /* Sit clearly above the brush art, left side — not centered */
+  /* Sit clearly above the brush art, left side – not centered */
   bottom: clamp(10rem, 18vh, 13.5rem);
   z-index: 6;
   display: flex;
@@ -1096,7 +1127,7 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  /* One smooth left-heavy scrim for all four scenes — no local “box” on copy. */
+  /* One smooth left-heavy scrim for all four scenes – no local “box” on copy. */
   background:
     linear-gradient(
       100deg,
@@ -1212,10 +1243,15 @@
 .experience-piece__photos--collage { background: #ede1ca; border-radius: 18px; padding: 0; overflow: hidden; }
 .experience-piece__photos--collage > img:first-child { border-radius: 18px; }
 .experience-piece__badge { position: absolute; top: 0.75rem; left: 0.75rem; width: 4.25rem; height: 4.25rem; object-fit: contain; background: #fff8ed; border-radius: 50%; padding: 0.35rem; border: 3px solid var(--color-cream); mix-blend-mode: normal; z-index: 3; }
-.collage-live.is-alive .experience-piece__photos > img:first-child,
-.collage-live.is-alive .experience-piece__stage img.is-active,
-.collage-live.is-alive .community-collage__stage img.is-active,
-.collage-live.is-alive .outdoors-photos__stage img.is-active { animation: collage-drift 12s ease-in-out infinite alternate; }
+@media (hover: hover) {
+  .collage-live.is-alive:hover .experience-piece__photos > img:first-child,
+  .collage-live.is-alive:hover .experience-piece__stage img.is-active,
+  .collage-live.is-alive:hover .community-collage__stage img.is-active,
+  .collage-live.is-alive:hover .outdoors-photos__stage img.is-active {
+    animation: collage-drift 9s ease-in-out 1;
+  }
+}
+
 .collage-live:hover .experience-piece__photos > img:first-child,
 .collage-live:hover .experience-piece__stage img.is-active,
 .collage-live:hover .community-collage__stage img.is-active { transform: scale(1.035); }
@@ -1243,13 +1279,14 @@
 .experience-piece--food .experience-piece__photos > img:first-child { border-radius: 5px 70px 5px 5px; }
 .experience-piece--local .experience-piece__photos > .experience-piece__inset,
 .experience-piece--food .experience-piece__photos > .experience-piece__inset { left: 0; right: auto; bottom: -15px; transform: rotate(4deg); }
-.home-rooms { background: #f1eade; }
-.home-rooms__carousel {
-  margin-bottom: 1.25rem;
+.home-rooms {
+  background: #f1eade;
+  overflow-x: clip;
 }
 
-.home-rooms .home-top-carousel--stay .home-top-carousel__shell {
-  padding-inline: 0;
+.home-rooms__carousel {
+  width: 100%;
+  margin-block: 0 1.25rem;
 }
 .section-heading-row { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; }
 .room-editorials { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }

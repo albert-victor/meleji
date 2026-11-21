@@ -1,0 +1,132 @@
+/**
+ * Mobile UX – overflow, header clearance, touch-friendly splits.
+ * Additive only; does not replace component-specific responsive rules.
+ */
+
+.page,
+.page--with-chrome .page__main {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@media (max-width: 899px) {
+  .page-split__aside {
+    position: static;
+    top: auto;
+  }
+
+  .page--home .home-hero--collage .home-hero__grid {
+    min-height: auto;
+    padding-top: calc(var(--header-height) + clamp(0.65rem, 2.5vw, 1.1rem));
+  }
+
+  .home-hero--collage .home-hero__panel {
+    padding-inline: var(--container-padding);
+  }
+
+  .home-hero--collage .home-hero__botanical {
+    right: 0;
+    opacity: 0.42;
+    width: clamp(5.5rem, 26vw, 7.5rem);
+    height: clamp(7rem, 30vw, 9rem);
+  }
+
+  .home-hero--collage .home-hero__float--upper {
+    right: 0;
+  }
+
+  .detail-section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .detail-section__link {
+    align-self: flex-start;
+  }
+
+  .page-hero--landscape,
+  .page-hero--cinematic {
+    min-height: min(92svh, 44rem);
+  }
+
+  .page-hero__title {
+    font-size: clamp(2rem, 8vw, 2.85rem);
+    max-width: 18ch;
+  }
+}
+
+@media (max-width: 899px) {
+  .home-faq {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .site-header__bar.container {
+    padding-inline: clamp(0.85rem, 4vw, 1.25rem);
+  }
+
+  .site-header__descriptor {
+    display: none;
+  }
+
+  .site-header__lockup {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .home-hero--collage .home-hero__actions,
+  .home-hero--split .home-hero__actions,
+  .page-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .home-hero--collage .home-hero__actions .btn,
+  .home-hero--split .home-hero__actions .btn,
+  .page-hero__actions .btn,
+  .page-hero__actions .csp-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .experience-pricing__amount {
+    flex-wrap: wrap;
+  }
+
+  .detail-packages-cta__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .detail-packages-cta__actions .csp-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header__name {
+    font-size: 0.98rem;
+    letter-spacing: 0.04em;
+  }
+
+  .site-header__logo {
+    width: 3rem;
+  }
+
+  .site-header__cta {
+    --btn-pad-x: 0.5rem;
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 359px) {
+  :root {
+    --container-padding: 1rem;
+  }
+}

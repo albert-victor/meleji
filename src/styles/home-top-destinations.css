@@ -1,4 +1,4 @@
-/* Homepage — Our top destinations + packages periodic carousel */
+/* Homepage – Our top destinations + packages periodic carousel */
 
 .home-top-picks {
   position: relative;
@@ -141,6 +141,9 @@
   display: flex;
   gap: clamp(0.85rem, 2vw, 1.15rem);
   transition: transform 0.7s cubic-bezier(0.33, 1, 0.45, 1);
+}
+
+.home-top-carousel--live .home-top-carousel__track {
   will-change: transform;
 }
 

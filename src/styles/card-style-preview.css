@@ -61,7 +61,7 @@
   max-width: 72rem;
 }
 
-/* —— Premium card shell (preview) —— */
+/* –– Premium card shell (preview) –– */
 :root {
   --csp-surface: #faf6f0;
   --csp-olive: #5c6b48;
@@ -287,7 +287,8 @@
 }
 
 .csp-btn--primary:hover {
-  filter: brightness(1.05);
+  background: linear-gradient(135deg, #873b22 0%, var(--csp-brown-deep) 100%);
+  color: #ffffff;
 }
 
 .csp-btn--ghost {
@@ -298,7 +299,9 @@
 }
 
 .csp-btn--ghost:hover {
-  background: rgb(92 107 72 / 0.08);
+  color: #fff8ee;
+  background: linear-gradient(135deg, var(--csp-olive) 0%, var(--csp-olive-deep) 100%);
+  border-color: var(--csp-olive-deep);
 }
 
 .csp-btn--dest {

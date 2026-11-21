@@ -1,27 +1,168 @@
 /**
- * Warm room-card polish only — safari, destination, gallery and amenity photos stay natural.
+ * Card photography – warm gold wash (DOM layer) + smooth hover zoom.
+ * Hook: .meleji-card-photo + .meleji-card-photo__shade
  */
 
-.stay-card__media.m-card__media--room-photo {
+.meleji-card-photo {
   position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.stay-card__media.m-card__media--room-photo::after {
-  content: '';
+.meleji-card-photo__shade {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
-  background: var(--meleji-photo-wash);
-  opacity: var(--meleji-photo-wash-opacity);
-  mix-blend-mode: soft-light;
+  background:
+    linear-gradient(180deg, rgb(253 230 180 / 0.32) 0%, transparent 42%),
+  linear-gradient(
+      158deg,
+      rgb(253 230 180 / 0.55) 0%,
+      rgb(245 214 107 / 0.42) 26%,
+      rgb(212 162 74 / 0.34) 54%,
+      rgb(139 100 65 / 0.24) 100%
+    );
+  opacity: var(--meleji-card-wash-opacity, 0.58);
+  transition: opacity var(--meleji-card-photo-zoom-ms, 1.05s) var(--ease-cinematic);
 }
 
-.stay-card__media.m-card__media--room-photo .stay-card__hero {
+.meleji-card-photo > img,
+.meleji-card-photo .csp-card__hero,
+.meleji-card-photo .csp-card__main,
+.meleji-card-photo .stay-card__hero {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   filter: var(--meleji-photo-filter);
+  transform: scale(1);
+  transform-origin: center center;
+  transition:
+    transform var(--meleji-card-photo-zoom-ms, 1.05s) var(--ease-cinematic),
+    filter 0.55s var(--ease-out);
 }
 
-/* Page-end CTA — dark scrim only (no global cream wash on the photo) */
+.m-card--photo-soft .meleji-card-photo__shade,
+.csp-card--photo-soft .meleji-card-photo__shade {
+  opacity: calc(var(--meleji-card-wash-opacity, 0.58) + 0.06);
+}
+
+@media (hover: hover) {
+  .meleji-card-photo:hover .meleji-card-photo__shade,
+  .csp-card:hover .meleji-card-photo__shade,
+  a.m-card:hover .meleji-card-photo__shade,
+  article.m-card:hover .meleji-card-photo__shade,
+  .stay-card:hover .meleji-card-photo__shade,
+  .stay-card:has(.stay-card__surface:hover) .meleji-card-photo__shade,
+  .foundation-sponsor-card:hover .meleji-card-photo__shade,
+  figure.meleji-card-photo:hover .meleji-card-photo__shade {
+    opacity: var(--meleji-card-wash-opacity-hover, 0.22);
+  }
+
+  .meleji-card-photo:hover > img,
+  .meleji-card-photo:hover .csp-card__hero,
+  .meleji-card-photo:hover .csp-card__main,
+  .meleji-card-photo:hover .stay-card__hero,
+  .csp-card:hover .meleji-card-photo .csp-card__hero,
+  .csp-card:hover .meleji-card-photo .csp-card__main,
+  a.m-card:hover .meleji-card-photo > img,
+  article.m-card:hover .meleji-card-photo > img,
+  .stay-card:hover .meleji-card-photo .stay-card__hero,
+  .stay-card:has(.stay-card__surface:hover) .meleji-card-photo .stay-card__hero,
+  .foundation-sponsor-card:hover .meleji-card-photo > img,
+  figure.meleji-card-photo:hover > img {
+    transform: scale(var(--meleji-card-photo-zoom, 1.04));
+    filter: saturate(1.02) contrast(1.05) brightness(1.05);
+    will-change: transform;
+  }
+}
+
+/* –– Exclusions: landing + sticky editorial –– */
+:where(
+  .page--home .home-hero,
+  .page--home .home-story,
+  .page--home .home-intro,
+  .page--home .home-experiences,
+  .page--home .home-rooms,
+  .page--home .home-outdoors,
+  .page--home .home-community,
+  .page-hero,
+  .detail-page-hero,
+  .detail-editorial-hero,
+  .foundation-hero,
+  .editorial-split,
+  .page-split__aside,
+  .story-scene,
+  .foundation-photo-wash,
+  .visit-cta,
+  [data-photo-wash='off']
+) .meleji-card-photo__shade {
+  display: none;
+}
+
+:where(
+  .page--home .home-hero,
+  .page--home .home-story,
+  .page--home .home-intro,
+  .page--home .home-experiences,
+  .page--home .home-rooms,
+  .page--home .home-outdoors,
+  .page--home .home-community,
+  .page-hero,
+  .detail-page-hero,
+  .foundation-hero,
+  .editorial-split,
+  .story-scene,
+  .foundation-photo-wash,
+  .visit-cta,
+  [data-photo-wash='off']
+) .meleji-card-photo > img,
+:where(.page-hero, .story-scene, [data-photo-wash='off']) .meleji-card-photo .csp-card__hero {
+  filter: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meleji-card-photo__shade {
+    transition: none;
+  }
+
+  .meleji-card-photo > img,
+  .meleji-card-photo .csp-card__hero,
+  .meleji-card-photo .stay-card__hero {
+    transition: none;
+    transform: none;
+    will-change: auto;
+  }
+}
+
+/* Tighter photo blocks in listing grids */
+.card-grid .csp-card__media--dest,
+.card-grid .csp-card__media--package {
+  aspect-ratio: 16 / 10;
+  max-height: clamp(10.25rem, 23vw, 12.25rem);
+}
+
+.card-grid .m-card__media:not(.m-card__media--logo) {
+  aspect-ratio: 16 / 10;
+  max-height: clamp(10rem, 22vw, 12rem);
+}
+
+.card-grid--stay-catalog .stay-card__media {
+  max-height: clamp(10.5rem, 24vw, 12.5rem);
+}
+
+.home-top-carousel .csp-card__media--dest,
+.home-top-carousel .csp-card__media--package,
+.home-top-carousel--stay .stay-card__media {
+  aspect-ratio: 4 / 3;
+  max-height: clamp(9.5rem, 42vw, 11.25rem);
+}
+
+/* Page-end CTA – dark scrim only */
 .visit-cta {
   position: relative;
 }

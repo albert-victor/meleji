@@ -30,13 +30,13 @@ export const publishedRooms = [
       { icon: 'fa-users', label: 'Solo or pairs' },
     ],
     amenities: [
-      'USD 15 per night — single bed',
-      'USD 30 per night — double / couple',
-      'Shared bathroom arrangement — details on enquiry',
+      'USD 15 per night – single bed',
+      'USD 30 per night – double / couple',
+      'Shared bathroom arrangement – details on enquiry',
       'Meals and experiences booked separately',
     ],
     href: '/pages/accommodation/shared-rooms/',
-    bookingHref: '/pages/booking/?room=shared-rooms',
+    bookingHref: '/pages/booking/?room=shared-rooms&occupancy=single',
   },
   {
     id: 'deluxe',
@@ -56,7 +56,7 @@ export const publishedRooms = [
     pricing: STAY_PRICING.deluxe,
     ratingStars: 5,
     roomKicker: 'Private stay',
-    availabilityBadge: 'Limited availability — book early',
+    availabilityBadge: 'Limited availability – book early',
     services: [
       { icon: 'fa-bed', label: 'Private room' },
       { icon: 'fa-door-closed', label: 'More privacy' },
@@ -65,12 +65,12 @@ export const publishedRooms = [
       { icon: 'fa-heart', label: 'Couples welcome' },
     ],
     amenities: [
-      `USD ${STAY_PRICING.deluxe.night} per night — private room`,
+      `USD ${STAY_PRICING.deluxe.night} per night – private room`,
       'Suitable for couples and longer stays',
       'Meal plans and experiences added on enquiry',
-      'Pay and confirm with the team — not online checkout',
+      'Pay and confirm with the team – not online checkout',
     ],
     href: '/pages/accommodation/deluxe-rooms/',
-    bookingHref: '/pages/booking/?room=deluxe-rooms',
+    bookingHref: '/pages/booking/?room=deluxe-rooms&occupancy=double',
   },
 ];

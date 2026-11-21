@@ -17,6 +17,10 @@
   scroll-margin-top: var(--scroll-margin-header);
 }
 
+.page--with-chrome.page--cinematic-hero .page__main {
+  padding-block: 0;
+}
+
 .page__content {
   display: flex;
   flex-direction: column;

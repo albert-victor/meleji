@@ -5,7 +5,11 @@ import expCoffee from '../assets/images/optimized/expCoffee-1600.webp';
 import intro from '../assets/images/optimized/intro-1600.webp';
 import fieldImg from '../assets/images/accommodation/I_the_field.jpg';
 import waterfallImg from '../assets/images/sticky-sections/waterfalls_1.jpg';
-import { COFFEE_HOMESTAY, FOOD_PRICING } from './pricing.js';
+import momentsImg from '../assets/images/moments/moments.jpg';
+import momentField from '../assets/images/moments/in_the_Field.jpg';
+import foundationCommunity from '../assets/images/Meleji-Foundation/main_6.jpg';
+import momentBanner from '../assets/images/moments/c1b2d090-2feb-4c12-9423-6315de68c646.jpg';
+import { COFFEE_HOMESTAY, EXPERIENCE_CULTURE, FOOD_PRICING, FOUNDATION_PRICING, formatUsd } from './pricing.js';
 
 /** @type {{ step: number, title: string, body: string, image?: { src: string, alt: string } }[]} */
 export const COFFEE_JOURNEY_STEPS = [
@@ -30,7 +34,7 @@ export const COFFEE_JOURNEY_STEPS = [
   {
     step: 4,
     title: 'Processing and drying',
-    body: 'Follow cherries from pulping through drying — stages vary with weather and batch size.',
+    body: 'Follow cherries from pulping through drying – stages vary with weather and batch size.',
   },
   {
     step: 5,
@@ -46,7 +50,7 @@ export const COFFEE_JOURNEY_STEPS = [
   {
     step: 7,
     title: 'Tasting your cup',
-    body: `Sit down to taste the coffee you helped prepare. USD ${COFFEE_HOMESTAY.perPerson} per person — total depends on guest count, confirmed on enquiry.`,
+    body: `Sit down to taste the coffee you helped prepare. ${formatUsd(COFFEE_HOMESTAY.perPerson)} per person – total depends on guest count, confirmed on enquiry.`,
     image: { src: expCoffee, alt: 'Coffee tasting at the homestay' },
   },
 ];
@@ -59,23 +63,24 @@ export const FOOD_EXPERIENCE_IMAGES = [
 
 /** @type {{ name: string, description: string }[]} */
 export const FOOD_DISH_NOTES = [
-  { name: 'Maharage (beans)', description: 'Slow-cooked beans seasoned with local spices — a staple on many plates.' },
+  { name: 'Maharage (beans)', description: 'Slow-cooked beans seasoned with local spices – a staple on many plates.' },
   { name: 'Mboga (greens)', description: 'Seasonal vegetables prepared simply alongside rice or ugali.' },
   { name: 'Ugali or rice', description: 'Starch options depending on what the kitchen prepares that day.' },
   { name: 'Chapati', description: 'Flatbread when flour is available and hosts have time to prepare it.' },
-  { name: 'Grilled options', description: 'Sometimes offered when ingredients allow — confirm when you book.' },
+  { name: 'Grilled options', description: 'Sometimes offered when ingredients allow – confirm when you book.' },
 ];
 
 export const FOOD_PRICING_NOTES = [
-  `USD ${FOOD_PRICING.plate} — one served meal (per plate, not per ingredient).`,
-  `USD ${FOOD_PRICING.fullDay} — lunch and dinner on the same day (package — confirm serving style with hosts).`,
+  `${formatUsd(FOOD_PRICING.plate)} – one served meal (per plate, not per ingredient).`,
+  `${formatUsd(FOOD_PRICING.fullDay)} – lunch and dinner on the same day (package – confirm serving style with hosts).`,
   'Menus shift with market availability. Share dietary needs when you enquire.',
 ];
 
 export const CULTURE_DETAIL = {
   images: [
-    { src: fieldImg, alt: 'Guests with a local host in the field' },
-    { src: food2, alt: 'Community meal time' },
+    { src: foundationCommunity, alt: 'Community time with hosts and Meleji Children Foundation' },
+    { src: momentsImg, alt: 'Shared time with the Meleji community' },
+    { src: momentBanner, alt: 'Group gathering with local partners' },
   ],
   panels: [
     {
@@ -84,15 +89,60 @@ export const CULTURE_DETAIL = {
     },
     {
       title: 'Foundation visits',
-      body: 'Time at Meleji Children Foundation follows safeguarding guidance on the foundation pages — never unannounced.',
+      body: 'Time at Meleji Children Foundation follows safeguarding guidance on the foundation pages – never unannounced.',
     },
+    {
+      title: 'Timing and pace',
+      body: 'Half-day or single-activity visits suit most guests. The team shares what is realistic before you confirm.',
+    },
+  ],
+  pricingTiers: [
+    {
+      label: 'Foundation campus day',
+      amount: EXPERIENCE_CULTURE.foundationVisitFrom,
+      unit: 'from per person',
+      note: 'Volunteer-day guide rate when you join an approved foundation activity.',
+    },
+    {
+      label: 'Host-led community visit',
+      amount: null,
+      unit: 'quoted on enquiry',
+      note: 'Depends on introductions available, transport, and group size.',
+    },
+    {
+      label: 'Child sponsorship (optional)',
+      amount: FOUNDATION_PRICING.childSponsorFrom,
+      unit: 'from per month',
+      note: 'Private sponsorship – separate from a single visit; team explains reporting.',
+    },
+  ],
+  details: [
+    'Introductory meeting with Meleji hosts before any community visit',
+    'Safeguarding rules for foundation time (pre-booked only)',
+    'Respect for photography and privacy requests from local families',
+    'Whatsapp confirmation of date, meeting point, and dress code',
   ],
 };
 
+export const FOOD_PRICING_TIERS = [
+  { label: 'Per plate', amount: FOOD_PRICING.plate, unit: 'one served meal' },
+  { label: 'Lunch + dinner', amount: FOOD_PRICING.fullDay, unit: 'same day at the homestay' },
+];
+
+export const COFFEE_PRICING_TIERS = [
+  {
+    label: 'Homestay coffee journey',
+    amount: COFFEE_HOMESTAY.perPerson,
+    unit: 'per person',
+    note: 'Multiply by each participant in your enquiry.',
+  },
+];
+
 export const NATURE_DETAIL = {
   images: [
-    { src: waterfallImg, alt: 'Forest waterfall outing' },
-    { src: fieldImg, alt: 'Trails near Arusha with guides' },
+    { src: waterfallImg, alt: 'Forest waterfall outing with a guide' },
+    { src: fieldImg, alt: 'Trails and open ground near the homestay' },
+    { src: momentField, alt: 'Guests walking with hosts in the Arusha countryside' },
   ],
   panels: [
     {
@@ -103,5 +153,29 @@ export const NATURE_DETAIL = {
       title: 'What to bring',
       body: 'Sturdy shoes, rain layer, and water. Routes may change if paths are wet or river levels are high.',
     },
+    {
+      title: 'Fitness and timing',
+      body: 'Routes range from gentle walks to steeper waterfall approaches. Share mobility needs when you enquire.',
+    },
+  ],
+  pricingTiers: [
+    {
+      label: 'Half-day guided outing',
+      amount: null,
+      unit: 'quoted on enquiry',
+      note: 'Guide, timing, and meet point confirmed before you depart.',
+    },
+    {
+      label: 'Waterfall walk add-on',
+      amount: null,
+      unit: 'quoted on enquiry',
+      note: 'Seasonal access; may pair with a homestay stay or safari free day.',
+    },
+  ],
+  details: [
+    'Licensed or known local guide assigned by the Meleji team',
+    'Safety briefing and realistic pace for your group',
+    'Packed water recommendation; lunch optional on longer routes',
+    'Transport from the homestay quoted separately when needed',
   ],
 };

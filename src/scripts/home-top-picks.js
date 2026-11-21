@@ -2,6 +2,7 @@ import { liveDestinations } from '../data/published/destinations.js';
 import { liveSafariPackages } from '../data/published/packages.js';
 import { renderDestinationCard } from '../components/cards/destination-card.js';
 import { renderSafariPackageCard } from '../components/cards/package-card.js';
+import { bindVisibleInterval } from './visibility-interval.js';
 
 const CAROUSEL_INTERVAL_MS = 5000;
 const HOME_PACKAGE_COUNT = 10;
@@ -53,7 +54,11 @@ function wrapCarouselSlide(html) {
 export function mountCarousel(root, slidesHtml, modifierClass = '') {
   if (!root || !slidesHtml) return;
   const slideCount = (slidesHtml.match(/home-top-carousel__slide/g) || []).length;
-  root.className = `home-top-carousel ${modifierClass}`.trim();
+  const preserved = [...root.classList].filter(
+    (c) => c !== 'home-top-carousel' && !c.startsWith('home-top-carousel--'),
+  );
+  const next = ['home-top-carousel', modifierClass, ...preserved].join(' ').trim();
+  root.className = next.replace(/\s+/g, ' ').trim();
   root.dataset.slideCount = String(slideCount);
   root.innerHTML = `
     <div class="home-top-carousel__shell">
@@ -93,7 +98,6 @@ export function initPeriodicCarousel(carouselRoot) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let index = 0;
-  let timerId = null;
 
   const maxIndex = () => {
     const visible = visibleSlideCount(viewport);
@@ -103,17 +107,32 @@ export function initPeriodicCarousel(carouselRoot) {
   const renderDots = () => {
     if (!dotsRoot) return;
     const cap = maxIndex() + 1;
-    dotsRoot.innerHTML = Array.from({ length: cap }, (_, i) => {
-      const active = i === index ? ' is-active' : '';
-      return `<button type="button" class="home-top-carousel__dot${active}" role="tab" aria-selected="${i === index ? 'true' : 'false'}" aria-label="Show slide ${i + 1} of ${cap}" data-dot-index="${i}"></button>`;
-    }).join('');
-    dotsRoot.querySelectorAll('[data-dot-index]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        index = Number(btn.getAttribute('data-dot-index')) || 0;
-        apply();
-        renderDots();
-        resume();
+    const buttons = [...dotsRoot.querySelectorAll('[data-dot-index]')];
+    if (buttons.length !== cap) {
+      dotsRoot.innerHTML = Array.from({ length: cap }, (_, i) => {
+        const active = i === index ? ' is-active' : '';
+        return `<button type="button" class="home-top-carousel__dot${active}" role="tab" aria-selected="${i === index ? 'true' : 'false'}" aria-label="Show slide ${i + 1} of ${cap}" data-dot-index="${i}"></button>`;
+      }).join('');
+      dotsRoot.querySelectorAll('[data-dot-index]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          index = Number(btn.getAttribute('data-dot-index')) || 0;
+          apply();
+          syncDots();
+          resume();
+        });
       });
+      return;
+    }
+    syncDots();
+  };
+
+  const syncDots = () => {
+    if (!dotsRoot) return;
+    dotsRoot.querySelectorAll('[data-dot-index]').forEach((btn) => {
+      const i = Number(btn.getAttribute('data-dot-index')) || 0;
+      const active = i === index;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
     });
   };
 
@@ -137,17 +156,17 @@ export function initPeriodicCarousel(carouselRoot) {
     renderDots();
   };
 
+  let stopVisibleTimer = () => {};
+
   const pause = () => {
-    if (timerId) {
-      window.clearInterval(timerId);
-      timerId = null;
-    }
+    stopVisibleTimer();
   };
 
   const resume = () => {
     if (reducedMotion) return;
     pause();
-    timerId = window.setInterval(() => advance(1), CAROUSEL_INTERVAL_MS);
+    stopVisibleTimer();
+    stopVisibleTimer = bindVisibleInterval(carouselRoot, () => advance(1), CAROUSEL_INTERVAL_MS);
   };
 
   const onResize = () => {
@@ -190,7 +209,7 @@ export function initHomeTopPicks() {
 
   if (destMount && destinations.length) {
     const slides = destinations
-      .map((d, i) => wrapCarouselSlide(renderDestinationCard(d, { compact: true, index: i })))
+      .map((d, i) => wrapCarouselSlide(renderDestinationCard(d, { compact: true, index: i, reveal: false })))
       .join('');
     mountCarousel(destMount, slides, 'home-top-carousel--dest');
     initPeriodicCarousel(destMount);
@@ -198,7 +217,7 @@ export function initHomeTopPicks() {
 
   if (pkgMount && packages.length) {
     const slides = packages
-      .map((p, i) => wrapCarouselSlide(renderSafariPackageCard(p, { index: i })))
+      .map((p, i) => wrapCarouselSlide(renderSafariPackageCard(p, { index: i, reveal: false })))
       .join('');
     mountCarousel(pkgMount, slides, 'home-top-carousel--packages');
     initPeriodicCarousel(pkgMount);

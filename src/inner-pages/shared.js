@@ -1,17 +1,43 @@
 import { initEnquiryForms } from '../components/enquiry-form.js';
 import { initInnerEffects } from '../scripts/inner-effects.js';
 import { initBookingEstimates } from '../scripts/booking-estimates.js';
+import { initFormControls } from '../scripts/form-controls.js';
+import { initContactHub } from '../scripts/contact-hub.js';
 import { escapeHtml } from '../utils/html.js';
+import { CARD_PHOTO_SHADE } from '../components/cards/shared.js';
+
+function applyInnerPageBodyClasses(root) {
+  document.body.classList.add('page--inner', 'page--with-chrome');
+
+  if (root.querySelector('[data-foundation-rail]')) {
+    document.body.classList.add('page--foundation-rail');
+  }
+  if (document.body.dataset.page === 'foundation') {
+    document.body.classList.add('page--foundation-compact-header');
+  }
+  if (root.querySelector('.foundation-landing-hero, .page-hero--cinematic, .page-hero--landscape')) {
+    document.body.classList.add('page--cinematic-hero');
+    import('../scripts/inner-header.js').then((m) => m.initCinematicHeaderScroll());
+  }
+}
 
 export function mountInner(html) {
   const root = document.querySelector('[data-inner-mount]');
   if (!root) return;
   root.innerHTML = html;
-  initEnquiryForms(root);
-  initBookingEstimates(root);
-  initInnerEffects();
+  applyInnerPageBodyClasses(root);
+
+  try {
+    initEnquiryForms(root);
+    initFormControls(root);
+    initContactHub(root);
+    initBookingEstimates(root);
+    initInnerEffects(root);
+  } catch (err) {
+    console.error('[mountInner] Page inits failed after mount', err);
+  }
+
   import('../scripts/accommodation-cards.js').then((m) => m.initAccommodationCards(root));
-  document.body.classList.add('page--inner', 'page--with-chrome');
 }
 
 export function renderGallery(items) {
@@ -19,9 +45,10 @@ export function renderGallery(items) {
     <div class="gallery-grid">
       ${items
         .map(
-          (item) => `
-        <figure class="gallery-grid__item">
+          (item, index) => `
+        <figure class="gallery-grid__item meleji-card-photo" data-reveal style="--reveal-delay: ${index % 9}">
           <img src="${item.src}" alt="${escapeHtml(item.alt)}" loading="lazy" decoding="async" width="640" height="480" />
+          ${CARD_PHOTO_SHADE}
         </figure>`,
         )
         .join('')}

@@ -17,9 +17,9 @@ function renderFooterSocialLinks() {
 
 function renderMainFooter(year) {
   const ecosystem = `
-    <section class="footer-ecosystem" aria-label="Meleji ecosystem">
+    <section class="footer-ecosystem" aria-label="Meleji ecosystem" data-reveal>
       <p class="footer-ecosystem__eyebrow">The Meleji ecosystem</p>
-      <p class="footer-ecosystem__lead">One team in Arusha — a homestay base, northern Tanzania safaris, and work through the children&apos;s foundation.</p>
+      <p class="footer-ecosystem__lead">One team in Arusha – a homestay base, northern Tanzania safaris, and work through the children&apos;s foundation.</p>
       <div class="footer-ecosystem__row">
         <a class="footer-ecosystem__unit" href="/">
           <img class="footer-ecosystem__mark" src="${homestaysLogo}" alt="" width="40" height="40" loading="lazy" decoding="async" data-photo-wash="off" />
@@ -48,10 +48,10 @@ function renderMainFooter(year) {
           </div>
         </div>
         ${ecosystem}
-        <div class="footer-grid">
+        <div class="footer-grid" data-reveal style="--reveal-delay: 1">
           <nav aria-label="Footer accommodation"><h2>Stay</h2><a href="/pages/accommodation/shared-rooms/">Shared rooms</a><a href="/pages/accommodation/deluxe-rooms/">Deluxe rooms</a><a href="/pages/accommodation/">All accommodation</a><a href="/pages/booking/">Booking enquiry</a></nav>
           <nav aria-label="Footer experiences"><h2>Explore</h2><a href="/pages/safaris/">Safaris &amp; tours</a><a href="/pages/safaris/destinations/">Destinations</a><a href="/pages/experiences/">Local experiences</a><a href="/pages/safaris/custom/">Custom safari</a></nav>
-          <nav aria-label="Footer our story"><h2>Our Story</h2><a href="/pages/about/">About Meleji</a><a href="/pages/foundation/">Our foundation</a><a href="/pages/foundation/volunteer/">Volunteer with us</a><a href="/pages/foundation/impact/">Community</a></nav>
+          <nav aria-label="Footer our story"><h2>Our Story</h2><a href="/pages/about/">About Meleji</a><a href="/pages/foundation/">Our foundation</a><a href="/pages/contact/?intent=foundation">Volunteer with us</a><a href="/pages/foundation/impact/">Community</a></nav>
           <div class="footer-contact"><h2>Get in touch</h2><p><i class="fa-regular fa-envelope" aria-hidden="true"></i><a href="mailto:${CONTACT.email}">${CONTACT.email}</a></p><p><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/255756344075" target="_blank" rel="noopener noreferrer">${CONTACT.phoneLabel}</a></p><p class="footer-contact__place"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>${CONTACT.location}</p><a class="footer-contact__cta" href="/pages/contact/">Contact the team <span aria-hidden="true">→</span></a></div>
         </div>
       </div>

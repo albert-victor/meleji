@@ -101,3 +101,317 @@
 .form-field__hint {
   margin: 0;
 }
+
+.form-field__legend {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-ui);
+  margin-bottom: var(--space-2);
+}
+
+.form-field--custom-date {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-date__row {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.custom-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-ivory) 100%);
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.custom-select__trigger:focus-visible {
+  outline: 2px solid var(--color-brand-amber);
+  outline-offset: 2px;
+}
+
+.form-field--custom-select.is-open .custom-select__trigger {
+  border-color: var(--color-brand-terracotta);
+  box-shadow: 0 0 0 3px rgb(169 75 38 / 0.12);
+}
+
+.custom-select__display {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-select__list {
+  position: absolute;
+  z-index: var(--z-dropdown, 50);
+  margin: var(--space-1) 0 0;
+  padding: var(--space-2);
+  list-style: none;
+  width: 100%;
+  max-height: 14rem;
+  overflow-y: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-field--custom-select {
+  position: relative;
+}
+
+.custom-select__option {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.custom-select__option:hover,
+.custom-select__option.is-selected {
+  background: var(--color-ivory);
+  color: var(--color-brand-terracotta);
+}
+
+/* Booking layout (Safari & Bush Retreats–style rows + touch-friendly controls) */
+.enquiry-form--booking-layout .enquiry-form__grid--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .enquiry-form--booking-layout .enquiry-form__grid--stacked {
+    gap: var(--space-5);
+  }
+}
+
+.enquiry-form__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .enquiry-form__row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  .enquiry-form__row > .form-field,
+  .enquiry-form__row > .form-field--custom-select,
+  .enquiry-form__row > .form-field--calendar {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.enquiry-form--booking-layout .form-field label,
+.enquiry-form--booking-layout .form-field__legend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.enquiry-form--booking-layout .form-field input:not([type='hidden']),
+.enquiry-form--booking-layout .form-field textarea,
+.enquiry-form--booking-layout .custom-select__trigger,
+.enquiry-form--booking-layout .calendar-field__trigger {
+  min-height: 3.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.enquiry-form--booking-layout .form-field textarea {
+  min-height: 7.5rem;
+}
+
+.enquiry-form--booking-layout .enquiry-form__footnote {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: 52ch;
+}
+
+.enquiry-form--booking-layout .enquiry-form__actions {
+  width: 100%;
+}
+
+.enquiry-form--booking-layout .enquiry-form__submit {
+  width: 100%;
+  min-height: 3.5rem;
+  padding: 1rem 2.5rem;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.enquiry-form--booking-card {
+  max-width: 44.5rem;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.custom-select--compact .custom-select__trigger {
+  min-height: 2.5rem;
+  font-size: var(--text-sm);
+  padding-inline: var(--space-3);
+}
+
+.form-field--custom-select .form-field label:not(.form-field__legend) {
+  margin-bottom: 0;
+}
+
+.form-field--custom-date .form-field--custom-select label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* Month grid calendar */
+.form-field--calendar {
+  position: relative;
+}
+
+.calendar-field__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-ivory) 100%);
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.calendar-field__trigger:focus-visible {
+  outline: 2px solid var(--color-brand-amber);
+  outline-offset: 2px;
+}
+
+.form-field--calendar.is-open .calendar-field__trigger {
+  border-color: var(--color-brand-terracotta);
+}
+
+.calendar-field__trigger i {
+  color: var(--color-brand-terracotta);
+}
+
+.calendar-popover {
+  position: absolute;
+  z-index: var(--z-dropdown, 60);
+  top: calc(100% + 0.35rem);
+  left: 0;
+  width: min(100%, 18.5rem);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.calendar-popover__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.calendar-popover__month {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.calendar-popover__shift {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-ivory);
+  cursor: pointer;
+}
+
+.calendar-popover__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  list-style: none;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.calendar-popover__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-popover__pad {
+  aspect-ratio: 1;
+}
+
+.calendar-popover__day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.calendar-popover__day:hover:not(:disabled) {
+  background: var(--color-ivory);
+  color: var(--color-brand-terracotta);
+}
+
+.calendar-popover__day.is-selected {
+  background: linear-gradient(145deg, #b95118, #873b22);
+  color: #fff;
+}
+
+.calendar-popover__day.is-past:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

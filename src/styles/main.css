@@ -8,5 +8,9 @@
 @import './inner-pages.css';
 @import './foundation-page.css';
 @import './gallery-page.css';
+@import './about-page.css';
+@import './contact-page.css';
 @import './detail-editorial.css';
 @import './responsive.css';
+@import './mobile-ux.css';
+@import './site-entry.css';

@@ -1,4 +1,6 @@
 import { escapeHtml } from '../../utils/html.js';
+import { scrollRevealAttrs } from '../../utils/reveal-attrs.js';
+import { CARD_PHOTO_SHADE } from './shared.js';
 
 /**
  * @param {import('../../data/types.js').AccommodationItem} item
@@ -45,9 +47,9 @@ export function renderAccommodationCard(item, options = {}) {
     : '';
 
   return `
-    <article class="stay-card stay-card--luxury m-card m-card--accommodation${extra}">
+    <article class="stay-card stay-card--luxury m-card m-card--accommodation${extra}" ${scrollRevealAttrs(options)}>
       <a class="stay-card__surface" href="${escapeHtml(item.bookingHref ?? item.href)}" aria-label="Book ${escapeHtml(item.title)}"></a>
-      <div class="stay-card__media m-card__media m-card__media--wide m-card__media--room-photo" data-collage>
+      <div class="stay-card__media m-card__media m-card__media--wide m-card__media--room-photo meleji-card-photo" data-collage>
         <img
           class="stay-card__hero"
           src="${escapeHtml(heroSrc)}"
@@ -57,6 +59,7 @@ export function renderAccommodationCard(item, options = {}) {
           loading="lazy"
           decoding="async"
         />
+        ${CARD_PHOTO_SHADE}
         <span class="stay-card__price-badge" aria-label="From ${priceAmount} US dollars ${item.priceUnit ?? 'per night'}">
           <span class="stay-card__price-from">from</span>
           <span class="stay-card__price-mark" aria-hidden="true">

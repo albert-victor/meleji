@@ -1,5 +1,7 @@
 import { ARUSHA_URBAN_PHOTO_SLUGS } from '../../data/arusha-city-market-images.js';
 import { escapeHtml } from '../../utils/html.js';
+import { scrollRevealAttrs } from '../../utils/reveal-attrs.js';
+import { CARD_PHOTO_SHADE } from './shared.js';
 import {
   formatPackageDurationBadge,
   packageCardCtaLabel,
@@ -23,7 +25,7 @@ function packageCtaButtonClass(variant) {
 }
 
 /**
- * Safari package card — vertical editorial layout for all grids and carousels.
+ * Safari package card – vertical editorial layout for all grids and carousels.
  * @param {import('../../data/types.js').SafariPackageItem} item
  * @param {{ className?: string; index?: number }} [options]
  */
@@ -42,8 +44,8 @@ export function renderSafariPackageCard(item, options = {}) {
     : '';
 
   return `
-    <article class="csp-card csp-card--package m-card m-card--package m-card--static${softPhoto}${extra}" id="package-${escapeHtml(item.slug)}">
-      <div class="csp-card__media csp-card__media--package m-card__media">
+    <article class="csp-card csp-card--package m-card m-card--package m-card--static${softPhoto}${extra}" id="package-${escapeHtml(item.slug)}" ${scrollRevealAttrs(options)}>
+      <div class="csp-card__media csp-card__media--package m-card__media meleji-card-photo">
         <img
           class="csp-card__hero"
           src="${escapeHtml(item.imageSrc)}"
@@ -53,6 +55,7 @@ export function renderSafariPackageCard(item, options = {}) {
           width="640"
           height="400"
         />
+        ${CARD_PHOTO_SHADE}
         <span class="csp-card__badge csp-card__badge--category" title="${escapeHtml(category)}">${escapeHtml(category)}</span>
         ${renderCardHeartIcon()}
         ${PKG_WAVE}
@@ -76,13 +79,12 @@ export function renderSafariPackageCard(item, options = {}) {
     </article>`;
 }
 
-/** Empty-state shell when no packages are published. */
-export function renderSafariPackagesPendingCard({ href = '/pages/booking/', className = '' } = {}) {
+/** Compact prompt when the packages index has nothing published yet. */
+export function renderSafariPackagesPendingCard({ href = '/pages/safaris/custom/', className = '' } = {}) {
   const extra = className ? ` ${className}` : '';
   return `
-    <article class="csp-card csp-card--package m-card m-card--package m-card--static m-card--pending${extra}">
-      <div class="csp-card__media pattern-panel pattern-panel--mesh" role="img" aria-label="Safari planning">
-        <span class="visually-hidden">Safari planning</span>
+    <article class="csp-card csp-card--package m-card m-card--package m-card--static m-card--pending${extra}" data-reveal>
+      <div class="csp-card__media csp-card__media--package csp-card__media--empty" role="presentation" aria-hidden="true">
         ${PKG_WAVE}
       </div>
       <div class="csp-card__body csp-card__body--package m-card__body">

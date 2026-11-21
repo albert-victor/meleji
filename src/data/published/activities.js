@@ -1,4 +1,4 @@
-/** Activity icon tiles — Font Awesome Free (solid). */
+/** Activity icon tiles – Font Awesome Free (solid). */
 export const publishedActivities = [
   { id: 'stay', label: 'Accommodation', icon: 'fa-bed', description: 'Shared and deluxe rooms' },
   { id: 'safari', label: 'Safari', icon: 'fa-binoculars', description: 'Wildlife and parks' },

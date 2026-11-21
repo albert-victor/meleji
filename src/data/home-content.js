@@ -12,7 +12,7 @@ export const storySteps = [
   {
     title: 'Stay connected',
     text: 'Combine accommodation with tours, meals, and community visits when you are ready.',
-    route: 'Tanzania — enquiry-led travel',
+    route: 'Tanzania – enquiry-led travel',
   },
 ];
 
@@ -21,19 +21,19 @@ export const destinationTeasers = [
     name: 'Ruaha',
     region: 'Southern Tanzania',
     href: '/pages/safaris/',
-    status: 'Safari overview — package pages pending',
+    status: 'Safari overview – package pages pending',
   },
   {
     name: 'Moshi & Kilimanjaro foothills',
     region: 'Northern Tanzania',
     href: '/pages/safaris/',
-    status: 'Safari overview — package pages pending',
+    status: 'Safari overview – package pages pending',
   },
   {
     name: 'Materuni & waterfalls',
     region: 'Day trips',
     href: '/pages/safaris/',
-    status: 'Safari overview — package pages pending',
+    status: 'Safari overview – package pages pending',
   },
 ];
 
@@ -42,13 +42,13 @@ export const experienceTeasers = [
     title: 'Swahili food',
     icon: 'fa-utensils',
     href: '/pages/experiences/',
-    note: 'Half-board and plate options — confirm when booking',
+    note: 'Half-board and plate options – confirm when booking',
   },
   {
     title: 'Coffee experience',
     icon: 'fa-mug-hot',
     href: '/pages/experiences/',
-    note: 'From farm to cup — schedule on enquiry',
+    note: 'From farm to cup – schedule on enquiry',
   },
   {
     title: 'Cultural visits',

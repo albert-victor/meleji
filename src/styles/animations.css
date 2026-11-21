@@ -9,27 +9,67 @@
   }
 }
 
-@keyframes fade-up {
+/* Elegant scale – global scroll reveal. */
+:root {
+  --reveal-scale-from: 0.92;
+  --reveal-translate-y: 0.65rem;
+  --reveal-duration: 950ms;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-stagger-step: 100ms;
+}
+
+@keyframes reveal-elegant-scale {
   from {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: scale(var(--reveal-scale-from)) translateY(var(--reveal-translate-y));
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
   }
 }
 
-[data-reveal] {
-  opacity: 1;
+[data-reveal]:not(.is-visible),
+[data-outdoors-slide]:not(.is-visible),
+[data-experience-safari]:not(.is-visible),
+[data-foundation-collage]:not(.is-visible) {
+  opacity: 0;
+  transform: scale(var(--reveal-scale-from)) translateY(var(--reveal-translate-y));
 }
 
-[data-reveal].is-visible {
-  animation: fade-up var(--duration-slow) var(--ease-out) forwards;
+[data-reveal].is-visible,
+[data-outdoors-slide].is-visible,
+[data-experience-safari].is-visible,
+[data-foundation-collage].is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  animation: reveal-elegant-scale var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: calc(var(--reveal-delay, 0) * var(--reveal-stagger-step));
+}
+
+/* Premium / stay cards – win over card hover transitions during reveal */
+.csp-card[data-reveal].is-visible,
+.stay-card[data-reveal].is-visible,
+.m-card[data-reveal].is-visible,
+.gallery-grid__item[data-reveal].is-visible {
+  animation: reveal-elegant-scale var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: calc(var(--reveal-delay, 0) * var(--reveal-stagger-step));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal].is-visible {
+  [data-reveal]:not(.is-visible),
+  [data-reveal].is-visible,
+  [data-outdoors-slide]:not(.is-visible),
+  [data-outdoors-slide].is-visible,
+  [data-experience-safari]:not(.is-visible),
+  [data-experience-safari].is-visible,
+  [data-foundation-collage]:not(.is-visible),
+  [data-foundation-collage].is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
     animation: none;
   }
 }

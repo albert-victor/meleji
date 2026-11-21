@@ -1,48 +1,16 @@
-/* City tours & local markets — brand cinematic wash, gentle motion (low-res sources) */
+/* City tours & local markets – homepage collage tiles (card wash lives in photo-wash.css) */
 
 :root {
   --meleji-urban-cinematic-wash: linear-gradient(
     148deg,
-    rgb(154 73 31 / 0.22) 0%,
-    rgb(122 154 72 / 0.16) 42%,
-    rgb(212 162 74 / 0.14) 78%,
-    rgb(166 124 82 / 0.1) 100%
+    rgb(245 214 107 / 0.2) 0%,
+    rgb(212 162 74 / 0.18) 40%,
+    rgb(166 124 82 / 0.12) 100%
   );
   --meleji-urban-photo-filter: saturate(0.96) contrast(0.99) brightness(1.02);
 }
 
-.m-card--photo-soft .m-card__media::after,
-.csp-card--photo-soft .csp-card__media::after,
-.csp-card--photo-soft .csp-card__main-stage::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: var(--meleji-urban-cinematic-wash);
-  mix-blend-mode: multiply;
-  opacity: 0.78;
-}
-
-.m-card--photo-soft .m-card__media img,
-.csp-card--photo-soft .csp-card__hero,
-.csp-card--photo-soft .csp-card__main {
-  filter: var(--meleji-urban-photo-filter);
-}
-
-@media (hover: hover) {
-  a.m-card--photo-soft:hover .m-card__media img,
-  .csp-card--photo-soft:hover .csp-card__hero,
-  .csp-card--photo-soft:hover .csp-card__main {
-    transform: scale(1.012);
-  }
-}
-
-.csp-card--photo-soft:hover .csp-card__hero {
-  transform: scale(1.012);
-}
-
-/* Homepage explore tiles — city & markets */
+/* Homepage explore tiles – city & markets */
 .experience-piece--urban-photo .experience-piece__photos {
   position: relative;
 }

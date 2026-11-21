@@ -66,8 +66,8 @@ export function renderDetailSection({ title, body, children = '', band = false }
   return `
     <section class="inner-section${bandClass}">
       <div class="container detail-section">
-        ${renderDetailSectionHeading({ title, text: body })}
-        ${children}
+        <div data-reveal>${renderDetailSectionHeading({ title, text: body })}</div>
+        <div data-reveal style="--reveal-delay: 1">${children}</div>
       </div>
     </section>`;
 }

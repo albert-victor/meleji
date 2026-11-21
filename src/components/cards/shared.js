@@ -9,6 +9,9 @@ export function filterLiveContent(items) {
   return items.filter((item) => item.status === 'published');
 }
 
+/** Visible gold cinematic wash over card photos (paired with .meleji-card-photo). */
+export const CARD_PHOTO_SHADE = '<span class="meleji-card-photo__shade" aria-hidden="true"></span>';
+
 /**
  * @param {{ imageSrc?: string, imageAlt: string, pattern?: string, aspect?: string }} media
  */
@@ -22,7 +25,7 @@ export function renderCardMedia(media) {
   }
 
   return `
-    <div class="m-card__media${aspectClass}">
+    <div class="m-card__media meleji-card-photo${aspectClass}">
       <img
         src="${media.imageSrc}"
         alt="${escapeHtml(media.imageAlt)}"
@@ -31,5 +34,6 @@ export function renderCardMedia(media) {
         width="960"
         height="720"
       />
+      ${CARD_PHOTO_SHADE}
     </div>`;
 }

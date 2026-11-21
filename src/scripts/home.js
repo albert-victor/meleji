@@ -7,6 +7,13 @@
   EXPERIENCE_SAFARI_SLIDES_B,
   FOUNDATION_COLLAGE_SLIDES,
 } from '../data/home-images.js';
+import {
+  flushVisibleReveals,
+  initScrollRevealObserver,
+  observeRevealTargets,
+  revealLandingStack,
+} from './reveal-observer.js';
+import { bindVisibleInterval } from './visibility-interval.js';
 
 function hydrateHomeImages() {
   document.querySelectorAll('[data-home-img]').forEach((img) => {
@@ -33,31 +40,6 @@ function initHeaderScrollState() {
 
   header.classList.remove('is-transparent');
   header.classList.add('is-hero-bar');
-}
-
-function initReveal() {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reduced.matches || !('IntersectionObserver' in window)) {
-    document.querySelectorAll('[data-reveal], [data-collage], [data-outdoors-slide], [data-experience-safari], [data-foundation-collage]').forEach((el) => {
-      el.classList.add('is-visible', 'is-alive');
-    });
-    return null;
-  }
-
-  const reveal = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible', 'is-alive');
-        reveal.unobserve(entry.target);
-      }),
-    { threshold: 0.14 }
-  );
-
-  document.querySelectorAll('[data-reveal], [data-collage], [data-outdoors-slide], [data-experience-safari], [data-foundation-collage]').forEach((el) =>
-    reveal.observe(el)
-  );
-  return reduced;
 }
 
 function initHeroSlides() {
@@ -131,7 +113,10 @@ function initHeroSlides() {
     syncFloats(index);
   };
 
+  let stopHeroTimer = () => {};
+
   const stopAuto = () => {
+    stopHeroTimer();
     if (timer) {
       window.clearInterval(timer);
       timer = null;
@@ -140,8 +125,9 @@ function initHeroSlides() {
 
   const startAuto = () => {
     stopAuto();
-    if (reduced.matches || paused) return;
-    timer = window.setInterval(() => setSlide(index + 1), INTERVAL);
+    if (reduced.matches || paused || !heroRoot) return;
+    stopHeroTimer();
+    stopHeroTimer = bindVisibleInterval(heroRoot, () => setSlide(index + 1), INTERVAL);
   };
 
   const pause = () => {
@@ -226,7 +212,7 @@ function initRotatingCollage(root, stageSelector, slideDefs, intervalMs = 4200, 
 
   if (reducedQuery?.matches) return;
 
-  window.setInterval(() => {
+  bindVisibleInterval(root, () => {
     if (!root.classList.contains('is-alive') && !root.classList.contains('is-visible')) return;
     imgs[index].classList.remove('is-active');
     index = (index + 1) % imgs.length;
@@ -248,7 +234,7 @@ function initExperienceSafariRotators(reducedQuery) {
 
     if (reducedQuery?.matches) return;
 
-    window.setInterval(() => {
+    bindVisibleInterval(root, () => {
       if (!root.classList.contains('is-alive') && !root.classList.contains('is-visible')) return;
       insetIndex = (insetIndex + 1) % insetSlides.length;
       const slide = insetSlides[insetIndex];
@@ -274,7 +260,7 @@ function initFoundationCollage(reducedQuery) {
 
   if (reducedQuery?.matches) return;
 
-  window.setInterval(() => {
+  bindVisibleInterval(root, () => {
     if (!root.classList.contains('is-alive') && !root.classList.contains('is-visible')) return;
     insetIndex = (insetIndex + 2) % FOUNDATION_COLLAGE_SLIDES.length;
     const slide = pickInset(insetIndex);
@@ -336,13 +322,12 @@ function initOutdoorsAutoslide(reducedQuery) {
 
   if (reducedQuery?.matches) return;
 
-  window.setInterval(() => {
+  bindVisibleInterval(root, () => {
     if (!root.classList.contains('is-alive') && !root.classList.contains('is-visible')) return;
     show(index + 1);
   }, 4600);
 }
 
-const HOME_STAY_CARD_IDS = ['stay-01', 'stay-05', 'stay-08', 'stay-10'];
 
 function initHomeStayCards() {
   const mount = document.querySelector('[data-home-stay-carousel]');
@@ -352,28 +337,43 @@ function initHomeStayCards() {
     import('../components/cards/accommodation-card.js'),
     import('./home-top-picks.js'),
   ]).then(([catalog, card, carousel]) => {
-    const picks = HOME_STAY_CARD_IDS.map((id) => catalog.accommodationCatalog.find((r) => r.id === id)).filter(
-      Boolean,
-    );
+    const picks = catalog.accommodationRoomCards;
     const slides = picks
-      .map((room) => `<div class="home-top-carousel__slide" role="listitem">${card.renderAccommodationCard(room)}</div>`)
+      .map(
+        (room, index) =>
+          `<div class="home-top-carousel__slide" role="listitem">${card.renderAccommodationCard(room, { index, reveal: false })}</div>`
+      )
       .join('');
     carousel.mountCarousel(mount, slides, 'home-top-carousel--stay');
     carousel.initPeriodicCarousel(mount);
+    requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+  }).catch((err) => {
+    console.error('Home stay carousel failed to load', err);
   });
 }
 
 export function initHome() {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  initScrollRevealObserver();
   hydrateHomeImages();
   initHeaderScrollState();
   initHomeStayCards();
-  import('./home-top-picks.js').then((m) => m.initHomeTopPicks());
-  const reduced = initReveal();
+  import('./home-top-picks.js').then((m) => {
+    m.initHomeTopPicks();
+    observeRevealTargets(document.querySelector('.home-top-picks'));
+    observeRevealTargets(document.querySelector('[data-home-top-destinations]'));
+    observeRevealTargets(document.querySelector('[data-home-top-packages]'));
+  });
   initHeroSlides();
   initHeroEntrance();
-  initOutdoorsAutoslide(reduced);
-  initExperienceSafariRotators(reduced);
-  initFoundationCollage(reduced);
+  initOutdoorsAutoslide(reducedMotion);
+  initExperienceSafariRotators(reducedMotion);
+  initFoundationCollage(reducedMotion);
+
+  observeRevealTargets(document.querySelector('.site-footer'));
+  observeRevealTargets(document.querySelector('.visit-cta'));
+  revealLandingStack(document);
+  flushVisibleReveals(document);
 
   const root = document.querySelector('[data-story]');
   if (!root) return;

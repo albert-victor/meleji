@@ -1,4 +1,4 @@
-/* Gallery — animated mosaic collages */
+/* Gallery – animated mosaic collages */
 
 .inner-page--gallery {
   --gallery-tile-radius: clamp(10px, 1.2vw, 16px);
@@ -17,15 +17,15 @@
 .gallery-mosaic {
   position: relative;
   display: grid;
-  gap: clamp(0.45rem, 1.1vw, 0.85rem);
+  gap: clamp(0.35rem, 0.9vw, 0.65rem);
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  grid-template-rows: repeat(4, minmax(68px, auto));
-  min-height: min(72vw, 520px);
+  grid-template-rows: repeat(4, minmax(52px, auto));
+  min-height: min(48vw, 320px);
 }
 
 @media (min-width: 768px) {
   .gallery-mosaic {
-    min-height: clamp(380px, 42vw, 520px);
+    min-height: clamp(240px, 26vw, 320px);
   }
 }
 
@@ -49,56 +49,36 @@
   transform: none;
 }
 
+/* Wash + hover zoom: photo-wash.css (.gallery-mosaic__tile::after) */
 .gallery-mosaic__tile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-    155deg,
-    rgb(154 73 31 / 0.14),
-    rgb(122 154 72 / 0.1) 48%,
-    rgb(49 62 46 / 0.12)
-  );
-  mix-blend-mode: multiply;
-  opacity: 0.75;
+  content: none;
+  display: none;
 }
 
-.gallery-mosaic__tile img {
+.gallery-mosaic__tile img,
+.gallery-grid__item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.9s var(--ease-out);
 }
 
-@media (hover: hover) {
-  .gallery-mosaic__tile:hover img {
-    transform: scale(1.035);
-  }
-
-  .gallery-mosaic-section--urban .gallery-mosaic__tile:hover img {
-    transform: scale(1.012);
-  }
+.gallery-grid__item {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--gallery-tile-radius, 12px);
 }
 
-.gallery-mosaic-section--urban .gallery-mosaic__tile::before {
-  background: var(--meleji-urban-cinematic-wash, linear-gradient(
-    148deg,
-    rgb(154 73 31 / 0.22),
-    rgb(122 154 72 / 0.16) 42%,
-    rgb(212 162 74 / 0.14) 100%
-  ));
-  mix-blend-mode: multiply;
-  opacity: 0.78;
+.gallery-mosaic-section--urban .meleji-card-photo__shade {
+  opacity: calc(var(--meleji-card-wash-opacity) + 0.08);
 }
 
-.gallery-mosaic-section--urban .gallery-mosaic__tile img {
+.gallery-mosaic-section--urban .meleji-card-photo > img {
   filter: var(--meleji-urban-photo-filter, saturate(0.96) contrast(0.99) brightness(1.02));
 }
 
-/* Tile slots — asymmetric collage */
+/* Tile slots – asymmetric collage */
 .gallery-mosaic__tile--a {
   grid-column: 1 / span 4;
   grid-row: 1 / span 3;
@@ -158,6 +138,59 @@
 
 .gallery-mosaic-section + .gallery-mosaic-section {
   padding-top: var(--space-4);
+}
+
+/* Compact catalogue grid – more photos per row */
+.inner-page--gallery .gallery-grid,
+.gallery-grid--dense {
+  gap: clamp(0.35rem, 1vw, 0.55rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 540px) {
+  .inner-page--gallery .gallery-grid,
+  .gallery-grid--dense {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .inner-page--gallery .gallery-grid,
+  .gallery-grid--dense {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .inner-page--gallery .gallery-grid,
+  .gallery-grid--dense {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.inner-page--gallery .gallery-grid__item,
+.gallery-grid--dense .gallery-grid__item {
+  aspect-ratio: 1;
+  border-radius: var(--gallery-tile-radius, 10px);
+  overflow: hidden;
+}
+
+.gallery-grid__item[data-reveal] {
+  transform-origin: center center;
+}
+
+.gallery-grid__item[data-reveal] img {
+  transition: transform 0.9s var(--ease-cinematic);
+}
+
+@media (hover: hover) {
+  .gallery-grid__item[data-reveal].is-visible:hover img {
+    transform: scale(1.035);
+  }
+}
+
+.accommodation-house__grid {
+  margin-top: var(--space-6);
 }
 
 @media (prefers-reduced-motion: reduce) {

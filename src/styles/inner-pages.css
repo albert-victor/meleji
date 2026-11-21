@@ -1,4 +1,5 @@
-.page--inner .page__main {
+.page--inner .page__main,
+.page[data-page] .page__main {
   padding-block: 0;
 }
 
@@ -61,41 +62,272 @@
   margin-top: var(--space-6);
 }
 
-.page-hero--landscape {
-  min-height: min(70vh, 36rem);
+.page-hero--landscape,
+.page-hero--cinematic {
+  position: relative;
   display: grid;
   align-items: end;
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100dvh;
+  margin-bottom: 0;
   color: var(--color-text-inverse);
-  margin-bottom: var(--space-10);
+  isolation: isolate;
+  overflow: hidden;
 }
 
-.page-hero--landscape .page-hero__media {
+.page-hero--landscape .page-hero__media,
+.page-hero--cinematic .page-hero__media {
   position: absolute;
   inset: 0;
 }
 
-.page-hero--landscape .page-hero__media img {
+.page-hero--landscape .page-hero__media img,
+.page-hero--cinematic .page-hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
 
-.page-hero--landscape .page-hero__shade {
+/* Cinematic inner heroes – balanced overlay: photo visible, copy readable (not homepage/foundation landing) */
+.page-hero--landscape .page-hero__shade,
+.page-hero--cinematic .page-hero__shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(26 26 26 / 0.15), rgb(26 26 26 / 0.78));
+  pointer-events: none;
+  background:
+    linear-gradient(105deg, rgb(18 14 11 / 0.68) 0%, rgb(42 32 26 / 0.42) 36%, rgb(22 18 14 / 0.14) 58%, transparent 84%),
+    linear-gradient(180deg, rgb(0 0 0 / 0.36) 0%, transparent 46%, rgb(18 14 11 / 0.78) 100%),
+    linear-gradient(118deg, rgb(58 72 48 / 0.2) 0%, transparent 54%),
+    linear-gradient(208deg, rgb(140 72 38 / 0.16) 0%, transparent 48%);
 }
 
-.page-hero--landscape .page-hero__content {
+/* Foundation sub-routes that use page-hero – match main foundation landing legibility */
+body[data-page^='foundation'] .page-hero__shade {
+  background:
+    linear-gradient(100deg, rgb(22 16 12 / 0.72) 0%, rgb(40 30 24 / 0.38) 42%, rgb(22 16 12 / 0.08) 68%),
+    linear-gradient(180deg, rgb(0 0 0 / 0.18) 0%, transparent 40%, rgb(22 16 12 / 0.5) 100%);
+}
+
+.page-hero--landscape .page-hero__content,
+.page-hero--cinematic .page-hero__content {
   position: relative;
-  z-index: 1;
-  padding-block: var(--space-12);
+  z-index: 2;
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-block: clamp(5.5rem, 14vh, 7.5rem) clamp(2.5rem, 8vh, 4.25rem);
+  padding-inline: var(--container-padding);
+  isolation: isolate;
 }
 
-.page-hero--landscape .page-hero__title { color: #fff9f0; }
-.page-hero--landscape .page-hero__eyebrow { color: #eac390; }
-.page-hero--landscape .page-hero__lead {
-  color: rgb(255 255 255 / 0.88);
+/* Local contrast behind headline block – keeps photo bright elsewhere */
+.page-hero--landscape .page-hero__content::before,
+.page-hero--cinematic .page-hero__content::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 0;
+  top: clamp(-1rem, -2vh, 0px);
+  max-width: min(52rem, 92vw);
+  height: calc(100% + clamp(0.75rem, 2vh, 1.25rem));
+  border-radius: 0;
+  background: radial-gradient(
+    ellipse 118% 98% at 0% 100%,
+    rgb(8 6 5 / 0.74) 0%,
+    rgb(14 11 9 / 0.46) 46%,
+    rgb(18 14 11 / 0.18) 68%,
+    transparent 80%
+  );
+  pointer-events: none;
+}
+
+.page-hero--landscape .page-hero__title,
+.page-hero--cinematic .page-hero__title {
+  color: #fff9f0;
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 6.5vw, 4.35rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.02;
+  max-width: 16ch;
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 0.35),
+    0 4px 32px rgb(0 0 0 / 0.48);
+}
+
+.page-hero--landscape .page-hero__eyebrow,
+.page-hero--cinematic .page-hero__eyebrow {
+  margin-bottom: 0.85rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-brand-yellow-bright);
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.55);
+}
+
+.page-hero--landscape .page-hero__lead,
+.page-hero--cinematic .page-hero__lead {
+  margin-top: var(--space-4);
+  max-width: 42ch;
+  font-size: clamp(0.92rem, 1.25vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.55;
+  color: #fffbf5;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.45), 0 2px 22px rgb(0 0 0 / 0.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.page-hero--landscape .page-hero__actions,
+.page-hero--cinematic .page-hero__actions {
+  margin-top: var(--space-6);
+  gap: var(--space-3);
+}
+
+/* Landing / cinematic heroes – outline CTAs: white label on photo; brand fill keeps white text */
+.page-hero--landscape .page-hero__actions .btn--secondary,
+.page-hero--cinematic .page-hero__actions .btn--secondary,
+.page-hero--landscape .page-hero__actions .btn--ghost,
+.page-hero--cinematic .page-hero__actions .btn--ghost {
+  --btn-fg: #ffffff;
+  --btn-border: rgb(255 248 238 / 0.62);
+  color: #ffffff;
+  border-color: rgb(255 248 238 / 0.62);
+  background: transparent;
+}
+
+.page-hero--landscape .page-hero__actions .btn--secondary .btn__clip,
+.page-hero--landscape .page-hero__actions .btn--secondary .btn__label,
+.page-hero--landscape .page-hero__actions .btn--secondary .btn__icon,
+.page-hero--cinematic .page-hero__actions .btn--secondary .btn__clip,
+.page-hero--cinematic .page-hero__actions .btn--secondary .btn__label,
+.page-hero--cinematic .page-hero__actions .btn--secondary .btn__icon,
+.page-hero--landscape .page-hero__actions .btn--ghost .btn__clip,
+.page-hero--landscape .page-hero__actions .btn--ghost .btn__label,
+.page-hero--landscape .page-hero__actions .btn--ghost > span,
+.page-hero--cinematic .page-hero__actions .btn--ghost .btn__clip,
+.page-hero--cinematic .page-hero__actions .btn--ghost .btn__label,
+.page-hero--cinematic .page-hero__actions .btn--ghost > span {
+  color: #ffffff;
+}
+
+@media (hover: hover) {
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:hover,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:focus-visible,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:hover,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:focus-visible,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:hover,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:focus-visible,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:hover,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:focus-visible {
+    --btn-fg: #ffffff;
+    color: #ffffff;
+    border-color: #873b22;
+    background: transparent;
+  }
+
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:hover .btn__clip,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:hover .btn__label,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:hover .btn__icon,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:hover > *,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:focus-visible .btn__clip,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:focus-visible .btn__label,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:focus-visible .btn__icon,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:focus-visible > *,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:hover .btn__clip,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:hover .btn__label,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:hover .btn__icon,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:hover > *,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:focus-visible .btn__clip,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:focus-visible .btn__label,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:focus-visible .btn__icon,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:focus-visible > *,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:hover .btn__clip,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:hover .btn__label,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:hover > *,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:focus-visible .btn__clip,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:focus-visible .btn__label,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:focus-visible > *,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:hover .btn__clip,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:hover .btn__label,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:hover > *,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:focus-visible .btn__clip,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:focus-visible .btn__label,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:focus-visible > * {
+    color: #ffffff;
+  }
+
+  .page-hero--landscape .page-hero__actions .btn--secondary:hover::before,
+  .page-hero--landscape .page-hero__actions .btn--secondary:focus-visible::before,
+  .page-hero--cinematic .page-hero__actions .btn--secondary:hover::before,
+  .page-hero--cinematic .page-hero__actions .btn--secondary:focus-visible::before {
+    transform: scaleX(1);
+  }
+}
+
+@media (hover: none) {
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:active,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:active,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:active,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:active {
+    --btn-fg: #ffffff;
+    color: #ffffff;
+    border-color: #873b22;
+    background: transparent;
+  }
+
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:active .btn__clip,
+  .page-hero--landscape .page-hero__actions .btn.btn--secondary:active > *,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:active .btn__clip,
+  .page-hero--cinematic .page-hero__actions .btn.btn--secondary:active > *,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:active .btn__clip,
+  .page-hero--landscape .page-hero__actions .btn.btn--ghost:active > *,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:active .btn__clip,
+  .page-hero--cinematic .page-hero__actions .btn.btn--ghost:active > * {
+    color: #ffffff;
+  }
+}
+
+.page-hero__scroll {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: clamp(1.1rem, 3vw, 1.75rem);
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgb(255 248 238 / 0.72);
+}
+
+.page-hero__scroll::after {
+  content: '↓';
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__scroll {
+    display: none;
+  }
+}
+
+.page--cinematic-hero .page__main {
+  padding-block: 0;
+}
+
+.inner-page > .page-hero--cinematic + .inner-section,
+.inner-page > .page-hero--landscape + .inner-section {
+  padding-top: clamp(var(--space-10), 6vw, var(--space-16));
 }
 
 .page-hero--room {
@@ -515,4 +747,80 @@ a.things-to-do__chip:hover {
   color: var(--color-brand-green);
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+.detail-packages-cta {
+  max-width: 42rem;
+}
+
+.detail-packages-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.experience-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.experience-pricing__row {
+  padding-block: var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.experience-pricing__row:last-of-type {
+  border-bottom: none;
+}
+
+.experience-pricing__label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.experience-pricing__amount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.experience-pricing__value {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  line-height: 1.1;
+  color: var(--color-brand-green);
+  letter-spacing: -0.02em;
+}
+
+.experience-pricing__on-request {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-brand-green);
+}
+
+.experience-pricing__unit {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.experience-pricing__note {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+}
+
+.experience-pricing__disclaimer {
+  margin: 0;
+  padding-top: var(--space-2);
+}
+
+.m-card--experience .m-card__price {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-brand-green);
+  font-weight: 600;
 }

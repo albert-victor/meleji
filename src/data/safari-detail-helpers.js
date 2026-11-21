@@ -2,6 +2,7 @@ import { liveDestinations } from './published/destinations.js';
 import { liveSafariPackages } from './published/packages.js';
 import { liveSafariActivities } from './published/safari-activities.js';
 import {
+  activitySlugFromLabel,
   getEditorialRouteFit,
   getNearbySlugsForDestination,
 } from './destination-relations.js';
@@ -9,10 +10,31 @@ import {
 export { getEditorialRouteFit } from './destination-relations.js';
 
 /**
+ * Packages whose route lists this destination slug.
  * @param {string} destinationSlug
+ * @param {number} [limit]
  */
-export function getPackagesForDestination(destinationSlug) {
-  return liveSafariPackages.filter((pkg) => pkg.destinationSlugs?.includes(destinationSlug));
+export function getPackagesForDestination(destinationSlug, limit = 6) {
+  return liveSafariPackages
+    .filter((pkg) => pkg.destinationSlugs?.includes(destinationSlug))
+    .slice(0, limit);
+}
+
+/**
+ * When no package lists this slug, suggest routes through nearby stops (editorial links only).
+ * @param {string} destinationSlug
+ * @param {number} [limit]
+ */
+export function getSuggestedPackagesForDestination(destinationSlug, limit = 6) {
+  const nearbySlugs = new Set([destinationSlug, ...getNearbySlugsForDestination(destinationSlug)]);
+  const scored = liveSafariPackages
+    .map((pkg) => {
+      const overlap = (pkg.destinationSlugs ?? []).filter((s) => nearbySlugs.has(s)).length;
+      return { pkg, overlap };
+    })
+    .filter(({ overlap }) => overlap > 0)
+    .sort((a, b) => b.overlap - a.overlap || a.pkg.name.localeCompare(b.pkg.name));
+  return scored.slice(0, limit).map(({ pkg }) => pkg);
 }
 
 /**
@@ -32,7 +54,7 @@ export function getNearbyDestinations(destinationSlug, limit = 4) {
 }
 
 /**
- * “You may also like” — mix of nearby and same-region destinations.
+ * “You may also like” – mix of nearby and same-region destinations.
  * @param {string} destinationSlug
  * @param {string} [region]
  * @param {number} [limit]
@@ -48,6 +70,26 @@ export function getAlsoLikeDestinations(destinationSlug, region = '', limit = 3)
     if (!merged.some((d) => d.slug === dest.slug)) merged.push(dest);
   }
   return merged.slice(0, limit);
+}
+
+/**
+ * Related row for destination detail footers – nearby first, then regional picks.
+ * @param {string} destinationSlug
+ * @param {string} [region]
+ * @param {number} [limit]
+ */
+export function getRelatedDestinations(destinationSlug, region = '', limit = 3) {
+  const nearby = getNearbyDestinations(destinationSlug, limit + 2);
+  const also = getAlsoLikeDestinations(destinationSlug, region, limit + 2);
+  const seen = new Set([destinationSlug]);
+  const merged = [];
+  for (const dest of [...nearby, ...also]) {
+    if (!dest || seen.has(dest.slug)) continue;
+    seen.add(dest.slug);
+    merged.push(dest);
+    if (merged.length >= limit) break;
+  }
+  return merged;
 }
 
 /**

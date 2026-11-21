@@ -1,4 +1,5 @@
 import { escapeHtml } from '../../utils/html.js';
+import { scrollRevealAttrs } from '../../utils/reveal-attrs.js';
 import {
   destinationCardCtaLabel,
   destinationCardCtaVariant,
@@ -8,6 +9,7 @@ import {
   renderDestinationMediaTags,
   renderDestinationPhotoHint,
 } from './card-premium-shared.js';
+import { CARD_PHOTO_SHADE } from './shared.js';
 
 const DEST_WAVE = `
   <div class="csp-card__wave csp-card__wave--dest" aria-hidden="true">
@@ -32,8 +34,8 @@ export function renderDestinationCard(item, options = {}) {
       : 'csp-btn csp-btn--primary csp-btn--card';
 
   return `
-    <article class="csp-card csp-card--destination csp-card--destination-rich m-card m-card--destination m-card--static${compact}${extra}">
-      <div class="csp-card__media csp-card__media--dest m-card__media">
+    <article class="csp-card csp-card--destination csp-card--destination-rich m-card m-card--destination m-card--static${compact}${extra}" ${scrollRevealAttrs(options)}>
+      <div class="csp-card__media csp-card__media--dest m-card__media meleji-card-photo">
         <img
           class="csp-card__hero"
           src="${escapeHtml(item.imageSrc)}"
@@ -43,6 +45,7 @@ export function renderDestinationCard(item, options = {}) {
           width="640"
           height="400"
         />
+        ${CARD_PHOTO_SHADE}
         ${renderDestinationPhotoHint(photoHint)}
         ${renderDestinationMediaTags(item)}
         ${renderCardHeartIcon()}
@@ -53,7 +56,8 @@ export function renderDestinationCard(item, options = {}) {
         <h3 class="csp-card__title m-card__title">${escapeHtml(item.name)}</h3>
         <div class="csp-card__actions m-card__actions">
           <a class="${btnClass}" href="${escapeHtml(item.href)}">
-            ${escapeHtml(ctaLabel)} <i class="fa-solid fa-arrow-right csp-btn__arrow" aria-hidden="true"></i>
+            <span class="csp-btn__label">${escapeHtml(ctaLabel)}</span>
+            <i class="fa-solid fa-arrow-right csp-btn__arrow" aria-hidden="true"></i>
           </a>
         </div>
       </div>

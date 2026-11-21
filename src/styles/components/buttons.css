@@ -53,6 +53,23 @@
   box-shadow: none;
 }
 
+.btn--pattern-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url('../../assets/patterns/african-diamond.svg') center / 72px repeat;
+  opacity: var(--pattern-opacity-strong);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn--pattern-overlay .btn__clip {
+  position: relative;
+  z-index: 1;
+}
+
 .btn--primary .btn__clip {
   display: inline-flex;
   align-items: center;
@@ -86,17 +103,11 @@
   background: var(--color-surface);
 }
 
-.cta-band .btn--secondary {
-  --btn-fg: var(--color-brand-terracotta-deep);
-  --btn-border: var(--color-brand-taupe);
-  background: rgb(255 248 237 / 0.85);
-}
-
-.cta-band .btn--secondary::before {
+.btn--secondary::before {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   border-radius: inherit;
   background: var(--gradient-cta);
   transform: scaleX(0);
@@ -105,32 +116,15 @@
   pointer-events: none;
 }
 
-@media (hover: hover) {
-  .cta-band .btn--secondary:hover,
-  .cta-band .btn--secondary:focus-visible {
-    --btn-fg: #ffffff;
-    border-color: #873b22;
-    color: #ffffff;
-    background: transparent;
-  }
-
-  .cta-band .btn--secondary:hover::before,
-  .cta-band .btn--secondary:focus-visible::before {
-    transform: scaleX(1);
-  }
+.btn--secondary .btn__clip {
+  position: relative;
+  z-index: 1;
 }
 
-@media (hover: none) {
-  .cta-band .btn--secondary:active {
-    --btn-fg: #ffffff;
-    border-color: #873b22;
-    color: #ffffff;
-    background: transparent;
-  }
-
-  .cta-band .btn--secondary:active::before {
-    transform: scaleX(1);
-  }
+.cta-band .btn--secondary {
+  --btn-fg: var(--color-brand-terracotta-deep);
+  --btn-border: var(--color-brand-taupe);
+  background: rgb(255 248 237 / 0.85);
 }
 
 .btn--ghost {
@@ -151,7 +145,7 @@
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: linear-gradient(118deg, #b95118 0%, #a5451d 48%, #873b22 100%);
+  background: var(--gradient-cta);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform var(--duration-ghost-fill) var(--ease-ghost-fill);
@@ -159,7 +153,9 @@
 }
 
 .btn--ghost .btn__clip,
-.btn--ghost-cream .btn__clip {
+.btn--ghost-cream .btn__clip,
+.btn--ghost > *,
+.btn--ghost-cream > * {
   position: relative;
   z-index: 1;
 }
@@ -238,8 +234,8 @@
 @media (hover: hover) {
   .btn--primary:hover,
   .btn--primary:focus-visible {
-    background: linear-gradient(118deg, #a5451d 0%, #873b22 48%, #71301d 100%);
-    border-color: #8f4620;
+    background: var(--gradient-cta-hover);
+    border-color: #71301d;
     color: #ffffff;
   }
 
@@ -253,15 +249,36 @@
     transform: translateY(calc(var(--btn-label-height) * -1));
   }
 
-  .btn--secondary:hover,
-  .btn--secondary:focus-visible {
-    border-color: var(--color-brand-terracotta-deep);
-    background: rgb(237 226 207 / 0.9);
-    color: var(--color-brand-brown);
+  .btn.btn--secondary:hover,
+  .btn.btn--secondary:focus-visible {
+    --btn-fg: #ffffff;
+    border-color: #873b22;
+    color: #ffffff;
+    background: transparent;
   }
 
-  .btn--ghost:hover,
-  .btn--ghost:focus-visible {
+  .btn.btn--secondary:hover .btn__clip,
+  .btn.btn--secondary:hover .btn__label,
+  .btn.btn--secondary:hover > *,
+  .btn.btn--secondary:focus-visible .btn__clip,
+  .btn.btn--secondary:focus-visible .btn__label,
+  .btn.btn--secondary:focus-visible > * {
+    color: #ffffff;
+  }
+
+  .btn.btn--secondary:hover .btn__icon,
+  .btn.btn--secondary:focus-visible .btn__icon {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  .btn.btn--secondary:hover::before,
+  .btn.btn--secondary:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  .btn.btn--ghost:hover,
+  .btn.btn--ghost:focus-visible {
     --btn-fg: #ffffff;
     background: transparent;
     border-color: #873b22;
@@ -272,9 +289,21 @@
       background var(--duration-ghost-fill) var(--ease-ghost-fill);
   }
 
+  .btn.btn--ghost:hover .btn__clip,
+  .btn.btn--ghost:hover .btn__label,
+  .btn.btn--ghost:hover > *,
+  .btn.btn--ghost:focus-visible .btn__clip,
+  .btn.btn--ghost:focus-visible .btn__label,
+  .btn.btn--ghost:focus-visible > * {
+    color: #ffffff;
+  }
+
   .btn--ghost:hover::before,
-  .btn--ghost:focus-visible::before {
+  .btn--ghost:focus-visible::before,
+  .btn--ghost-cream:hover::before,
+  .btn--ghost-cream:focus-visible::before {
     transform: scaleX(1);
+    background: var(--gradient-cta-hover);
   }
 
   .btn--ghost:hover .btn__icon--trail,
@@ -308,8 +337,8 @@
 }
 
 @media (hover: hover) {
-  .btn--ghost-cream:hover,
-  .btn--ghost-cream:focus-visible {
+  .btn.btn--ghost-cream:hover,
+  .btn.btn--ghost-cream:focus-visible {
     --btn-fg: #ffffff;
     background: transparent;
     border-color: #873b22;
@@ -320,6 +349,17 @@
       color var(--duration-ghost-fill) var(--ease-ghost-fill);
   }
 
+  .btn.btn--ghost-cream:hover .btn__clip,
+  .btn.btn--ghost-cream:hover .btn__label,
+  .btn.btn--ghost-cream:hover > *,
+  .btn.btn--ghost-cream:hover .home-hero__cta-arrow,
+  .btn.btn--ghost-cream:focus-visible .btn__clip,
+  .btn.btn--ghost-cream:focus-visible .btn__label,
+  .btn.btn--ghost-cream:focus-visible > *,
+  .btn.btn--ghost-cream:focus-visible .home-hero__cta-arrow {
+    color: #ffffff;
+  }
+
   .btn--ghost-cream:hover::before,
   .btn--ghost-cream:focus-visible::before {
     transform: scaleX(1);
@@ -327,15 +367,43 @@
 }
 
 @media (hover: none) {
-  .btn--ghost-cream:active {
+  .btn.btn--secondary:active {
+    --btn-fg: #ffffff;
+    border-color: #873b22;
+    color: #ffffff;
+    background: transparent;
+  }
+
+  .btn.btn--secondary:active .btn__clip,
+  .btn.btn--secondary:active .btn__label,
+  .btn.btn--secondary:active > * {
+    color: #ffffff;
+  }
+
+  .btn.btn--secondary:active::before {
+    transform: scaleX(1);
+  }
+
+  .btn.btn--ghost:active,
+  .btn.btn--ghost-cream:active {
     --btn-fg: #ffffff;
     background: transparent;
     border-color: #873b22;
     color: #ffffff;
   }
 
+  .btn.btn--ghost:active .btn__clip,
+  .btn.btn--ghost:active > *,
+  .btn.btn--ghost-cream:active .btn__clip,
+  .btn.btn--ghost-cream:active > *,
+  .btn.btn--ghost-cream:active .home-hero__cta-arrow {
+    color: #ffffff;
+  }
+
+  .btn--ghost:active::before,
   .btn--ghost-cream:active::before {
     transform: scaleX(1);
+    background: var(--gradient-cta-hover);
   }
 }
 
@@ -359,6 +427,7 @@
     transform: none;
   }
 
+  .btn--secondary::before,
   .btn--ghost::before,
   .btn--ghost-cream::before,
   .btn__stack,

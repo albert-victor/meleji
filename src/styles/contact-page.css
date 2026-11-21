@@ -1,0 +1,393 @@
+.inner-page--contact .page-hero--contact {
+  margin-bottom: 0;
+}
+
+/* –– Contact details (top) –– */
+.contact-hub__reach {
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+.contact-hub__eyebrow {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand-terracotta);
+}
+
+.contact-hub__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.65rem, 3.2vw, 2.25rem);
+  margin: 0 0 var(--space-3);
+}
+
+.contact-hub__lead,
+.contact-hub__enquiry-lead {
+  margin: 0;
+  max-width: 62ch;
+  font-size: var(--text-md);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.contact-hub__reach-header {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.contact-hub__details-layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .contact-hub__details-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 21rem);
+    align-items: start;
+    gap: var(--space-8);
+  }
+}
+
+.contact-channel-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .contact-channel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-channel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.contact-channel {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(165deg, var(--color-surface) 0%, var(--color-ivory) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 100%;
+}
+
+.contact-channel--accent {
+  background: linear-gradient(145deg, #faf3ea 0%, #f0e2d3 55%, #ead9c8 100%);
+}
+
+.contact-channel__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-brand-terracotta);
+  border: 1px solid var(--color-border);
+}
+
+.contact-channel h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+.contact-channel p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.contact-channel__hint {
+  margin-top: var(--space-1);
+}
+
+.contact-channel a {
+  font-weight: 600;
+}
+
+.contact-channel__action {
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.contact-channel__action .btn {
+  width: 100%;
+}
+
+.contact-hub__steps {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.contact-hub__steps-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-4);
+}
+
+.contact-hub__steps-list {
+  margin: 0 0 var(--space-4);
+  padding-left: 1.2rem;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-hub__steps-list strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.contact-hub__steps-note {
+  margin: 0;
+}
+
+.contact-hub__skip {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.contact-hub__skip:focus-visible {
+  position: fixed;
+  top: calc(var(--header-height, 4rem) + var(--space-2));
+  left: var(--container-padding);
+  z-index: var(--z-dropdown, 50);
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  clip: auto;
+  overflow: visible;
+  white-space: normal;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
+
+/* –– Enquiry band (form below details) –– */
+.contact-hub__enquiry-band {
+  width: 100%;
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+  background: var(--color-ivory);
+  border-block: 1px solid var(--color-border);
+}
+
+.contact-hub__enquiry-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contact-hub__enquiry-header {
+  max-width: 70ch;
+}
+
+.contact-hub__enquiry-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  margin: 0 0 var(--space-3);
+  scroll-margin-top: calc(var(--header-height, 4rem) + var(--space-4));
+}
+
+.contact-enquiry__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-4);
+}
+
+.contact-enquiry__tab {
+  min-height: 2.75rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  border: 1px solid transparent;
+  transition:
+    color var(--duration-normal) var(--ease-out),
+    background var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
+}
+
+.contact-enquiry__tab:hover {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.contact-enquiry__tab.is-active {
+  color: #fff;
+  border-color: #a34b26;
+  background: linear-gradient(118deg, #b95118 0%, #a5451d 48%, #873b22 100%);
+}
+
+.contact-enquiry__stage {
+  width: 100%;
+}
+
+.contact-enquiry__panel[hidden] {
+  display: none !important;
+}
+
+.contact-enquiry__panel:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+@media (min-width: 1024px) {
+  .contact-enquiry__panel:not([hidden]) {
+    display: grid;
+    grid-template-columns: minmax(14rem, 20rem) minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+}
+
+.contact-panel__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-2);
+}
+
+.contact-panel__intro {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.contact-panel__points {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-panel__points li::marker {
+  color: var(--color-brand-terracotta);
+}
+
+.contact-hub__form-card {
+  width: 100%;
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 768px) {
+  .contact-hub__form-card {
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+    min-height: min(62vh, 42rem);
+  }
+}
+
+.enquiry-form--contact-panel {
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  width: 100%;
+  max-width: none;
+}
+
+.enquiry-form--contact-panel.enquiry-form--booking-layout .enquiry-form__grid--stacked {
+  gap: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .enquiry-form--contact-panel.enquiry-form--booking-layout .enquiry-form__grid--stacked {
+    gap: 1.35rem;
+  }
+}
+
+/* Legacy class hooks */
+.contact-enquiry--page .contact-enquiry__layout {
+  max-width: var(--container-max);
+}
+
+.booking-page__alt {
+  margin-top: var(--space-6);
+  text-align: center;
+}
+
+.booking-page__alt .btn {
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+
+.enquiry-form.is-prepared {
+  animation: enquiry-success-pulse 0.6s var(--ease-out);
+}
+
+@keyframes enquiry-success-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(169 75 38 / 0.35);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgb(169 75 38 / 0);
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
+.enquiry-form__success {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-brand-terracotta);
+}
+
+.enquiry-redirect {
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-ivory);
+}
+
+.enquiry-redirect__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-2);
+}
+
+.enquiry-redirect__intro {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enquiry-form.is-prepared {
+    animation: none;
+  }
+}

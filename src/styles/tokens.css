@@ -75,11 +75,22 @@
     #873b22 48%,
     #71301d 100%
   );
-  --gradient-footer: linear-gradient(
-    180deg,
-    var(--color-brand-charcoal) 0%,
-    #121212 100%
-  );
+  /* Footer: brown base + kidogo terracotta (glow + soft fade toward the right) */
+  --gradient-footer:
+    linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 58%,
+      rgb(120 55 32 / 0.12) 78%,
+      rgb(164 78 37 / 0.28) 94%,
+      rgb(181 88 42 / 0.36) 100%
+    ),
+    radial-gradient(ellipse 80% 50% at 50% -8%, rgb(197 154 106 / 0.16) 0%, transparent 58%),
+    radial-gradient(ellipse 52% 100% at 100% 45%, rgb(164 78 37 / 0.45) 0%, rgb(100 48 28 / 0.2) 40%, transparent 72%),
+    radial-gradient(ellipse 40% 65% at 0% 0%, rgb(197 154 106 / 0.1) 0%, transparent 52%),
+    linear-gradient(180deg, #2f2119 0%, #35271e 46%, #2a1c16 100%);
+  --footer-overlay-image: url('/overlay/footer-overlay.svg');
+  --footer-overlay-opacity: 0.2;
 
   /* Libre Bodoni = display headings; Lexend = UI/body; Italiana = signature accents */
   --font-heading: 'Libre Bodoni', Didot, 'Bodoni MT', Georgia, serif;
@@ -166,14 +177,19 @@
   --pattern-opacity: 0.08;
   --pattern-opacity-strong: 0.14;
 
-  /* Subtle warm wash on photography — tames harsh/saturation without hurting contrast */
+  /* Subtle warm / yellowish cinematic wash on card photography */
   --meleji-photo-wash-opacity: 0.1;
+  --meleji-card-wash-opacity: 0.52;
+  --meleji-card-wash-opacity-hover: 0.24;
   --meleji-photo-wash: linear-gradient(
-    122deg,
-    rgb(212 162 74 / 0.18) 0%,
-    rgb(166 124 82 / 0.14) 38%,
-    rgb(253 249 243 / 0.12) 72%,
-    rgb(60 42 33 / 0.08) 100%
+    165deg,
+    rgb(253 230 180 / 0.42) 0%,
+    rgb(245 214 107 / 0.32) 28%,
+    rgb(212 162 74 / 0.26) 52%,
+    rgb(166 124 82 / 0.18) 76%,
+    rgb(92 66 45 / 0.1) 100%
   );
-  --meleji-photo-filter: saturate(0.97) contrast(1) brightness(1.01);
+  --meleji-photo-filter: saturate(0.94) contrast(1.03) brightness(1.03);
+  --meleji-card-photo-zoom: 1.04;
+  --meleji-card-photo-zoom-ms: 1.05s;
 }

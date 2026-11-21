@@ -1,215 +1,93 @@
-import { ACCOMMODATION_PHOTOS_01_13 } from '../accommodation-numbered-images.js';
-import { STAY_PRICING } from '../pricing.js';
-
-const SHARED_SINGLE_SERVICES = [
-  { icon: 'fa-bed', label: 'Bunk beds' },
-  { icon: 'fa-shower', label: 'Shared bathroom' },
-  { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
-  { icon: 'fa-mug-hot', label: 'Meals on request' },
-  { icon: 'fa-user', label: 'Solo guest' },
-];
-
-const SHARED_DOUBLE_SERVICES = [
-  { icon: 'fa-bed', label: 'Bunk beds' },
-  { icon: 'fa-shower', label: 'Shared bathroom' },
-  { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
-  { icon: 'fa-mug-hot', label: 'Meals on request' },
-  { icon: 'fa-users', label: 'Couple / pair' },
-];
-
-const DELUXE_SERVICES = [
-  { icon: 'fa-bed', label: 'Private room' },
-  { icon: 'fa-door-closed', label: 'More privacy' },
-  { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
-  { icon: 'fa-mug-hot', label: 'Meals on request' },
-  { icon: 'fa-heart', label: 'Couples welcome' },
-];
-
 /**
- * Ten stay cards — one hero image each, linked to shared or deluxe room types.
- * @type {import('../types.js').AccommodationItem[]}
+ * Priced room cards for the accommodation overview and home stay carousel.
+ * Five layouts (shared, deluxe, and standard bed rooms) – guide rates in `pricing.js`.
+ * Full detail pages remain `shared-rooms` and `deluxe-rooms` only.
  */
-export const accommodationCatalog = [
+import { publishedRooms } from './rooms.js';
+import { STAY_PRICING } from '../pricing.js';
+import { ACCOMMODATION_PHOTOS_01_13 } from '../accommodation-numbered-images.js';
+
+const sharedBedPhoto = ACCOMMODATION_PHOTOS_01_13[2]; // room interior / bed
+const standardDoublePhoto = ACCOMMODATION_PHOTOS_01_13[4]; // bedding
+/** Wide-angle hero – acc6 @ 1280px (not the 237px PNG screenshot). */
+const standardPrivatePhoto = ACCOMMODATION_PHOTOS_01_13[5];
+
+/** @type {import('../types.js').AccommodationItem[]} */
+const standardRoomCards = [
   {
-    id: 'stay-01',
+    id: 'standard-guest',
     status: 'published',
-    title: 'Shared bunk room — single',
-    slug: 'shared-rooms',
-    description:
-      'Affordable shared layout for solo travellers. USD 15 per night (single bed) — layout confirmed when you enquire.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[0].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[0].alt,
-    occupancy: '1 guest · single bed',
+    title: 'Standard guest room',
+    slug: 'standard-guest-room',
+    description: 'A standard layout with a single bed – suited to solo guests who prefer a regular bed over bunks.',
+    imageSrc: sharedBedPhoto.src,
+    imageAlt: sharedBedPhoto.alt,
+    occupancy: '1 guest',
+    priceNote: `From USD ${STAY_PRICING.shared.single} per night`,
     priceFrom: STAY_PRICING.shared.single,
     priceUnit: 'per night · single',
+    priceSubline: `Double occupancy from $${STAY_PRICING.shared.double} per night when available`,
+    pricing: STAY_PRICING.shared,
     ratingStars: 4,
-    roomKicker: 'Shared stay',
-    services: SHARED_SINGLE_SERVICES,
+    roomKicker: 'Standard stay',
+    services: [
+      { icon: 'fa-bed', label: 'Single bed' },
+      { icon: 'fa-shower', label: 'Bathroom on enquiry' },
+      { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
+      { icon: 'fa-mug-hot', label: 'Meals on request' },
+    ],
     href: '/pages/accommodation/shared-rooms/',
-    bookingHref: '/pages/booking/?room=shared-rooms',
+    bookingHref: '/pages/booking/?room=standard-guest-room&occupancy=single',
   },
   {
-    id: 'stay-02',
+    id: 'standard-double',
     status: 'published',
-    title: 'Shared room — warm timber',
-    slug: 'shared-rooms',
-    description:
-      'Shared homestay room with timber finishes. Guide rate USD 15 per night for one guest on a single bed.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[1].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[1].alt,
-    occupancy: '1 guest · single bed',
-    priceFrom: STAY_PRICING.shared.single,
-    priceUnit: 'per night · single',
-    ratingStars: 4,
-    roomKicker: 'Shared stay',
-    services: SHARED_SINGLE_SERVICES,
-    href: '/pages/accommodation/shared-rooms/',
-    bookingHref: '/pages/booking/?room=shared-rooms',
-  },
-  {
-    id: 'stay-03',
-    status: 'published',
-    title: 'Shared room — homestay base',
-    slug: 'shared-rooms',
-    description:
-      'Practical shared setup for guests who want to stay close to Arusha outings. USD 15 per night (single).',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[2].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[2].alt,
-    occupancy: '1 guest · single bed',
-    priceFrom: STAY_PRICING.shared.single,
-    priceUnit: 'per night · single',
-    ratingStars: 5,
-    roomKicker: 'Shared stay',
-    services: SHARED_SINGLE_SERVICES,
-    href: '/pages/accommodation/shared-rooms/',
-    bookingHref: '/pages/booking/?room=shared-rooms',
-  },
-  {
-    id: 'stay-04',
-    status: 'published',
-    title: 'Shared room — double setup',
-    slug: 'shared-rooms',
-    description:
-      'Shared room arranged for two guests on a double or couple basis. USD 30 per night — confirm bed layout on enquiry.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[3].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[3].alt,
-    occupancy: '2 guests · double / couple',
+    title: 'Standard double room',
+    slug: 'standard-double-room',
+    description: 'Standard room with a double bed for couples or two guests travelling together.',
+    imageSrc: standardDoublePhoto.src,
+    imageAlt: standardDoublePhoto.alt,
+    occupancy: '2 guests (couple or pair)',
+    priceNote: `From USD ${STAY_PRICING.shared.double} per night`,
     priceFrom: STAY_PRICING.shared.double,
     priceUnit: 'per night · double',
+    priceSubline: `Solo use from $${STAY_PRICING.shared.single} per night when a single is available`,
+    pricing: STAY_PRICING.shared,
     ratingStars: 4,
-    roomKicker: 'Shared stay',
-    services: SHARED_DOUBLE_SERVICES,
+    roomKicker: 'Standard stay',
+    services: [
+      { icon: 'fa-bed', label: 'Double bed' },
+      { icon: 'fa-heart', label: 'Couples welcome' },
+      { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
+      { icon: 'fa-mug-hot', label: 'Meals on request' },
+    ],
     href: '/pages/accommodation/shared-rooms/',
-    bookingHref: '/pages/booking/?room=shared-rooms',
+    bookingHref: '/pages/booking/?room=standard-double-room&occupancy=double',
   },
   {
-    id: 'stay-05',
+    id: 'standard-private',
     status: 'published',
-    title: 'Shared room — pair stay',
-    slug: 'shared-rooms',
-    description:
-      'Shared accommodation suited to travelling pairs. Guide rate USD 30 per night for the room on a double basis.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[4].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[4].alt,
-    occupancy: '2 guests · double / couple',
-    priceFrom: STAY_PRICING.shared.double,
-    priceUnit: 'per night · double',
+    title: 'Standard private room',
+    slug: 'standard-private-room',
+    description: 'Private standard room with a dedicated sleeping area – more quiet than shared bunk setups.',
+    imageSrc: standardPrivatePhoto.src,
+    imageAlt: standardPrivatePhoto.alt,
+    occupancy: '1–2 guests (private)',
+    priceNote: `USD ${STAY_PRICING.deluxe.night} per night`,
+    priceFrom: STAY_PRICING.deluxe.night,
+    priceUnit: 'per night · private',
+    pricing: STAY_PRICING.deluxe,
     ratingStars: 4,
-    roomKicker: 'Shared stay',
-    services: SHARED_DOUBLE_SERVICES,
-    href: '/pages/accommodation/shared-rooms/',
-    bookingHref: '/pages/booking/?room=shared-rooms',
-  },
-  {
-    id: 'stay-06',
-    status: 'published',
-    title: 'Deluxe private room',
-    slug: 'deluxe-rooms',
-    description:
-      'More private than shared bunking — suited to couples or guests who want extra space. USD 40 per night.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[5].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[5].alt,
-    occupancy: '1–2 guests · private room',
-    priceFrom: STAY_PRICING.deluxe.night,
-    priceUnit: 'per night · private',
-    ratingStars: 5,
-    roomKicker: 'Private stay',
-    services: DELUXE_SERVICES,
+    roomKicker: 'Private standard',
+    services: [
+      { icon: 'fa-bed', label: 'Private sleeping area' },
+      { icon: 'fa-door-closed', label: 'More privacy' },
+      { icon: 'fa-wifi', label: 'Guest Wi‑Fi' },
+      { icon: 'fa-mug-hot', label: 'Meals on request' },
+    ],
     href: '/pages/accommodation/deluxe-rooms/',
-    bookingHref: '/pages/booking/?room=deluxe-rooms',
-  },
-  {
-    id: 'stay-07',
-    status: 'published',
-    title: 'Deluxe room — timber interior',
-    slug: 'deluxe-rooms',
-    description:
-      'Private guest room with warm timber tones. USD 40 per night for solo guests or couples.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[6].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[6].alt,
-    occupancy: '1–2 guests · private room',
-    priceFrom: STAY_PRICING.deluxe.night,
-    priceUnit: 'per night · private',
-    ratingStars: 5,
-    roomKicker: 'Private stay',
-    services: DELUXE_SERVICES,
-    href: '/pages/accommodation/deluxe-rooms/',
-    bookingHref: '/pages/booking/?room=deluxe-rooms',
-  },
-  {
-    id: 'stay-08',
-    status: 'published',
-    title: 'Deluxe room — quiet evenings',
-    slug: 'deluxe-rooms',
-    description:
-      'A private room to return to after coffee, food, or safari days. USD 40 per night — confirmed on WhatsApp or email.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[7].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[7].alt,
-    occupancy: '1–2 guests · private room',
-    priceFrom: STAY_PRICING.deluxe.night,
-    priceUnit: 'per night · private',
-    ratingStars: 4,
-    roomKicker: 'Private stay',
-    services: DELUXE_SERVICES,
-    href: '/pages/accommodation/deluxe-rooms/',
-    bookingHref: '/pages/booking/?room=deluxe-rooms',
-  },
-  {
-    id: 'stay-09',
-    status: 'published',
-    title: 'Deluxe room — longer stays',
-    slug: 'deluxe-rooms',
-    description:
-      'Private layout often chosen for longer homestay weeks. USD 40 per night; availability confirmed with the team.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[8].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[8].alt,
-    occupancy: '1–2 guests · private room',
-    priceFrom: STAY_PRICING.deluxe.night,
-    priceUnit: 'per night · private',
-    availabilityBadge: 'Limited availability — book early',
-    ratingStars: 5,
-    roomKicker: 'Private stay',
-    services: DELUXE_SERVICES,
-    href: '/pages/accommodation/deluxe-rooms/',
-    bookingHref: '/pages/booking/?room=deluxe-rooms',
-  },
-  {
-    id: 'stay-10',
-    status: 'published',
-    title: 'Deluxe room — couples',
-    slug: 'deluxe-rooms',
-    description:
-      'Private room with space for two. USD 40 per night — in-room details shared before you confirm.',
-    imageSrc: ACCOMMODATION_PHOTOS_01_13[9].src,
-    imageAlt: ACCOMMODATION_PHOTOS_01_13[9].alt,
-    occupancy: '1–2 guests · private room',
-    priceFrom: STAY_PRICING.deluxe.night,
-    priceUnit: 'per night · private',
-    availabilityBadge: 'Limited availability — book early',
-    ratingStars: 5,
-    roomKicker: 'Private stay',
-    services: DELUXE_SERVICES,
-    href: '/pages/accommodation/deluxe-rooms/',
-    bookingHref: '/pages/booking/?room=deluxe-rooms',
+    bookingHref: '/pages/booking/?room=standard-private-room&occupancy=double',
   },
 ];
+
+export const accommodationRoomCards = [...publishedRooms, ...standardRoomCards];

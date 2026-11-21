@@ -1,4 +1,4 @@
-# Phase 04 — Cards and data
+# Phase 04 – Cards and data
 
 ## Card components (`src/components/cards/`)
 
@@ -21,7 +21,7 @@ Shared image rules live in `src/styles/components/cards.css`: `aspect-ratio: 4/3
 | ---- | ------- |
 | `src/data/types.js` | JSDoc field shapes |
 | `src/data/published/*.js` | Approved production records (`status: 'published'`) |
-| `src/data/fixtures/card-fixtures.js` | **Dev only** — `[DEV]` labels, import only from dev tooling |
+| `src/data/fixtures/card-fixtures.js` | **Dev only** – `[DEV]` labels, import only from dev tooling |
 
 **Destinations** (`published/destinations.js`) and **safari packages** (`published/packages.js`) are separate datasets. Packages array is empty until official content is imported.
 

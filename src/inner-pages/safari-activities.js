@@ -1,7 +1,7 @@
 import { renderBreadcrumb } from '../components/breadcrumb.js';
 import { renderPageHero } from '../components/page-hero.js';
 import { renderCtaBand } from '../components/cta-band.js';
-import { renderEnquiryForm } from '../components/enquiry-form.js';
+import { renderEnquiryRedirectPanel } from '../components/enquiry-redirect.js';
 import {
   renderDetailSection,
   renderEditorialRouteFit,
@@ -19,7 +19,7 @@ import { liveSafariActivities } from '../data/published/safari-activities.js';
 import { liveSafariPackages } from '../data/published/packages.js';
 import { getSafariActivityBySlug } from '../data/published/lookup.js';
 import { escapeHtml } from '../utils/html.js';
-import safariHero from '../assets/images/optimized/landscape-1600.webp';
+import { CINEMATIC_HERO_IMAGES } from '../data/cinematic-hero-images.js';
 import { mountInner, renderGallery, renderAmenityList, renderItinerary } from './shared.js';
 import { renderMissingContent } from './not-found.js';
 
@@ -35,9 +35,9 @@ export function renderSafariActivitiesIndex() {
         variant: 'landscape',
         eyebrow: 'Northern Tanzania',
         title: 'Safari activities',
-        lead: 'Arusha city walks, market mornings, coffee, migration seasons, Hadzabe visits, waterfalls, and game drives — mix urban days with bush routes on enquiry.',
-        imageSrc: safariHero,
-        imageAlt: 'Wide landscape in northern Tanzania',
+        lead: 'City walks, markets, coffee, game drives, and day trips – combined with your stay on enquiry.',
+        imageSrc: CINEMATIC_HERO_IMAGES.safaris.src,
+        imageAlt: CINEMATIC_HERO_IMAGES.safaris.alt,
         actions: [{ label: 'Tailor-made enquiry', href: '/pages/safaris/custom/' }],
       })}
       <section class="inner-section container">
@@ -133,14 +133,6 @@ export function renderSafariActivityDetail(slug) {
     }),
   });
 
-  const sourceBlock = activity.sourceNote
-    ? `<p class="text-muted text-small" style="margin-top: var(--space-6)">${escapeHtml(activity.sourceNote)}${
-        activity.sourceUrl
-          ? ` <a href="${escapeHtml(activity.sourceUrl)}" rel="noopener noreferrer" target="_blank">View source</a>`
-          : ''
-      }</p>`
-    : '';
-
   mountInner(`
     <div class="inner-page">
       ${renderBreadcrumb([
@@ -167,18 +159,17 @@ export function renderSafariActivityDetail(slug) {
           ${context || `<p class="text-muted">${escapeHtml(activity.longDescription)}</p>`}
           ${homestayCoffeeLink}
           ${sampleItinerary ? `<h2 style="margin-top: var(--space-8)">Sample day outline</h2>${sampleItinerary}` : ''}
-          ${sourceBlock}
         </div>
         <aside class="info-panel page-split__aside">
           ${renderEditorialRouteFit(4, 'Activity fit')}
           ${highlights}
           ${thingsBlock ? `<h3 style="margin-top: var(--space-6)">Often paired with</h3>${thingsBlock}` : ''}
-          ${renderEnquiryForm({
-            id: `safari-activity-${activity.slug}`,
-            topic: 'safari',
+          ${renderEnquiryRedirectPanel({
             heading: 'Activity enquiry',
             intro: 'Include travel dates and whether you already have accommodation with Meleji.',
-            hiddenFields: { activity: activity.slug },
+            intent: 'safari',
+            context: { activity: activity.slug },
+            buttonLabel: 'Enquire about this activity',
           })}
         </aside>
       </section>

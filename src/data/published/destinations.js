@@ -5,8 +5,8 @@ import ruahaWide from '../../assets/images/sticky-sections/2f4903d6-3b6e-4ec3-b2
 import northWide from '../../assets/images/moments/lake duluti.jpg';
 
 /**
- * Destinations (regions/areas) — separate from safari packages.
- * Arusha / Northern Circuit entries imported from Tanzania Tourism (see arusha-destinations.js).
+ * Destinations (regions/areas) – separate from safari packages.
+ * Arusha / Northern Circuit entries (see arusha-destinations.js).
  * Draft entries keep detail URLs for template QA only (noindex, not linked from indexes).
  */
 export const publishedDestinations = [

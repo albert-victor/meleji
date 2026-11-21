@@ -1,5 +1,5 @@
 /**
- * Room photography — verified subjects in docs/content-status.md.
+ * Room photography – verified subjects in docs/content-status.md.
  */
 import { ACCOMMODATION_PHOTOS_01_13 } from './accommodation-numbered-images.js';
 import sharedBunks from '../assets/images/accommodation/acc1.jpg';

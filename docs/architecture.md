@@ -1,4 +1,4 @@
-# Meleji Homestays — Architecture
+# Meleji Homestays – Architecture
 
 ## Stack
 
@@ -35,7 +35,7 @@ At build time, Vite emits those HTML files and hashed assets into `dist/` with c
 **Adding a page later:**
 
 ```js
-// vite.config.js — rollupOptions.input
+// vite.config.js – rollupOptions.input
 main: resolve(rootDir, 'index.html'),
 contact: resolve(rootDir, 'pages/contact/index.html'),
 ```

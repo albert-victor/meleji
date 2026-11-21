@@ -1,4 +1,4 @@
-/* —— Hamburger / X toggle —— */
+/* –– Hamburger / X toggle –– */
 .nav-toggle {
   position: relative;
   display: flex;
@@ -139,7 +139,7 @@ body.page--home.is-menu-open .site-header .site-header__lockup {
   border-left-color: color-mix(in srgb, #fff9f0 55%, transparent);
 }
 
-/* —— Soft dim behind glass panel —— */
+/* –– Soft dim behind glass panel –– */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -155,7 +155,7 @@ body.page--home.is-menu-open .site-header .site-header__lockup {
   pointer-events: auto;
 }
 
-/* —— Glass panel: slides in from the left —— */
+/* –– Glass panel: slides in from the left –– */
 .site-menu {
   position: fixed;
   inset: 0;

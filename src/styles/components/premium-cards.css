@@ -50,7 +50,7 @@ a.csp-card:focus-visible {
 
   .csp-card--destination-rich:hover .csp-card__hero,
   .csp-card--package:not(.csp-card--photo-soft):hover .csp-card__hero {
-    transform: scale(1.035);
+    transform: scale(var(--meleji-card-photo-zoom, 1.035));
   }
 
   .csp-card--destination-rich:hover .csp-card__media-tags span {
@@ -152,7 +152,7 @@ a.csp-card:focus-visible {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform var(--duration-slow) var(--ease-out);
+  transition: transform var(--meleji-card-photo-zoom-ms, 1.05s) var(--ease-cinematic, var(--ease-out));
 }
 
 .csp-card__badge {
@@ -231,13 +231,19 @@ a.csp-card:focus-visible {
 }
 
 .csp-card__media--dest {
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 16 / 10;
+  max-height: clamp(10.75rem, 28vw, 13rem);
   border-radius: var(--csp-radius) var(--csp-radius) 0 0;
 }
 
 .csp-card__media--package {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
+  max-height: clamp(10.75rem, 28vw, 13.25rem);
   border-radius: var(--csp-radius) var(--csp-radius) 0 0;
+}
+
+.csp-card__media--empty {
+  background: linear-gradient(145deg, var(--color-surface-muted, #f5efe6) 0%, var(--color-surface) 100%);
 }
 
 .csp-card__media--dest .csp-card__hero,
@@ -246,7 +252,7 @@ a.csp-card:focus-visible {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform var(--duration-slow) var(--ease-out);
+  transition: transform var(--meleji-card-photo-zoom-ms, 1.05s) var(--ease-cinematic, var(--ease-out));
 }
 
 .csp-card__photo-hint {
@@ -445,7 +451,8 @@ a.csp-card:focus-visible {
 }
 
 .csp-card--destination-rich.csp-card--compact .csp-card__media--dest {
-  aspect-ratio: 4 / 3.35;
+  aspect-ratio: 3 / 2;
+  max-height: clamp(9.75rem, 38vw, 11.25rem);
 }
 
 .csp-card__kicker--dest {
@@ -754,6 +761,7 @@ a.csp-card:focus-visible {
 }
 
 .csp-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -768,6 +776,8 @@ a.csp-card:focus-visible {
   text-decoration: none;
   border-radius: var(--radius-pill);
   border: 1px solid transparent;
+  overflow: hidden;
+  isolation: isolate;
   transition:
     background 0.45s var(--ease-out),
     background-position 0.45s var(--ease-out),
@@ -848,10 +858,13 @@ a.csp-card:focus-visible {
 }
 
 @media (hover: hover) {
-  .csp-btn--primary:hover {
+  .csp-btn--primary:hover,
+  .csp-btn--primary:focus-visible {
+    background: linear-gradient(120deg, #9a4618 0%, #873b22 48%, #71301d 100%);
     background-position: 100% 50%;
     box-shadow: 0 8px 22px rgb(111 46 22 / 0.34);
     transform: translateY(-1px);
+    color: #ffffff;
   }
 
   .csp-btn--primary:hover .csp-btn__arrow,
@@ -869,9 +882,53 @@ a.csp-card:focus-visible {
   border: 1px solid var(--csp-olive);
 }
 
+.csp-btn--ghost::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(120deg, var(--csp-olive) 0%, var(--csp-olive-deep) 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s var(--ease-out);
+  pointer-events: none;
+}
+
+.csp-btn--ghost > *,
+.csp-btn__label {
+  position: relative;
+  z-index: 1;
+}
+
 @media (hover: hover) {
-  .csp-btn--ghost:hover {
-    background: rgb(92 107 72 / 0.08);
+  .csp-btn--ghost:hover,
+  .csp-btn--ghost:focus-visible {
+    color: #ffffff;
+    border-color: var(--csp-olive-deep);
+    background: transparent;
+  }
+
+  .csp-btn--ghost:hover .csp-btn__arrow,
+  .csp-btn--ghost:focus-visible .csp-btn__arrow {
+    color: #ffffff;
+  }
+
+  .csp-btn--ghost:hover::before,
+  .csp-btn--ghost:focus-visible::before {
+    transform: scaleX(1);
+  }
+}
+
+@media (hover: none) {
+  .csp-btn--ghost:active {
+    color: #ffffff;
+    border-color: var(--csp-olive-deep);
+    background: transparent;
+  }
+
+  .csp-btn--ghost:active::before {
+    transform: scaleX(1);
   }
 }
 

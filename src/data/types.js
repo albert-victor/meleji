@@ -9,14 +9,14 @@
  * @property {string} title
  * @property {string} slug
  * @property {string} description
- * @property {string} imageSrc — bundler-resolved URL
+ * @property {string} imageSrc – bundler-resolved URL
  * @property {string} imageAlt
  * @property {string} [occupancy]
- * @property {string} [priceNote] — e.g. "Rates on request" only when approved
+ * @property {string} [priceNote] – e.g. "Rates on request" only when approved
  * @property {number} [priceFrom]
  * @property {string} [priceUnit]
  * @property {string} [priceSubline]
- * @property {number} [ratingStars] — decorative display only, not a review score
+ * @property {number} [ratingStars] – decorative display only, not a review score
  * @property {string} [roomKicker]
  * @property {string} [availabilityBadge]
  * @property {{ icon: string, label: string }[]} [services]
@@ -30,7 +30,7 @@
 
 /**
  * @typedef {Object} DestinationGalleryImage
- * @property {string} src — bundler-resolved URL
+ * @property {string} src – bundler-resolved URL
  * @property {string} alt
  */
 
@@ -43,7 +43,7 @@
  * @property {string} region
  * @property {string} summary
  * @property {string} [longDescription]
- * @property {string[]} [context] — paragraph blocks for detail layout
+ * @property {string[]} [context] – paragraph blocks for detail layout
  * @property {string} [category]
  * @property {string} [sizeLabel]
  * @property {string[]} [activities]
@@ -96,7 +96,7 @@
  * @property {ContentStatus} status
  * @property {string} title
  * @property {string} slug
- * @property {string} icon — Font Awesome e.g. fa-mug-hot
+ * @property {string} icon – Font Awesome e.g. fa-mug-hot
  * @property {string} summary
  * @property {string} longDescription
  * @property {string[]} [context]
@@ -129,7 +129,7 @@
  * @typedef {Object} ActivityIconItem
  * @property {string} id
  * @property {string} label
- * @property {string} icon — Font Awesome class e.g. fa-mug-hot
+ * @property {string} icon – Font Awesome class e.g. fa-mug-hot
  * @property {string} [description]
  */
 

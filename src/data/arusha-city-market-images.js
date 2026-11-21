@@ -1,5 +1,5 @@
 /**
- * Arusha city tours & local markets — safari-activities folder photography.
+ * Arusha city tours & local markets – safari-activities folder photography.
  * Shared across activities, packages, homepage, and gallery.
  */
 import cityPrimary from '../assets/images/safari-activities/city_tours/city_tours.jpg';

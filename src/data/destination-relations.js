@@ -1,6 +1,6 @@
 /**
  * Editorial planning links between destinations, activities, and routes from Arusha.
- * Drive times and prices are confirmed on enquiry — no fixed durations here.
+ * Drive times and prices are confirmed on enquiry – no fixed durations here.
  */
 
 /** @type {Record<string, string[]>} */
@@ -23,7 +23,7 @@ export const nearbyDestinationSlugs = {
 };
 
 /**
- * Meleji team route-fit score (1–5) for planning — not guest review data.
+ * Meleji team route-fit score (1–5) for planning – not guest review data.
  * @type {Record<string, number>}
  */
 export const editorialRouteFit = {
