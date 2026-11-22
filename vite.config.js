@@ -43,11 +43,13 @@ const MELEJI_ENTRY_SHELL = `<div id="site-entry" class="site-entry" hidden aria-
     <div class="site-entry__logo-wrap"><img class="site-entry__logo" src="/brand/meleji-entry-logo.png" alt="" width="512" height="512" decoding="async" fetchpriority="high" loading="eager" /></div>
     <div class="site-entry__dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   </div>
-</div>`;
+</div>
+<script id="meleji-entry-arm">(function(){var h=document.documentElement;if(!h.classList.contains('meleji-entry-pending'))return;if(document.body&&document.body.classList.contains('page--loading-preview')){h.classList.remove('meleji-entry-pending');return;}var e=document.getElementById('site-entry');if(!e)return;e.hidden=false;e.removeAttribute('aria-hidden');e.classList.add('is-active');if(window.__melejiEntryShownAt==null)window.__melejiEntryShownAt=performance.now();})();</script>`;
 
 const MELEJI_ENTRY_CRITICAL = `
+html.meleji-entry-pending{min-height:100%;background:#faf6f0}
 html.meleji-entry-pending,html.meleji-entry-pending body{overflow:hidden;background:#faf6f0}
-html.meleji-entry-pending body>:not(#site-entry):not(script){visibility:hidden!important}
+html.meleji-entry-pending body>:not(#site-entry):not(script):not(#meleji-entry-arm){visibility:hidden!important}
 html.meleji-entry-pending #site-entry.site-entry.is-active{display:flex!important;position:fixed;inset:0;z-index:600;align-items:center;justify-content:center;opacity:1!important;visibility:visible!important;background:#faf6f0}
 html.meleji-entry-pending .site-entry__stack{display:flex;flex-direction:column;align-items:center;gap:1.1rem}
 html.meleji-entry-pending .site-entry__logo-wrap{display:flex;align-items:center;justify-content:center;overflow:visible;min-width:calc(clamp(4.5rem,24vw,7.25rem) * 1.12);min-height:calc(clamp(4.5rem,24vw,7.25rem) * 1.12)}
@@ -82,6 +84,9 @@ function injectSiteBoot() {
   };
 }
 
+/** Set NGROK=1 when tunneling so HMR uses wss:// through the HTTPS ngrok URL. */
+const viaNgrok = process.env.NGROK === '1' || process.env.NGROK === 'true';
+
 export default defineConfig({
   root: rootDir,
   publicDir: 'public',
@@ -90,6 +95,27 @@ export default defineConfig({
     alias: {
       '@': resolve(rootDir, 'src'),
     },
+  },
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+    // Allow ngrok (and other) Host headers without touching site assets/pages
+    allowedHosts: true,
+    ...(viaNgrok
+      ? {
+          hmr: {
+            protocol: 'wss',
+            clientPort: 443,
+          },
+        }
+      : {}),
+  },
+  preview: {
+    host: true,
+    port: 4173,
+    strictPort: true,
+    allowedHosts: true,
   },
   build: {
     outDir: 'dist',

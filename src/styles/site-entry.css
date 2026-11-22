@@ -5,7 +5,7 @@ html.meleji-entry-pending body {
   background: #faf6f0;
 }
 
-html.meleji-entry-pending body > :not(#site-entry):not(script) {
+html.meleji-entry-pending body > :not(#site-entry):not(script):not(#meleji-entry-arm) {
   visibility: hidden !important;
 }
 

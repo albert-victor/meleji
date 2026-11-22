@@ -1,7 +1,7 @@
 import foodImg from '../../assets/images/optimized/expFood-1600.webp';
 import coffeeImg from '../../assets/images/optimized/expCoffee-1600.webp';
-import momentsImg from '../../assets/images/moments/moments.jpg';
-import foundationCommunity from '../../assets/images/Meleji-Foundation/main_6.jpg';
+import culturalTourHero from '../../assets/images/safari-activities/local_markets1.jpg';
+import culturalTourInset from '../../assets/images/moments/in_the_Field.jpg';
 import natureImg from '../../assets/images/optimized/waterfall-1600.webp';
 import waterfallImg from '../../assets/images/sticky-sections/waterfalls_1.jpg';
 import { COFFEE_HOMESTAY, FOOD_PRICING, formatUsd } from '../pricing.js';
@@ -68,10 +68,10 @@ export const publishedExperiences = [
     priceSummary: experiencePriceSummary(CULTURE_DETAIL.pricingTiers),
     longDescription:
       'When appropriate introductions can be made, guests may join visits led by local hosts and approved foundation activities. Every visit is pre-arranged so communities can prepare and safeguarding rules are respected.',
-    imageSrc: foundationCommunity,
-    imageAlt: 'Community time with hosts and Meleji Children Foundation',
-    landscapeSrc: momentsImg,
-    cardImagePosition: 'center 42%',
+    imageSrc: culturalTourHero,
+    imageAlt: 'Guided morning at Arusha market with a local host',
+    landscapeSrc: culturalTourInset,
+    cardImagePosition: 'center 35%',
     pricingTiers: CULTURE_DETAIL.pricingTiers,
     inclusions: CULTURE_DETAIL.details,
     href: '/pages/experiences/culture/',

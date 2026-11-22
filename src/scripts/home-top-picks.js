@@ -5,6 +5,7 @@ import { renderSafariPackageCard } from '../components/cards/package-card.js';
 import { bindVisibleInterval } from './visibility-interval.js';
 
 const CAROUSEL_INTERVAL_MS = 5000;
+const SCROLL_BREAKPOINT_PX = 900;
 const HOME_PACKAGE_COUNT = 10;
 
 const TOP_DESTINATION_SLUGS = [
@@ -80,8 +81,12 @@ export function mountCarousel(root, slidesHtml, modifierClass = '') {
 function visibleSlideCount(viewport) {
   const w = viewport.clientWidth;
   if (w < 480) return 1;
-  if (w < 900) return 2;
+  if (w < SCROLL_BREAKPOINT_PX) return 2;
   return 3;
+}
+
+function usesNativeScroll(viewport) {
+  return viewport.clientWidth < SCROLL_BREAKPOINT_PX;
 }
 
 export function initPeriodicCarousel(carouselRoot) {
@@ -98,10 +103,30 @@ export function initPeriodicCarousel(carouselRoot) {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let index = 0;
+  let scrollSyncRaf = 0;
+  let resumeAfterManualMs = 0;
 
   const maxIndex = () => {
     const visible = visibleSlideCount(viewport);
     return Math.max(0, slides.length - visible);
+  };
+
+  const stepSize = () => {
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    return slideWidth + gap;
+  };
+
+  const syncIndexFromScroll = () => {
+    if (!usesNativeScroll(viewport)) return;
+    const step = stepSize();
+    if (step <= 0) return;
+    const cap = maxIndex();
+    const next = Math.min(cap, Math.max(0, Math.round(viewport.scrollLeft / step)));
+    if (next !== index) {
+      index = next;
+      syncDots();
+    }
   };
 
   const renderDots = () => {
@@ -137,12 +162,24 @@ export function initPeriodicCarousel(carouselRoot) {
   };
 
   const apply = () => {
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    const step = slideWidth + gap;
-    track.style.transform = `translate3d(${-index * step}px, 0, 0)`;
+    const step = stepSize();
+    const native = usesNativeScroll(viewport);
+    carouselRoot.classList.toggle('home-top-carousel--scroll', native);
     carouselRoot.classList.add('home-top-carousel--live');
     carouselRoot.dataset.carouselIndex = String(index);
+
+    if (native) {
+      track.style.transform = 'none';
+      if (Math.abs(viewport.scrollLeft - index * step) > 2) {
+        viewport.scrollTo({
+          left: index * step,
+          behavior: reducedMotion ? 'auto' : 'smooth',
+        });
+      }
+      return;
+    }
+
+    track.style.transform = `translate3d(${-index * step}px, 0, 0)`;
   };
 
   const advance = (delta = 1) => {
@@ -170,10 +207,24 @@ export function initPeriodicCarousel(carouselRoot) {
   };
 
   const onResize = () => {
+    if (usesNativeScroll(viewport)) {
+      syncIndexFromScroll();
+    }
     const cap = maxIndex();
     if (index > cap) index = 0;
     apply();
     renderDots();
+  };
+
+  const pauseForManual = () => {
+    pause();
+    resumeAfterManualMs = Date.now() + 4500;
+  };
+
+  const maybeResumeAfterManual = () => {
+    window.setTimeout(() => {
+      if (Date.now() >= resumeAfterManualMs) resume();
+    }, 500);
   };
 
   apply();
@@ -187,6 +238,22 @@ export function initPeriodicCarousel(carouselRoot) {
   nextBtn?.addEventListener('click', () => {
     advance(1);
     resume();
+  });
+
+  viewport.addEventListener(
+    'scroll',
+    () => {
+      if (!usesNativeScroll(viewport)) return;
+      cancelAnimationFrame(scrollSyncRaf);
+      scrollSyncRaf = requestAnimationFrame(syncIndexFromScroll);
+    },
+    { passive: true },
+  );
+
+  viewport.addEventListener('touchstart', pauseForManual, { passive: true });
+  viewport.addEventListener('touchend', maybeResumeAfterManual, { passive: true });
+  viewport.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'touch' || event.pointerType === 'pen') pauseForManual();
   });
 
   carouselRoot.addEventListener('mouseenter', pause);

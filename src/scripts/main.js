@@ -5,7 +5,7 @@ import '../styles/main.css';
 import { mountSiteChrome } from '../components/site-chrome.js';
 import { renderFooter } from '../components/footer.js';
 import { initNavigation } from './navigation.js';
-import { dismissSiteEntry, initSiteEntryNav, showSiteEntryIfNeeded } from './site-entry.js';
+import { dismissSiteEntryAfterBoot, initSiteEntryNav, showSiteEntryIfNeeded } from './site-entry.js';
 
 initSiteEntryNav();
 
@@ -82,11 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  Promise.all(bootTasks).then(() => {
+  const bootPromise = Promise.all(bootTasks);
+
+  dismissSiteEntryAfterBoot(bootPromise).then(() => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         document.body.classList.add('is-page-ready');
-        dismissSiteEntry();
         window.scrollTo(0, 0);
         import('./reveal-observer.js').then(({ observeRevealTargets, refreshRevealsAfterSiteEntry, flushVisibleReveals }) => {
           const inner = document.querySelector('[data-inner-mount]') || document;

@@ -7,6 +7,8 @@ import fieldImg from '../assets/images/accommodation/I_the_field.jpg';
 import waterfallImg from '../assets/images/sticky-sections/waterfalls_1.jpg';
 import momentsImg from '../assets/images/moments/moments.jpg';
 import momentField from '../assets/images/moments/in_the_Field.jpg';
+import culturalTourHero from '../assets/images/safari-activities/local_markets1.jpg';
+import culturalTourStreet from '../assets/images/safari-activities/city_tours/local_markets2.jpg';
 import foundationCommunity from '../assets/images/Meleji-Foundation/main_6.jpg';
 import momentBanner from '../assets/images/moments/c1b2d090-2feb-4c12-9423-6315de68c646.jpg';
 import { COFFEE_HOMESTAY, EXPERIENCE_CULTURE, FOOD_PRICING, FOUNDATION_PRICING, formatUsd } from './pricing.js';
@@ -78,9 +80,10 @@ export const FOOD_PRICING_NOTES = [
 
 export const CULTURE_DETAIL = {
   images: [
-    { src: foundationCommunity, alt: 'Community time with hosts and Meleji Children Foundation' },
-    { src: momentsImg, alt: 'Shared time with the Meleji community' },
-    { src: momentBanner, alt: 'Group gathering with local partners' },
+    { src: culturalTourHero, alt: 'Stalls and spice rows on a guided Arusha market morning' },
+    { src: culturalTourStreet, alt: 'Walking Arusha streets with a local guide' },
+    { src: momentField, alt: 'Hosts and guests together near Arusha' },
+    { src: foundationCommunity, alt: 'Approved foundation visit when pre-arranged' },
   ],
   panels: [
     {
@@ -100,7 +103,7 @@ export const CULTURE_DETAIL = {
     {
       label: 'Foundation campus day',
       amount: EXPERIENCE_CULTURE.foundationVisitFrom,
-      unit: 'from per person',
+      unit: 'per person',
       note: 'Volunteer-day guide rate when you join an approved foundation activity.',
     },
     {
@@ -112,7 +115,7 @@ export const CULTURE_DETAIL = {
     {
       label: 'Child sponsorship (optional)',
       amount: FOUNDATION_PRICING.childSponsorFrom,
-      unit: 'from per month',
+      unit: 'per month',
       note: 'Private sponsorship – separate from a single visit; team explains reporting.',
     },
   ],

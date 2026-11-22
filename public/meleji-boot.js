@@ -9,9 +9,12 @@
   var navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
   var navIntent = sessionStorage.getItem('meleji:nav') === '1';
   var isReload = navEntry && navEntry.type === 'reload';
+  var isNavigate = navEntry && navEntry.type === 'navigate';
   var isBackForward = navEntry && navEntry.type === 'back_forward';
+  var reducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (navIntent || isReload) {
+  if (!reducedMotion && !isBackForward && (navIntent || isReload || isNavigate)) {
     document.documentElement.classList.add('meleji-entry-pending');
     if (navIntent) sessionStorage.removeItem('meleji:nav');
   }
@@ -59,19 +62,26 @@
     }
   }
 
+  function stampEntryShown() {
+    if (window.__melejiEntryShownAt == null) {
+      window.__melejiEntryShownAt = performance.now();
+    }
+  }
+
   function activateEntryShell() {
-    if (!document.documentElement.classList.contains('meleji-entry-pending')) return;
+    if (!document.documentElement.classList.contains('meleji-entry-pending')) return false;
     if (document.body && document.body.classList.contains('page--loading-preview')) {
       document.documentElement.classList.remove('meleji-entry-pending');
-      return;
+      return true;
     }
 
     var el = document.getElementById('site-entry');
-    if (!el) return;
+    if (!el) return false;
 
     el.hidden = false;
     el.removeAttribute('aria-hidden');
     el.classList.add('is-active');
+    stampEntryShown();
 
     var img = el.querySelector('.site-entry__logo');
     if (img && !img.getAttribute('src')) {
@@ -81,6 +91,8 @@
     whenLogoReady(img, function () {
       el.classList.add('is-logo-ready');
     });
+
+    return true;
   }
 
   function markInnerPending() {
@@ -90,6 +102,27 @@
     activateEntryShell();
   }
 
-  if (document.body) markInnerPending();
-  else document.addEventListener('DOMContentLoaded', markInnerPending, { once: true });
+  if (activateEntryShell()) {
+    markInnerPending();
+  } else if (document.documentElement.classList.contains('meleji-entry-pending')) {
+    var observer = new MutationObserver(function () {
+      if (activateEntryShell()) {
+        if (document.body) {
+          if (document.body.dataset.page) {
+            document.documentElement.classList.add('meleji-inner-pending');
+          }
+        }
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener(
+      'DOMContentLoaded',
+      function () {
+        markInnerPending();
+        observer.disconnect();
+      },
+      { once: true },
+    );
+  }
 })();

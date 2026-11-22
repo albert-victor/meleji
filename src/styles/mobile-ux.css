@@ -68,13 +68,14 @@
     padding-inline: clamp(0.85rem, 4vw, 1.25rem);
   }
 
-  .site-header__descriptor {
-    display: none;
+  .site-header__lockup {
+    flex-shrink: 0;
+    min-width: 0;
   }
 
-  .site-header__lockup {
-    border-left: none;
-    padding-left: 0;
+  .site-header__descriptor {
+    display: block;
+    white-space: nowrap;
   }
 
   .home-hero--collage .home-hero__actions,
@@ -113,6 +114,11 @@
   .site-header__name {
     font-size: 0.98rem;
     letter-spacing: 0.04em;
+  }
+
+  .site-header__descriptor {
+    font-size: 0.5rem;
+    letter-spacing: 0.16em;
   }
 
   .site-header__logo {

@@ -1,11 +1,12 @@
 import { SITE_ENTRY_LOGO_SRC, whenSiteEntryLogoReady } from './site-entry-logo.js';
 
 const NAV_KEY = 'meleji:nav';
-const MIN_VISIBLE_MS = 920;
+/** Safety cap only — loader stays until load or this limit, not a fixed minimum duration. */
+const MAX_PAGE_WAIT_MS = 8000;
+const LEAVE_FADE_MS = 460;
 
 let overlayEl = null;
 let shown = false;
-let shownAt = 0;
 let logoReadyPromise = null;
 
 function prefersReducedMotion() {
@@ -74,7 +75,9 @@ export function showSiteEntryIfNeeded() {
   if (!document.body) return;
 
   shown = true;
-  shownAt = performance.now();
+  if (typeof window.__melejiEntryShownAt !== 'number') {
+    window.__melejiEntryShownAt = performance.now();
+  }
 
   const el = ensureOverlay();
   el.hidden = false;
@@ -92,6 +95,30 @@ export function showSiteEntryIfNeeded() {
   });
 }
 
+/** Resolves when window load fires or a safety cap (slow images / network). */
+export function whenPageLoadComplete() {
+  if (document.readyState === 'complete') {
+    return Promise.resolve();
+  }
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      resolve();
+    };
+    window.addEventListener('load', finish, { once: true });
+    window.setTimeout(finish, MAX_PAGE_WAIT_MS);
+  });
+}
+
+/** Dismiss when JS boot and window load (or cap) finish — duration follows page speed, not a fixed timer. */
+export function dismissSiteEntryAfterBoot(bootPromise = Promise.resolve()) {
+  return Promise.all([bootPromise, whenPageLoadComplete()]).then(() => {
+    dismissSiteEntry();
+  });
+}
+
 export function dismissSiteEntry() {
   if (!shown) {
     releasePageShell();
@@ -99,8 +126,6 @@ export function dismissSiteEntry() {
   }
 
   const reduced = prefersReducedMotion();
-  const elapsed = performance.now() - shownAt;
-  const delay = reduced ? 0 : Math.max(0, MIN_VISIBLE_MS - elapsed);
 
   const runDismiss = () => {
     if (!overlayEl) {
@@ -127,11 +152,16 @@ export function dismissSiteEntry() {
     }
 
     overlayEl.classList.add('is-leaving');
-    window.setTimeout(finish, 460);
+    window.setTimeout(finish, LEAVE_FADE_MS);
   };
 
-  ensureLogoReady().finally(() => {
-    window.setTimeout(runDismiss, delay);
+  if (reduced) {
+    runDismiss();
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    runDismiss();
   });
 }
 

@@ -385,11 +385,10 @@ export function initHome() {
   let active = 0;
   let ticking = false;
   let enhanced = false;
-  let carousel = false;
 
   function setScene(index) {
     active = Math.max(0, Math.min(scenes.length - 1, index));
-    const layered = enhanced || carousel;
+    const layered = enhanced;
     scenes.forEach((scene, i) => {
       scene.classList.toggle('is-active', i === active);
       scene.inert = layered && i !== active;
@@ -400,8 +399,6 @@ export function initHome() {
       if (i === active) button.setAttribute('aria-current', 'step');
       else button.removeAttribute('aria-current');
     });
-    const count = root.querySelector('[data-story-count]');
-    if (count) count.textContent = `0${active + 1} / 04`;
   }
 
   function syncScroll() {
@@ -411,26 +408,23 @@ export function initHome() {
     const stage = root.querySelector('.home-story__stage');
     const header = parseFloat(getComputedStyle(stage).top) || 0;
     const travel = root.offsetHeight - stage.offsetHeight;
-    setScene(Math.floor(Math.max(0, Math.min(0.9999, (header - top) / Math.max(travel, 1))) * scenes.length));
+    const progress = Math.max(0, Math.min(0.9999, (header - top) / Math.max(travel, 1)));
+    setScene(Math.floor(progress * scenes.length));
+    root.classList.toggle('is-scrolled', progress > 0.08);
   }
 
   function configure() {
-    enhanced = desktop.matches && !motion.matches;
-    carousel = !motion.matches && !enhanced;
+    enhanced = !motion.matches;
     root.classList.toggle('is-enhanced', enhanced);
-    root.classList.toggle('is-story-carousel', carousel);
     setScene(active);
     syncScroll();
   }
 
   function go(index) {
     const target = (index + scenes.length) % scenes.length;
-    if (carousel) {
-      setScene(target);
-      return;
-    }
     if (!enhanced) {
-      scenes[target].scrollIntoView({ behavior: 'auto' });
+      scenes[target].scrollIntoView({ behavior: motion.matches ? 'auto' : 'smooth', block: 'center' });
+      setScene(target);
       return;
     }
     const stage = root.querySelector('.home-story__stage');
@@ -441,8 +435,6 @@ export function initHome() {
   }
 
   buttons.forEach((button, i) => button.addEventListener('click', () => go(i)));
-  root.querySelector('[data-story-prev]')?.addEventListener('click', () => go(active - 1));
-  root.querySelector('[data-story-next]')?.addEventListener('click', () => go(active + 1));
   window.addEventListener(
     'scroll',
     () => {
